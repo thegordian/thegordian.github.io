@@ -1,10 +1,10 @@
 # Site settings
-title: Gordian - Untangling mobility trances
+title: Gordian - Untangling mobility traces
 email: your-email@domain.com
 url: https://example.github.io
 description: "Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description."
 keywords: "your keywords, separated by commas"
-skills: "Route optimization - Sustainable transportation"
+skills: "Big mobility analytics for sustainable transportation"
 meta_author: LastName FirstName
 
 
