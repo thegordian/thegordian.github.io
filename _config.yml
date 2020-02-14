@@ -1,10 +1,10 @@
 # Site settings
-title: Gordian - Untangling mobility traces
+title: Gordian
 email: your-email@domain.com
 url: https://example.github.io
-description: "Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description."
+description: "Revolutionize transport infrastructure planning by untangling movement traces"
 keywords: "your keywords, separated by commas"
-skills: "Big mobility analytics for sustainable transportation"
+skills: "Fast and scalable data-driven tools to optimize transport resource allocation"
 meta_author: LastName FirstName
 
 
@@ -33,8 +33,8 @@ color:
 
 # Footer settings
 footer:
-  copyright: Dr. Henry Jekyll
-  location: Location
+  copyright: Gordian
+  location:
   social: Around the Web
   credits: Credits
 
@@ -53,11 +53,11 @@ social:
 
 # Postal address (add as many lines as necessary)
 address:
-  - line: 3481 Melrose Place
-  - line: Beverly Hills, CA 90210
+  - line: Teknikringen 10
+  - line: Stockholm, 11428
 
 # Credits content
-credits: 'Freelancer is a free to use, open source Bootstrap theme created by <a href="http://startbootstrap.com">Start Bootstrap</a>.'
+credits: ''
 
 # Build settings
 markdown: kramdown
