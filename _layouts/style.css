@@ -10,3 +10,11 @@
 .skills{
   font-weight: 700!important;
 }
+
+.modal-body p {
+  text-align: left;
+}
+
+#contact p {
+  text-align: center;
+}

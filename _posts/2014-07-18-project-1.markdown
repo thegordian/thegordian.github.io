@@ -2,11 +2,7 @@
 layout: default
 modal-id: 1
 date: 2014-07-18
-img: cabin.png
+img: output-0.png
 alt: image-alt
-project-date: April 2014
-client: Start Bootstrap
-category: Web Development
-description: Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!
-
+description: The utility of the GORDIAN tools is illustrated on the use case for electric road placement optimization. <br><br> So what is the benefit of electrifying a segment? It depends on the vehicle weights, vehicle speeds, the road incline, the vehicle’s battery size, the charging power, and the past and future routes or charging opportunities of vehicles. <br> <br> To find the most optimal placement, one needs to evaluate the en-route energy-use and battery-state of vehicles, and select the placement that electrifies the largest amount of transport work. But there are a combinatorial number of potential placements, and millions of routes. <br> <br> GORDIAN’s route-analytic tools can evaluate millions of routes under a second! <br> <br> The GORDIAN tools have been applied to simulated loaded and empty transport routes of heavy freight trucks in Sweden. The effects of the optimized placements have been compared to commonly discussed corridor placements. An example is shown for a 300 km infrastructure budget for trucks with 100 KWh batteries that can be charged at 300 kW. Higher degrees of transport work electrification are visualized by darker shades of blue on the maps. While the corridor placement electrifies 1600 megaton-kilometers, the optimized placement, for the same 300 km infrastructure budget, electrifies 5300 megaton-kilometers. <br><br> Generally, the GORDIAN tools allow to find placements that electrify 3.25 times as much transport work, or cut infrastructure costs by 80%! A savings of 300 megaton in CO2e-emissions, or 13 BSEK in infrastructure costs in Sweden! <br><br> <img src="img/portfolio/reno.png" class="img-responsive img-centered" alt="image-alt">
 ---

@@ -2,9 +2,8 @@
 layout: default
 modal-id: 3
 date: 2014-07-16
-img: output-2.png
+img: output-3.png
 alt: image-alt
-project-date: April 2014
 description: Coming soon
 
 ---
