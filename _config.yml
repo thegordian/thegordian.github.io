@@ -59,6 +59,8 @@ address:
 # Credits content
 credits: ''
 
+include: ['_pages']
+
 # Build settings
 markdown: kramdown
 permalink: pretty
