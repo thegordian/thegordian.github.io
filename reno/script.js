@@ -409,8 +409,8 @@ function show_dots()
         }
 
         message+='<h3>Parameter settings</h3>' +
-            'Battery size: '+$("#bs").val()+' kWh<br>' +
-            'Charging power: '+$("#cp").val()+' kW<br>' +
+            'Battery size: '+$("#bs_c").val()+' kWh<br>' +
+            'Charging power: '+$("#cp_p").val()+' kW<br>' +
             'Infrastructure budget (# of 5km long electrified segments): '+ib;
 //        message=message+"<br>"+'Results Displayed on the map - here are the statistics:';
 
@@ -426,7 +426,7 @@ function show_dots()
             'Processing time: '+stat.running_time+' seconds';
 
         message+='<h4>Overall transport electrification results</h4>' +
-            'Total transport work electrified: '+Math.round(stat.electric_work/1000000000,2)+' Gtkm<br>' +
+            'Total transport work electrified: '+(stat.electric_work/1000000000).toFixed(2)+' Gtkm<br>' +
             'Percent of transport work electrified: '+((stat.fraction)*100).toFixed(2)+' %<br>'
 
 /*
@@ -526,9 +526,15 @@ function fill_electrified_edges_layer(electrified_edge_json)
         }
         else
         {
-            var f1= feature_to_update.properties.work/(feature_to_update.properties.work+electrified_edge_json.work[key]);
-            var f2= electrified_edge_json.work[key]/(feature_to_update.properties.work+electrified_edge_json.work[key]);
-            feature_to_update.properties.fraction=((f1*feature_to_update.properties.fraction)+(f2*electrified_edge_json.fraction[key]));
+            //var f1= feature_to_update.properties.work/(feature_to_update.properties.work+electrified_edge_json.work[key]);
+            //var f2= electrified_edge_json.work[key]/(feature_to_update.properties.work+electrified_edge_json.work[key]);
+            /*
+            if(feature_to_update.properties.fraction<electrified_edge_json.fraction[key])
+            {
+                feature_to_update.properties.fraction=electrified_edge_json.fraction[key];
+            }*/
+
+            feature_to_update.properties.fraction=(feature_to_update.properties.fraction+electrified_edge_json.fraction[key])/2;
         }
 
         if(feature_to_update.properties.work==null)
@@ -658,7 +664,7 @@ $('#filter_modal_toggle_btn').on('click', function()
 
     //var file='b'+$("#bs").val()+'c'+$("#cp").val()+'k'+$("#ib").val()+'.json';
 
-    var file=$("#ib").val()+'c'+$("#cp").val()+'p'+$("#bs").val()+'.json';
+    var file=$("#ib").val()+'c'+$("#bs_c").val()+'p'+$("#cp_p").val()+'.json';
 
     //alert('data/result_10_2/'+file);
     if(b_full)
