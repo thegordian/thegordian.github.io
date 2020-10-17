@@ -156,7 +156,7 @@ function highlightFeature(e)
         $("#hover_info").css('color', '#000000');
         var electrified_segment_message='';
         if(!(selected_edges_array.indexOf(e.target.feature.properties.network_id)==-1))
-            electrified_segment_message=' Electrified edge energy demand: <b>'+ selected_edges_demand_array[e.target.feature.properties.network_id].toFixed(2)+' kwh<b>';
+            electrified_segment_message=' Electrified edge energy demand: <b>'+ selected_edges_demand_array[e.target.feature.properties.network_id].toFixed(2)+' kWh<b>';
         $("#hover_info").html('Percent electrified : <b>'+(e.target.feature.properties.fraction*100).toFixed(2) +" %</b> Electrified transport work : <b>"+(e.target.feature.properties.work/1000000).toFixed(0)+' Mtkm</b>'+electrified_segment_message);
 
 
