@@ -1,4 +1,3 @@
-
 $('#info_modal').modal();
 
 var geoJsonLayerNetwork;
@@ -88,8 +87,7 @@ geoJsonLayerNetworkElectrified= L.geoJson(nt_data, {
 
          network_array_leaflet_id[my_network_index]=featureLayer._leaflet_id;
          network_array_network_id[my_network_index]=featureData.properties.network_id;
-         my_network_index++;
-
+         my_network_index++;;
 
         featureLayer.setStyle({
             'color': return_line_color(featureData.properties.fraction),//'#7DF9FF',
