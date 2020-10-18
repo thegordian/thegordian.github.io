@@ -1,0 +1,11 @@
+ - add and map all attributes - both directions
+ - selected zoom fixing
+ - legend 
+ - mobile friendly
+ Cool stuff
+ - double click implementation
+ - his plan introduction
+ - change detections
+ - flash change detection
+ - Click - Hover : based on device
+ - check API
