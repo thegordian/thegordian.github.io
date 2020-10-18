@@ -9,3 +9,4 @@
  - flash change detection
  - Click - Hover : based on device
  - check API
+ - n Choose k  -  https://www.hackmath.net/en/calculator/n-choose-k?n=13000&k=500&order=0&repeat=0
