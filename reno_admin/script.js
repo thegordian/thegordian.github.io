@@ -169,7 +169,7 @@ geoJsonLayerNetworkElectrified= L.geoJson(nt_data, {
             ids=k_list.toString();
 
             $.ajax({
-                url: 'http://spatialstack.com/reno_pr_v6/eval.php?ids='+ids+'&capacity='+$("#bs_c").val()+'&power='+$("#cp_p").val(),//https://4ei.dev/eval.php
+                url: 'https://spatialstack.com/reno_pr_v6/eval.php?ids='+ids+'&capacity='+$("#bs_c").val()+'&power='+$("#cp_p").val(),//https://4ei.dev/eval.php
                 type: "GET",
                 dataType: 'json',
                 async: false,
@@ -1231,7 +1231,7 @@ legend.addTo(map);
 function load_initial()
 {
     $.ajax({
-        url: 'http://spatialstack.com/reno_pr_v6/eval.php?ids='+k_list.toString()+'&capacity='+$("#bs_c").val()+'&power='+$("#cp_p").val(),
+        url: 'https://spatialstack.com/reno_pr_v6/eval.php?ids='+k_list.toString()+'&capacity='+$("#bs_c").val()+'&power='+$("#cp_p").val(),
         type: "GET",
         dataType: 'json',
         async: false,
