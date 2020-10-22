@@ -164,6 +164,8 @@ geoJsonLayerNetworkElectrified= L.geoJson(nt_data, {
                 k_list.splice(k_list.indexOf(featureData.properties.d2_id), 1);
             }
 
+
+            $('#ib')[0].options[0].innerHTML='User plan ('+k_list.length+')';
             //console.log(k_list);
 
             ids=k_list.toString();
@@ -177,11 +179,13 @@ geoJsonLayerNetworkElectrified= L.geoJson(nt_data, {
                     if (response.error == 'cookie out') {
                         return;
                     }
+                    $('.sideinfo').addClass('open');
                     var res = JSON.parse(response);
                     process_result_data(res);
 
                 },
                 error: function (response) {
+                    $('.sideinfo').removeClass('open');
                     alert("Results not found!");
                     message='';
                     $("#message_text").html(message);
@@ -215,6 +219,7 @@ geoJsonLayerNetworkElectrified= L.geoJson(nt_data, {
 
 
 
+        featureLayer.on('click', highlightFeature);
         featureLayer.on('mouseover', highlightFeature);
         featureLayer.on('mouseout', resetHighlight);
 
@@ -266,15 +271,19 @@ function choose(n, k){
 
 function highlightFeature(e)
 {
+    if (lastHover !== undefined) {
+        resetHighlight(lastHover)
+    }
+    lastHover = e;
     if (hover) {
 
         var layer = e.target;
 
-        $("#hover_info").css('color', '#000000');
+        $("#hover_info-div").css('bottom', 10);
         var electrified_segment_message='';
         if(!(selected_edges_array.indexOf(e.target.feature.properties.network_id)==-1))
             electrified_segment_message=' Electrified edge energy demand: <b>'+ selected_edges_demand_array[e.target.feature.properties.network_id].toFixed(2)+' kWh<b>';
-        $("#hover_info").html('Percent electrified : <b>'+(e.target.feature.properties.fraction*100).toFixed(2) +" %</b> Electrified transport work : <b>"+(e.target.feature.properties.e_work/1000000).toFixed(2)+' Mtkm</b>'+electrified_segment_message);//+"</b> Transport work : <b>"+(e.target.feature.properties.work/1000000).toFixed(3)+' Mtkm</b>
+        $("#hover_info").html('Percent electrified : <b>'+(e.target.feature.properties.fraction*100).toFixed(2) +" %</b> Electrified transport work : <b>"+(e.target.feature.properties.e_work/1000000).toFixed(2)+' Mtkm</b>'+'</b> Transport work : <b>'+(e.target.feature.properties.work/1000000).toFixed(2)+' Mtkm</b>'+electrified_segment_message);//+"</b> Transport work : <b>"+(e.target.feature.properties.work/1000000).toFixed(3)+' Mtkm</b>
 
        // console.log(e.target.feature.properties);
 
@@ -296,8 +305,8 @@ function highlightFeature(e)
 function resetHighlight(e)
 {
         //geoJsonLayerSeg.resetStyle(e.target);
-        $("#hover_info").css('color', '#808080');
-        $("#hover_info").html('Hover over the map for statistics');
+        $("#hover_info-div").css('bottom', -200);
+        $("#hover_info").html('');
 
         if(e.target.feature.properties.fraction)
         {
@@ -603,6 +612,7 @@ function process_result_data(res)
 
     message+='<h4>Searching for optimized solution among '+choose_result+' possible solutions</h4>';
     $("#message_text").html(message);
+
     number_of_dots_to_show=res.stat.running_time/60;
     dot_counter=0;
 
@@ -702,7 +712,9 @@ function show_dots()
 */
         $("#message_text").html(message);
 
-        var basic_summary_text='Total transport work electrified: <b>'+(stat.electric_work/1000000000).toFixed(2)+' Gtkm</b> Percent of transport work electrified: <b>'+((stat.fraction)*100).toFixed(2)+'</b>';
+        //$("#ib").selectedIndex
+        var current_sel='Infrastructure budget (# of 5km long electrified segments) : </br><b>'+$('#ib')[0].options[$("#ib")[0].selectedIndex].innerHTML+'</b></br>';
+        var basic_summary_text=current_sel+'Electrified transport work :</br> <b>'+(stat.electric_work/1000000000).toFixed(2)+' Gtkm</b>  <b>('+((stat.fraction)*100).toFixed(2)+'%)</b>';
         if(i_html_results)
         {
             basic_summary_text='Results summary will be displayed here';
@@ -1081,6 +1093,12 @@ $('#filter_modal_toggle_btn').on('click', function()
     }
 
     $("#start_from_here_btn").show();
+
+    //$('#sidebar,#sidebar-content').toggleClass('close');
+
+    //$('#sidebar,#sidebar-content').toggleClass('open');
+    //toggleSideBar();
+
 });
 
 var tiles_carto_dark= L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {'attribution': 'Map tiles by Carto, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'});
@@ -1096,7 +1114,24 @@ var map = L.map('map', {
         geoJsonLayerNetwork
     ]
 });
-
+var sideInfo = L.control.custom({
+    position: 'topleft',
+    content: '<p class="m-0 p-2" id="basic_summary">Results summary will be displayed here</p>' +
+        '<i class="fa fa-bars align-self-center" style="cursor: pointer;" onclick="toggleInfo()"></i>',
+    classes : 'sideinfo d-flex justify-content-between',
+}).addTo(map);
+function toggleInfo() {
+    $('.sideinfo').toggleClass('open');
+}
+var lastHover;
+map.on('click', function() {
+    $("#hover_info-div").css('bottom', -200);
+    $("#legendd").removeClass('show');
+    $('.sideinfo').removeClass('open');
+    if (lastHover !== undefined) {
+        resetHighlight(lastHover)
+    }
+});
 
 map.on('zoomend', function() {
 
@@ -1156,6 +1191,7 @@ $(document).on('click', '#filter_modal_clear_btn', function(){
     k_list=new Array();
     i_load=true;
     i_html_results=true;
+    $('#ib')[0].options[0].innerHTML='User plan ('+k_list.length+')';
     load_initial();
 });
 
@@ -1182,6 +1218,7 @@ $(document).on('click', '#start_from_here_btn', function()
     k_list=k_list_double.slice()//.filter(onlyUnique)
     $('#ib').val('u');
     $("#filter_modal_clear_btn").show();
+    $('#ib')[0].options[0].innerHTML='User plan ('+k_list.length+')';
     load_initial();
 });
 
@@ -1192,7 +1229,12 @@ $(document).on('click', '#b_full', function(){
     //console.log(b_full);
 });
 
+$('#ib')[0].options[0].innerHTML='User plan ('+k_list.length+')';
+//document.getElementById('user_plan_option').html='nada';
 
+function toggleSideBar() {
+    $('#sidebar,#sidebar-content').toggleClass('open');
+}
 var legend = L.control({position: 'bottomright'});
 
 legend.onAdd = function (map) {
@@ -1203,29 +1245,31 @@ legend.onAdd = function (map) {
 
     // loop through our density intervals and generate a label with a colored square for each interval
 
-  //  for (var i = 0; i < grades.length; i++) {
-        div.innerHTML +='<div><b>Percent of transport work </br>(i.e., tkm) electrified</div>';
-       // div.innerHTML +='<div><i style="background:grey;height: 1px;margin-top: 10px"></i>' +'No transport' + '</div>';
-        div.innerHTML +='<div><i style="margin-top: 10px;height:1px;background:repeating-linear-gradient(to right,grey 0,grey 3px,transparent 3px,transparent 7px)"></i>' +'No transport' + '</div>';
-        div.innerHTML +='<div><i style="background:#58CCED;height: 6px;margin-top: 6px"></i> ' +'00 - 25%' + '</div>';
-        div.innerHTML +='<div><i style="background:#3895D3;height: 6px;margin-top: 6px"></i> ' +'25 - 50%' + '</div>';
-        div.innerHTML +='<div><i style="background:#1261A0;height: 6px;margin-top: 6px"></i> ' +'50 - 75%' + '</div>';
-        div.innerHTML +='<div><i style="background:#072F5F;height: 6px;margin-top: 6px"></i> ' +'75 - 100%' + '</div>';
-        div.innerHTML +='<div><b>Electrified edges</b></div>';
-        div.innerHTML +='<div><i style="background:red;height: 6px;margin-top: 6px"></i></div>';
-        div.innerHTML +='<br><div><b>Total transport work (Mtkm)</div>';
-        div.innerHTML +='<div><i style="margin-top: 10px;height:1px;background:repeating-linear-gradient(to right,grey 0,grey 3px,transparent 3px,transparent 7px)"></i>' +'No transport' + '</div>';
-        div.innerHTML +='<div><i style="background:grey;height: 1px;margin-top: 10px"></i> ' +'0 - 1' + '</div>';
-        div.innerHTML +='<div><i style="background:grey;height: 2px;margin-top: 9px"></i> ' +'1 - 4' + '</div>';
-        div.innerHTML +='<div><i style="background:grey;height: 3px;margin-top: 8px"></i> ' +'4 - 10' + '</div>';
-        div.innerHTML +='<div><i style="background:grey;height: 4px;margin-top: 8px"></i> ' +'10 - 28' + '</div>';
-        div.innerHTML +='<div><i style="background:grey;height: 5px;margin-top: 7px"></i> ' +'28 - 54' + '</div>';
-
+    //  for (var i = 0; i < grades.length; i++) {
+    var html = '<i class="fa fa-bars m-0 w-100" data-toggle="collapse" data-target="#legendd"></i>'+
+        '<div id="legendd" class="collapse"><div><b>Percent of transport work </br>(i.e., tkm) electrified</div>' +
+        '<div><i style="margin-top: 10px;height:1px;background:repeating-linear-gradient(to right,grey 0,grey 3px,transparent 3px,transparent 7px)"></i>' + 'No transport' + '</div>' +
+        '<div><i style="background:#58CCED;height: 6px;margin-top: 6px"></i> ' + '00 - 25%' + '</div>' +
+        '<div><i style="background:#3895D3;height: 6px;margin-top: 6px"></i> ' + '25 - 50%' + '</div>' +
+        '<div><i style="background:#1261A0;height: 6px;margin-top: 6px"></i> ' + '50 - 75%' + '</div>' +
+        '<div><i style="background:#072F5F;height: 6px;margin-top: 6px"></i> ' + '75 - 100%' + '</div>' +
+        '<div><b>Electrified edges</b></div>' +
+        '<div><i style="background:red;height: 6px;margin-top: 6px"></i></div>' +
+        '<br><div><b>Total transport work (Mtkm)</div>' +
+        '<div><i style="margin-top: 10px;height:1px;background:repeating-linear-gradient(to right,grey 0,grey 3px,transparent 3px,transparent 7px)"></i>' + 'No transport' + '</div>' +
+        '<div><i style="background:grey;height: 1px;margin-top: 10px"></i> ' + '0 - 1' + '</div>' +
+        '<div><i style="background:grey;height: 2px;margin-top: 9px"></i> ' + '1 - 4' + '</div>' +
+        '<div><i style="background:grey;height: 3px;margin-top: 8px"></i> ' + '4 - 10' + '</div>' +
+        '<div><i style="background:grey;height: 4px;margin-top: 8px"></i> ' + '10 - 28' + '</div>' +
+        '<div><i style="background:grey;height: 5px;margin-top: 7px"></i> ' + '28 - 54' + '</div></div>';
+    div.innerHTML = html;
 
     return div;
 };
 legend.addTo(map);
-
+if ($(window).height() > 600 && $(window).width() > 700) {
+    $("#legendd").addClass('show');
+}
 //$("#bs_c").val()+'p'+$("#cp_p").val()
 
 function load_initial()
@@ -1236,29 +1280,34 @@ function load_initial()
         dataType: 'json',
         async: false,
         success: function (response) {
+            openinfo()
             if (response.error == 'cookie out') {
                 return;
             }
             var res = JSON.parse(response);
             process_result_data(res);
-
         },
         error: function (response) {
+            openinfo()
             alert("Results not found!");
             message='';
             $("#message_text").html(message);
             map.addLayer(geoJsonLayerNetwork);
             map.removeLayer(geoJsonLayerNetworkElectrified);
             map.removeLayer(geoJsonLayerNetworkSelected);
-            return;
         }
     });
 //    load_initial_style();
 
 }
-
+var initApp = false;
 load_initial();
-
+function openinfo() {
+    if (!initApp) {
+        $('#info_modal').modal();
+        initApp = true;
+    }
+}
 
 function load_initial_style()
 {
