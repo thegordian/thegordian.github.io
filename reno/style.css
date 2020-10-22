@@ -2,15 +2,27 @@ body {
   margin: 0;
 }
 html, body {
+  overflow: hidden;
   height: 100%;
   font-family: 'Roboto' !important;
 }
 
 #hover_info {
-  color: #ccc;
+  text-align: center;
+  width: 70%;
+  color: white;
   padding: 10px;
   border-radius: 5px;
   border: 0.5px solid #e3e3e3;
+  background: rgba(0,0,0,0.8);
+}
+
+#hover_info-div {
+  width: 100%;
+  position: fixed;
+  bottom: -200px;
+  z-index: 1001;
+  transition: all 0.3s;
 }
 
 #myProgress {
@@ -34,6 +46,7 @@ html, body {
   border-radius: 5px;
 }
 #map {
+  min-height: 450px;
   height: 100%;
   margin: 0 10px 10px 10px;
 }
@@ -431,4 +444,58 @@ input[type=text], select {
   .map-second-title {
     font-size: 0.8rem;
   }
+}
+
+.sideinfo {
+  border-radius: 7px;
+  background: rgba(0, 0, 0, 0.7);
+  width: 250px;
+  left: -240px;
+  transition: all 0.3s;
+  color: white;
+}
+
+.sideinfo.open {
+  left: 0;
+  border: 1px solid white !important;
+}
+
+#sidebar {
+  top: 0;
+  height: 100%;
+  width: calc(100% - 250px);
+  position: fixed;
+  z-index: 2000;
+  left: -10000px;
+  transition: all 0.3s;
+  background: rgba(0,0,0,0.2);
+}
+
+#sidebar-content {
+  transition: all 0.3s;
+  width: 250px;
+  height: 100%;
+  background: rgba(0,0,0,0.88);
+  z-index: 2001;
+  right: -500px;
+  top: 0;
+  position: fixed;
+  overflow: auto;
+}
+
+#sidebar-content.open {
+  right: 0;
+}
+
+#sidebar.open {
+  left: 0;
+}
+
+.sidebar-close {
+  transition: all 0.3s;
+  color: rgba(255,255,255,0.7);
+}
+
+.sidebar-close:hover {
+  color: white !important;
 }
