@@ -1221,7 +1221,7 @@ $(document).on('click', '#filter_modal_clear_btn', function(){
     i_load=true;
     i_html_results=true;
     $('#ib')[0].options[0].innerHTML='User plan ('+k_list.length+')';
-    check_kth_server_request();
+    //check_kth_server_request();
     load_initial();
 });
 
