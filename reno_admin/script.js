@@ -1187,11 +1187,41 @@ $(document).on('click', '#click-info-2', function(){
     $('#info_modal_2').modal();
 });
 
+
+function check_kth_server_request()
+{
+    e_data={"ids":[51369,4239,51969],"capacity":100,"power":300};
+
+    $.ajax({
+        url: 'http://hermes.infra.kth.se:8081/eval',
+        type: "GET",
+        dataType: 'json',
+        data:e_data,
+        async: false,
+        success: function (response) {
+            if (response.error == 'cookie out') {
+                return;
+            }
+
+            var res = response;
+
+
+
+        },
+        error: function (response) {
+            alert("Results not found!");
+            return;
+        }
+    });
+}
+
+
 $(document).on('click', '#filter_modal_clear_btn', function(){
     k_list=new Array();
     i_load=true;
     i_html_results=true;
     $('#ib')[0].options[0].innerHTML='User plan ('+k_list.length+')';
+    check_kth_server_request();
     load_initial();
 });
 
