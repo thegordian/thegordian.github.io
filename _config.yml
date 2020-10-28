@@ -59,7 +59,7 @@ address:
 # Credits content
 credits: ''
 
-include: ['reno']
+include: ['reno','mm']
 
 # Build settings
 markdown: kramdown
