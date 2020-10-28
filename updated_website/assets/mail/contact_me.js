@@ -21,7 +21,8 @@ $(function () {
             $this = $("#sendMessageButton");
             $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
             $.ajax({
-                url: "/assets/mail/contact_me.php",
+                url: "http://spatialstack.com/gordian_php/gordian_email_sender.php",
+                // url: "gordian_php/gordian_email_sender.php", // local url
                 type: "POST",
                 data: {
                     name: name,
@@ -42,8 +43,6 @@ $(function () {
                         "<strong>Your message has been sent. </strong>"
                     );
                     $("#success > .alert-success").append("</div>");
-                    //clear all fields
-                    $("#contactForm").trigger("reset");
                 },
                 error: function () {
                     // Fail message
@@ -61,13 +60,13 @@ $(function () {
                         )
                     );
                     $("#success > .alert-danger").append("</div>");
-                    //clear all fields
-                    $("#contactForm").trigger("reset");
                 },
                 complete: function () {
                     setTimeout(function () {
                         $this.prop("disabled", false); // Re-enable submit button when AJAX call is complete
                     }, 1000);
+                    //clear all fields
+                    $("#contactForm").trigger("reset");
                 },
             });
         },

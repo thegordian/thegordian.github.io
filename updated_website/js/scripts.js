@@ -3,14 +3,14 @@
     * Copyright 2013-2020 Start Bootstrap
     * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-agency/blob/master/LICENSE)
     */
-    (function ($) {
+(function ($) {
     "use strict"; // Start of use strict
 
     // Smooth scrolling using jQuery easing
     $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function () {
         if (
             location.pathname.replace(/^\//, "") ==
-                this.pathname.replace(/^\//, "") &&
+            this.pathname.replace(/^\//, "") &&
             location.hostname == this.hostname
         ) {
             var target = $(this.hash);
@@ -53,4 +53,31 @@
     navbarCollapse();
     // Collapse the navbar when page is scrolled
     $(window).scroll(navbarCollapse);
+    on_resize($(window).width(), $(window).height());
+    $('#team-slider').lightSlider({
+        item: 1,
+        controls: false,
+        pager: false,
+        slideMargin: 0,
+        auto: true,
+        loop: true
+    });
 })(jQuery); // End of use strict
+
+
+$(window).on('resize', function () {
+    var win = $(this); //this = window
+    on_resize(win.width(), win.height());
+});
+function on_resize(width, height) {
+    // setTimeout(function() {
+    //     $(".team-text-box").css("left", $(".team-box > img").width());
+    // }, 1500);
+    if(width <= 1100) {
+        $(".team-box > img").removeClass("position-absolute");
+        $(".team-text-box").removeClass("position-absolute");
+    } else {
+        $(".team-box > img").addClass("position-absolute");
+        $(".team-text-box").addClass("position-absolute");
+    }
+}
