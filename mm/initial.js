@@ -83,10 +83,15 @@ map.on(L.Draw.Event.CREATED, function(e) {
 });
 
 var match_wkt = function(wkt) {
-    $.getJSON("https://hermes.infra.kth.se:8082/match_wkt", {
-            "wkt": wkt
-        }).done(function(data) {
+  $.ajax({
+        url: 'http://hermes.infra.kth.se:8082/match_wkt',
+        type: "GET",
+        data: {
+          "wkt": wkt
+        },
+        success: function(data) {
             // console.log("Result fetched");
+            // console.log(data);
             // console.log(data);
             if (data.state==1){
                 var geojson = Terraformer.WKT.parse(data.wkt);
@@ -104,15 +109,13 @@ var match_wkt = function(wkt) {
             } else {
                 alert("Cannot match the trajectory, try another one")
             }
-        })
-        .fail(function(jqXHR, textStatus, errorThrown) {
-            alert("Error with fetching data from server");
-            console.log("error " + textStatus);
-            console.log("incoming Text " + jqXHR.responseText);
-        }).always(function() {
-            console.log("complete");
-        });
-}
+        },
+        error: function (response) {
+            console.log("error " + response);
+            return;
+        }
+    });
+};
 
 map.on(L.Draw.Event.DRAWSTART, function(e) {
     editableLayers.clearLayers();
