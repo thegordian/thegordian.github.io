@@ -13,6 +13,7 @@
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="lib/lightslider/lightslider.min.css">
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
     </head>
@@ -20,7 +21,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="assets/img/gordain.jpeg" alt="" /></a>
+                <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="assets/img/Gordian_pos_WHhite.png" alt="" /></a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ml-1"></i>
@@ -53,6 +54,9 @@
                     <h2 class="section-heading text-uppercase">philosophy</h2>
                     <h3 class="section-subheading text-muted">Gordian is a contemporary movement-centered mindset that accounts for the complex reality of the infrastructure environment. Planning can only be optimal if it considers the relation of movement traces to one another and resources.</h3>
                 </div>
+                <div class="youtube-video-box text-center mb-4">
+                    <iframe width="100%" height="500" src="https://www.youtube.com/embed/kkm3AxI44gw?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
                     <img src="assets/img/demo.JPG" style="margin-left: auto;margin-right: auto;display: block;width: 100%">
             </div>
         </section>
@@ -65,26 +69,23 @@
                 </div>
                 <div class="row text-center">
                     <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
-                        </span>
+                        <a class="data-preprocessing-link" data-toggle="modal" href="#productModal1">
+                            <span class="product-services-icon data-preprocessing"></span>
+                        </a>
                         <h4 class="my-3">Data pre-processing</h4>
                         <p class="text-muted">Scalable and accurate map matching of movement trajectories.</p>
                     </div>
                     <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
-                        </span>
+                        <a class="knowledge-discovery-link" data-toggle="modal" href="#productModal2">
+                            <span class="product-services-icon knowledge-discovery"></span>
+                        </a>
                         <h4 class="my-3">Knowledge discovery and management</h4>
                         <p class="text-muted">Trajectory visual analytics, movement pattern discovery, and data compression and anonymization.</p>
                     </div>
                     <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
-                        </span>
+                        <a class="transport-planning-link" data-toggle="modal" href="#productModal3">
+                            <span class="product-services-icon transport-planning"></span>
+                        </a>
                         <h4 class="my-3">Transport planning and optimization</h4>
                         <p class="text-muted">Easy, interactive, and evidence-based planning.
                             Up to 5X more cost-effective plans than competitors.</p>
@@ -97,104 +98,111 @@
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Use Cases</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <!-- <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3> -->
                 </div>
                 <div class="row">
                     <div class="col-lg-4 col-sm-6 mb-4">
-                        <div class="portfolio-item">
+                        <div class="portfolio-item d-flex flex-column h-100">
                             <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1">
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="assets/img/portfolio/01-thumbnail.jpg" alt="" />
+                                <img class="img-fluid" src="assets/img/icons_for_usecases/charging_infrastr.jpg" alt="" />
+                                <img class="img-fluid img-hover" src="assets/img/icons_for_usecases/charging_infrastr_HOVER.jpg" alt="" />
                             </a>
-                            <div class="portfolio-caption">
+                            <div class="portfolio-caption flex-grow-1">
                                 <div class="portfolio-caption-heading">Charging infrastructure planning</div>
-                                <div class="portfolio-caption-subheading text-muted">Illustration</div>
+                                <!-- <div class="portfolio-caption-subheading text-muted">Illustration</div> -->
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6 mb-4">
-                        <div class="portfolio-item">
+                        <div class="portfolio-item d-flex flex-column h-100">
                             <a class="portfolio-link" data-toggle="modal" href="#portfolioModal2">
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="assets/img/portfolio/02-thumbnail.jpg" alt="" />
+                                <img class="img-fluid" src="assets/img/icons_for_usecases/transport_hub_planning.jpg" alt="" />
+                                <img class="img-fluid img-hover" src="assets/img/icons_for_usecases/transport_hub_planning_HOVER.jpg" alt="" />
                             </a>
-                            <div class="portfolio-caption">
+                            <div class="portfolio-caption flex-grow-1">
                                 <div class="portfolio-caption-heading">Transport hub planning</div>
-                                <div class="portfolio-caption-subheading text-muted">Graphic Design</div>
+                                <!-- <div class="portfolio-caption-subheading text-muted">Graphic Design</div> -->
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6 mb-4">
-                        <div class="portfolio-item">
+                        <div class="portfolio-item d-flex flex-column h-100">
                             <a class="portfolio-link" data-toggle="modal" href="#portfolioModal3">
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="assets/img/portfolio/03-thumbnail.jpg" alt="" />
+                                <img class="img-fluid" src="assets/img/icons_for_usecases/transit_route_plan.jpg" alt="" />
+                                <img class="img-fluid img-hover" src="assets/img/icons_for_usecases/transit_route_plan_HOVER.jpg" alt="" />
                             </a>
-                            <div class="portfolio-caption">
+                            <div class="portfolio-caption flex-grow-1">
                                 <div class="portfolio-caption-heading">Transit route planning</div>
-                                <div class="portfolio-caption-subheading text-muted">Identity</div>
+                                <!-- <div class="portfolio-caption-subheading text-muted">Identity</div> -->
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
-                        <div class="portfolio-item">
+                        <div class="portfolio-item d-flex flex-column h-100">
                             <a class="portfolio-link" data-toggle="modal" href="#portfolioModal4">
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="assets/img/portfolio/04-thumbnail.jpg" alt="" />
+                                <img class="img-fluid" src="assets/img/icons_for_usecases/hub_to_hub.jpg" alt="" />
+                                <img class="img-fluid img-hover" src="assets/img/icons_for_usecases/hub_to_hub_HOVER.jpg" alt="" />
                             </a>
-                            <div class="portfolio-caption">
+                            <div class="portfolio-caption flex-grow-1">
                                 <div class="portfolio-caption-heading">Hub-to-hub corridor planning</div>
-                                <div class="portfolio-caption-subheading text-muted">Branding</div>
+                                <!-- <div class="portfolio-caption-subheading text-muted">Branding</div> -->
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6 mb-4 mb-sm-0">
-                        <div class="portfolio-item">
+                        <div class="portfolio-item d-flex flex-column h-100">
                             <a class="portfolio-link" data-toggle="modal" href="#portfolioModal5">
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="assets/img/portfolio/05-thumbnail.jpg" alt="" />
+                                <img class="img-fluid" src="assets/img/icons_for_usecases/consolidated_log.jpg" alt="" />
+                                <img class="img-fluid img-hover" src="assets/img/icons_for_usecases/consolidated_log_HOVER.jpg" alt="" />
                             </a>
-                            <div class="portfolio-caption">
+                            <div class="portfolio-caption flex-grow-1">
                                 <div class="portfolio-caption-heading">Consolidated logistics planning</div>
-                                <div class="portfolio-caption-subheading text-muted">Website Design</div>
+                                <!-- <div class="portfolio-caption-subheading text-muted">Website Design</div> -->
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
-                        <div class="portfolio-item">
+                        <div class="portfolio-item d-flex flex-column h-100">
                             <a class="portfolio-link" data-toggle="modal" href="#portfolioModal6">
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="assets/img/portfolio/06-thumbnail.jpg" alt="" />
+                                <img class="img-fluid" src="assets/img/icons_for_usecases/merge_in_transit.jpg" alt="" />
+                                <img class="img-fluid img-hover" src="assets/img/icons_for_usecases/merge_in_transit_HOVER.jpg" alt="" />
                             </a>
-                            <div class="portfolio-caption">
+                            <div class="portfolio-caption flex-grow-1">
                                 <div class="portfolio-caption-heading">Merge-in-transit planning</div>
-                                <div class="portfolio-caption-subheading text-muted">Photography</div>
+                                <!-- <div class="portfolio-caption-subheading text-muted">Photography</div> -->
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
-                        <div class="portfolio-item">
+                        <div class="portfolio-item d-flex flex-column h-100">
                             <a class="portfolio-link" data-toggle="modal" href="#portfolioModal7">
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="assets/img/portfolio/07-thumbnail.jpg" alt="" />
+                                <img class="img-fluid" src="assets/img/icons_for_usecases/intelligent_fleet.jpg" alt="" />
+                                <img class="img-fluid img-hover" src="assets/img/icons_for_usecases/intelligent_fleet_HOVER.jpg" alt="" />
                             </a>
-                            <div class="portfolio-caption">
+                            <div class="portfolio-caption flex-grow-1">
                                 <div class="portfolio-caption-heading">Intelligent fleet management</div>
-                                <div class="portfolio-caption-subheading text-muted">Branding</div>
+                                <!-- <div class="portfolio-caption-subheading text-muted">Branding</div> -->
                             </div>
                         </div>
                     </div>
@@ -206,109 +214,63 @@
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">About</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <!-- <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3> -->
                 </div>
-                <ul class="timeline">
+                <div>
+                    <!-- <p class="coming-soon-text text-center">
+                        Coming Soon...
+                    </p> -->
+                    <p>
+                        Legend has it that a peasant farmer named Gordias fulfilled a prophesy by driving into the city of the Phyrgians on an ox-cart and so became their king. To commemorate the event the ox-cart was tied to a post with an intricate, tightly entangled knot that could not be untied for several centuries and the man to unravel the knot was prophesized to become the ruler of all of Asia. Upon his arrival, Alexander the Great, after some unsuccessful struggle with the knot, drew his sword and sliced the knot in half with a single stroke and later went on to conquer Asia.
+                    </p> <br>
+                    <p>
+                        The name Gordian is based on the metaphor that is associated with the Gordian Knot. In particular, movement traces have a similar entangled characteristic as the Gordian knot. The problems that Gordian solves are also (seemingly) intractable and Gordian provides effective and elegant solutions to such problems. By untangling knots, Gordian unleashes sustainable transport solutions.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <!-- Team-->
+        <section class="page-section bg-light p-0" id="team">
+            <div class="team-outer-box">
+                <ul id="team-slider">
                     <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/1.jpg" alt="" /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4>2009-2011</h4>
-                                <h4 class="subheading">Our Humble Beginnings</h4>
+                        <div class="team-box ceo d-flex flex-column justify-content-center align-items-center position-relative">
+                            <div class="team-overlay position-absolute"></div>
+                            <img class="position-absolute" src="assets/img/team/gyozo_TEAM.jpg" alt="ceo">
+                            <div class="team-text-box position-absolute">
+                                <h4 class="m-0">Gyözö Gidofalvi</h4>
+                                <p>CEO</p>
+                                <p>Gyözö is an associate professor at the Geodesy and Geoinformatics Division at the Department for Urban Planing and Environment at the Royal Institute of Technology (KTH) in Stockholm, Sweden. For more information please refer to his CV.</p>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/2.jpg" alt="" /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4>March 2011</h4>
-                                <h4 class="subheading">An Agency is Born</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
                         </div>
                     </li>
                     <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/3.jpg" alt="" /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4>December 2012</h4>
-                                <h4 class="subheading">Transition to Full Service</h4>
+                        <div class="team-box ceo d-flex flex-column justify-content-center align-items-center position-relative">
+                            <div class="team-overlay position-absolute"></div>
+                            <img class="position-absolute" src="assets/img/team/can_TEAM.jpg" alt="ceo">
+                            <div class="team-text-box position-absolute">
+                                <h4 class="m-0">Can Yang</h4>
+                                <p>Lead Backend</p>
+                                <p>Coming Soon. For more information please refer to his CV.</p>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
                         </div>
                     </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/4.jpg" alt="" /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4>July 2014</h4>
-                                <h4 class="subheading">Phase Two Expansion</h4>
+                    <li>
+                        <div class="team-box ceo d-flex flex-column justify-content-center align-items-center position-relative">
+                            <div class="team-overlay position-absolute"></div>
+                            <img class="position-absolute" src="assets/img/team/ehsan_TEAM.jpg" alt="ceo">
+                            <div class="team-text-box position-absolute">
+                                <h4 class="m-0">Ehsan Saqib</h4>
+                                <p>Frontend Lead</p>
+                                <p>Coming Soon. For more information please refer to his CV.</p>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image">
-                            <h4>
-                                Be Part
-                                <br />
-                                Of Our
-                                <br />
-                                Story!
-                            </h4>
                         </div>
                     </li>
                 </ul>
             </div>
         </section>
-        <!-- Team-->
-        <section class="page-section bg-light" id="team">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/gyozo.jpg" alt="" />
-                            <h4>Gyözö Gidofalvi</h4>
-                            <p class="text-muted">CEO</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/gy%C3%B6z%C3%B6-gidofalvi-a670465" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/can.JPG" alt="" />
-                            <h4>Can Yang</h4>
-                            <p class="text-muted">Lead Backend</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/can-yang-067b127a/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/ehsan.jpg" alt="" />
-                            <h4>Ehsan Saqib</h4>
-                            <p class="text-muted">Lead Frontend</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/ehsan-saqib-1b6b4627/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-8 mx-auto text-center"><p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p></div>
-                </div>
-            </div>
-        </section>
         <!-- Clients-->
-        <div class="py-5">
+        <!-- <div class="py-5">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3 col-sm-6 my-3">
@@ -325,33 +287,33 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Contact-->
         <section class="page-section" id="contact">
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Contact Us</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <!-- <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3> -->
                 </div>
                 <form id="contactForm" name="sentMessage" novalidate="novalidate">
                     <div class="row align-items-stretch mb-5">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input class="form-control" id="name" type="text" placeholder="Your Name *" required="required" data-validation-required-message="Please enter your name." />
+                                <input class="form-control" id="name" name="name" type="text" placeholder="Your Name *" required="required" data-validation-required-message="Please enter your name." />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" id="email" type="email" placeholder="Your Email *" required="required" data-validation-required-message="Please enter your email address." />
+                                <input class="form-control" id="email" name="email" type="email" placeholder="Your Email *" required="required" data-validation-required-message="Please enter your email address." />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group mb-md-0">
-                                <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" required="required" data-validation-required-message="Please enter your phone number." />
+                                <input class="form-control" id="phone" name="phone" type="tel" placeholder="Your Phone *" required="required" data-validation-required-message="Please enter your phone number." />
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group form-group-textarea mb-md-0">
-                                <textarea class="form-control" id="message" placeholder="Your Message *" required="required" data-validation-required-message="Please enter a message."></textarea>
+                                <textarea class="form-control" id="message" name="message" placeholder="Your Message *" required="required" data-validation-required-message="Please enter a message."></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -367,7 +329,7 @@
         <footer class="footer py-4">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-4 text-lg-left">Copyright © Your Website 2020</div>
+                    <div class="col-lg-4 text-lg-left">Copyright © Gordian 2020</div>
                     <div class="col-lg-4 my-3 my-lg-0">
                         <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
                         <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
@@ -391,18 +353,12 @@
                             <div class="col-lg-8">
                                 <div class="modal-body">
                                     <!-- Project Details Go Here-->
-                                    <h2 class="text-uppercase">Project Name</h2>
-                                    <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/01-full.jpg" alt="" />
-                                    <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                                    <ul class="list-inline">
-                                        <li>Date: January 2020</li>
-                                        <li>Client: Threads</li>
-                                        <li>Category: Illustration</li>
-                                    </ul>
+                                    <h2 class="text-uppercase">Charging infrastructure planning</h2>
+                                    <!-- <p class="item-intro text-muted">Illustration</p> -->
+                                    <p class="coming-soon-text text-center">Coming Soon...</p>
                                     <button class="btn btn-primary" data-dismiss="modal" type="button">
                                         <i class="fas fa-times mr-1"></i>
-                                        Close Project
+                                        Close
                                     </button>
                                 </div>
                             </div>
@@ -421,18 +377,12 @@
                             <div class="col-lg-8">
                                 <div class="modal-body">
                                     <!-- Project Details Go Here-->
-                                    <h2 class="text-uppercase">Project Name</h2>
-                                    <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/02-full.jpg" alt="" />
-                                    <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                                    <ul class="list-inline">
-                                        <li>Date: January 2020</li>
-                                        <li>Client: Explore</li>
-                                        <li>Category: Graphic Design</li>
-                                    </ul>
+                                    <h2 class="text-uppercase">Transport hub planning</h2>
+                                    <!-- <p class="item-intro text-muted">Graphic Design</p> -->
+                                    <p class="coming-soon-text text-center">Coming Soon...</p>
                                     <button class="btn btn-primary" data-dismiss="modal" type="button">
                                         <i class="fas fa-times mr-1"></i>
-                                        Close Project
+                                        Close
                                     </button>
                                 </div>
                             </div>
@@ -451,18 +401,12 @@
                             <div class="col-lg-8">
                                 <div class="modal-body">
                                     <!-- Project Details Go Here-->
-                                    <h2 class="text-uppercase">Project Name</h2>
-                                    <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/03-full.jpg" alt="" />
-                                    <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                                    <ul class="list-inline">
-                                        <li>Date: January 2020</li>
-                                        <li>Client: Finish</li>
-                                        <li>Category: Identity</li>
-                                    </ul>
+                                    <h2 class="text-uppercase">Transit route planning</h2>
+                                    <!-- <p class="item-intro text-muted">Identity</p> -->
+                                    <p class="coming-soon-text text-center">Coming Soon...</p>
                                     <button class="btn btn-primary" data-dismiss="modal" type="button">
                                         <i class="fas fa-times mr-1"></i>
-                                        Close Project
+                                        Close
                                     </button>
                                 </div>
                             </div>
@@ -481,18 +425,12 @@
                             <div class="col-lg-8">
                                 <div class="modal-body">
                                     <!-- Project Details Go Here-->
-                                    <h2 class="text-uppercase">Project Name</h2>
-                                    <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/04-full.jpg" alt="" />
-                                    <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                                    <ul class="list-inline">
-                                        <li>Date: January 2020</li>
-                                        <li>Client: Lines</li>
-                                        <li>Category: Branding</li>
-                                    </ul>
+                                    <h2 class="text-uppercase">Hub-to-hub corridor planning</h2>
+                                    <!-- <p class="item-intro text-muted">Branding</p> -->
+                                    <p class="coming-soon-text text-center">Coming Soon...</p>
                                     <button class="btn btn-primary" data-dismiss="modal" type="button">
                                         <i class="fas fa-times mr-1"></i>
-                                        Close Project
+                                        Close
                                     </button>
                                 </div>
                             </div>
@@ -511,18 +449,12 @@
                             <div class="col-lg-8">
                                 <div class="modal-body">
                                     <!-- Project Details Go Here-->
-                                    <h2 class="text-uppercase">Project Name</h2>
-                                    <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/05-full.jpg" alt="" />
-                                    <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                                    <ul class="list-inline">
-                                        <li>Date: January 2020</li>
-                                        <li>Client: Southwest</li>
-                                        <li>Category: Website Design</li>
-                                    </ul>
+                                    <h2 class="text-uppercase">Consolidated logistics planning</h2>
+                                    <!-- <p class="item-intro text-muted">Website Design</p> -->
+                                    <p class="coming-soon-text text-center">Coming Soon...</p>
                                     <button class="btn btn-primary" data-dismiss="modal" type="button">
                                         <i class="fas fa-times mr-1"></i>
-                                        Close Project
+                                        Close
                                     </button>
                                 </div>
                             </div>
@@ -541,18 +473,12 @@
                             <div class="col-lg-8">
                                 <div class="modal-body">
                                     <!-- Project Details Go Here-->
-                                    <h2 class="text-uppercase">Project Name</h2>
-                                    <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/06-full.jpg" alt="" />
-                                    <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                                    <ul class="list-inline">
-                                        <li>Date: January 2020</li>
-                                        <li>Client: Window</li>
-                                        <li>Category: Photography</li>
-                                    </ul>
+                                    <h2 class="text-uppercase">Merge-in-transit planning</h2>
+                                    <!-- <p class="item-intro text-muted">Photography</p> -->
+                                    <p class="coming-soon-text text-center">Coming Soon...</p>
                                     <button class="btn btn-primary" data-dismiss="modal" type="button">
                                         <i class="fas fa-times mr-1"></i>
-                                        Close Project
+                                        Close
                                     </button>
                                 </div>
                             </div>
@@ -571,18 +497,12 @@
                             <div class="col-lg-8">
                                 <div class="modal-body">
                                     <!-- Project Details Go Here-->
-                                    <h2 class="text-uppercase">Project Name</h2>
-                                    <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/07-full.jpg" alt="" />
-                                    <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                                    <ul class="list-inline">
-                                        <li>Date: January 2020</li>
-                                        <li>Client: Window</li>
-                                        <li>Category: Photography</li>
-                                    </ul>
+                                    <h2 class="text-uppercase">Intelligent fleet management</h2>
+                                    <!-- <p class="item-intro text-muted">Branding</p> -->
+                                    <p class="coming-soon-text text-center">Coming Soon...</p>
                                     <button class="btn btn-primary" data-dismiss="modal" type="button">
                                         <i class="fas fa-times mr-1"></i>
-                                        Close Project
+                                        Close
                                     </button>
                                 </div>
                             </div>
@@ -591,6 +511,81 @@
                 </div>
             </div>
         </div>
+
+        <!-- Product Modals -->
+        <!-- Modal 1-->
+        <div class="portfolio-modal modal fade" id="productModal1" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <!-- Project Details Go Here-->
+                                    <h2 class="text-uppercase">Data pre-processing</h2>
+                                    <p class="item-intro text-muted">Scalable and accurate map matching of movement trajectories.</p>
+                                    <p class="coming-soon-text text-center">Coming Soon...</p>
+                                    <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                        <i class="fas fa-times mr-1"></i>
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal 2-->
+        <div class="portfolio-modal modal fade" id="productModal2" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <!-- Project Details Go Here-->
+                                    <h2 class="text-uppercase">Knowledge discovery and management</h2>
+                                    <p class="item-intro text-muted">Trajectory visual analytics, movement pattern discovery, and data compression and anonymization.</p>
+                                    <p class="coming-soon-text text-center">Coming Soon...</p>
+                                    <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                        <i class="fas fa-times mr-1"></i>
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal 3-->
+        <div class="portfolio-modal modal fade" id="productModal3" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <!-- Project Details Go Here-->
+                                    <h2 class="text-uppercase">Transport planning and optimization</h2>
+                                    <p class="item-intro text-muted">Easy, interactive, and evidence-based planning. Up to 5X more cost-effective plans than competitors.</p>
+                                    <p class="coming-soon-text text-center">Coming Soon...</p>
+                                    <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                        <i class="fas fa-times mr-1"></i>
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Bootstrap core JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
@@ -599,6 +594,8 @@
         <!-- Contact form JS-->
         <script src="assets/mail/jqBootstrapValidation.js"></script>
         <script src="assets/mail/contact_me.js"></script>
+
+        <script src="lib/lightslider/lightslider.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
     </body>
