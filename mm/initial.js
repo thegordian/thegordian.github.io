@@ -83,7 +83,7 @@ map.on(L.Draw.Event.CREATED, function(e) {
 });
 
 var match_wkt = function(wkt) {
-    $.getJSON("http://hermes.infra.kth.se:8082/match_wkt", {
+    $.getJSON("https://hermes.infra.kth.se:8082/match_wkt", {
             "wkt": wkt
         }).done(function(data) {
             // console.log("Result fetched");
