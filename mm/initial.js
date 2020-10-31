@@ -1,17 +1,18 @@
 /**
  *   FMM web application
  *   Author: Can Yang
+ *   Updated by: Ehsan Saqib
  */
-var center = [59.3293, 18.0686];
+var center = [59.33458385, 18.05913005];
 var zoom_level = 12;
 map = new L.Map('map', {
     center: new L.LatLng(center[0], center[1]),
     zoom: zoom_level
 });
-var tiles_carto_dark= L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {'attribution': 'Map tiles by Carto, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'});
+var tiles_carto_dark= L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {'attribution': 'Map tiles by Carto, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'}).addTo(map);
 var tiles_osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+});
 
 var baseMaps = {
     "Dark": tiles_carto_dark,
@@ -19,20 +20,23 @@ var baseMaps = {
 };
 
 var exteriorStyle = {
-    "color": "#FF8C00",
+    "color": "#66CC66",
     "fill":false,
     "opacity":1.0,
     "weight":5
 };
 
 var boundary_layer = L.geoJson(boundary, {style: exteriorStyle});
+boundary_layer.addTo(map);
+
+//map.panTo(boundary_layer.getBounds().getCenter());
 
 // var optional_layers = {
 //     "Network boundary": boundary_layer
 // };
 //
 var optional_layers = {
-  "Network boundary": boundary_layer
+    "Network boundary": boundary_layer
 };
 
 L.control.layers(baseMaps,optional_layers).addTo(map);
@@ -51,8 +55,11 @@ var options = {
     draw: {
         polyline: {
             shapeOptions: {
-                color: '#996633', //f357a1
+                color: '#9A9A9A', //f357a1
                 weight: 4
+                //fillColor: '#66CC66',
+                //stroke: "True",
+
             },
             repeatMode: false,
             // Increase the icon size
@@ -75,6 +82,8 @@ map.on(L.Draw.Event.CREATED, function(e) {
     var type = e.layerType,
         layer = e.layer;
     editableLayers.addLayer(layer);
+   // editableLayers.getLayers()[0].setStyle({'color': 'green','opacity': 1})
+
     // Run map matching
     var traj = e.layer.toGeoJSON();
     var wkt = Terraformer.WKT.convert(traj.geometry);
@@ -83,16 +92,19 @@ map.on(L.Draw.Event.CREATED, function(e) {
 });
 
 var match_wkt = function(wkt) {
-  $.ajax({
-        url: 'http://hermes.infra.kth.se:8082/match_wkt',
+
+    $.ajax({
+        url: 'https://spatialstack.com/wrapper/mm_wrapper.php',//http://hermes.infra.kth.se:8082/match_wkt
+        //url: 'test.php',//
         type: "GET",
         data: {
-          "wkt": wkt
+            "wkt": wkt
         },
-        success: function(data) {
+        success: function(dat) {
             // console.log("Result fetched");
             // console.log(data);
             // console.log(data);
+            data=JSON.parse(dat);
             if (data.state==1){
                 var geojson = Terraformer.WKT.parse(data.wkt);
                 var geojson_layer = L.geoJson(
@@ -100,7 +112,8 @@ var match_wkt = function(wkt) {
                     {
                         style: function(feature) {
                             return {
-                                color: 'red'
+                                color: '#FF6600'
+                                ,opacity:1
                             };
                         }
                     }
