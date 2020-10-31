@@ -39,7 +39,7 @@ var optional_layers = {
     "Network boundary": boundary_layer
 };
 
-L.control.layers(baseMaps,optional_layers).addTo(map);
+//L.control.layers(baseMaps,optional_layers).addTo(map);
 
 // L.control.layers(optional_layers).addTo(map);
 
