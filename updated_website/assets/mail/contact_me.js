@@ -21,7 +21,7 @@ $(function () {
             $this = $("#sendMessageButton");
             $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
             $.ajax({
-                url: "http://spatialstack.com/gordian_php/gordian_email_sender.php",
+                url: "https://spatialstack.com/gordian_php/gordian_email_sender.php",
                 // url: "gordian_php/gordian_email_sender.php", // local url
                 type: "POST",
                 data: {

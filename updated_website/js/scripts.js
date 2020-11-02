@@ -86,3 +86,17 @@ $('.modal').on("hidden.bs.modal", function (e) { //fire on closing modal box
         $('body').addClass('modal-open'); // if open mean length is 1 then add a bootstrap css class to body of the page
     }
 });
+
+$(document).on("click", ".contact_more_info_btn", function(e) {
+    scrollToId("contact");
+})
+
+function scrollToId(id) {
+    $("html, body").animate(
+        {
+            scrollTop: $("#" + id).offset().top - 72,
+        },
+        1000,
+        "easeInOutExpo"
+    );
+}
