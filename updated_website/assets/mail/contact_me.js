@@ -11,6 +11,7 @@ $(function () {
             // get values from FORM
             var name = $("input#name").val();
             var email = $("input#email").val();
+            var subject = $("input#subject").val();
             var phone = $("input#phone").val();
             var message = $("textarea#message").val();
             var firstName = name; // For Success/Failure Message
@@ -26,8 +27,9 @@ $(function () {
                 type: "POST",
                 data: {
                     name: name,
-                    phone: phone,
                     email: email,
+                    subject: subject,
+                    phone: phone,
                     message: message,
                 },
                 cache: false,

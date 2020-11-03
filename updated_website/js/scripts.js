@@ -89,7 +89,9 @@ $('.modal').on("hidden.bs.modal", function (e) { //fire on closing modal box
 
 $(document).on("click", ".contact_more_info_btn", function(e) {
     scrollToId("contact");
-})
+    var subject = $(this).attr("data-subject");
+    $("#subject").val(subject);
+});
 
 function scrollToId(id) {
     $("html, body").animate(
