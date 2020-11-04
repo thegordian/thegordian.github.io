@@ -8,6 +8,7 @@
     <meta name="author" content="" />
     <title>Gordian</title>
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <script src="https://www.youtube.com/iframe_api"></script>
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -63,13 +64,18 @@
         <div class="container">
             <div class="text-center">
                 <h2 class="section-heading text-uppercase">philosophy</h2>
-                <h3 class="section-subheading text-muted">Digital movement traces provide a wealth of information about
+                <h3 class="section-subheading text-orange">Digital movement traces provide a wealth of information about
                     transport needs that is <b>essential</b> to better plan and optimize resource allocations.</h3>
             </div>
-            <div class="youtube-video-box text-center">
-                <iframe width="100%" height="500" src="https://www.youtube.com/embed/9xiVsFo3qmo?rel=0" frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen></iframe>
+            <div class="youtube-video-box text-center position-relative">
+                <!-- <iframe width="100%" height="500" src="https://www.youtube.com/embed/9xiVsFo3qmo?rel=0"  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+                <div id="philosophy_player"></div>
+                <div id="watch_video" class="floating_btns_on_yt_video position-absolute d-none">
+                    <a class="w-100 h-100 d-inline-block" href="#"></a>
+                </div>
+                <div id="try_demo" class="floating_btns_on_yt_video position-absolute d-none">
+                    <a class="w-100 h-100 d-inline-block" href="#"></a>
+                </div>
             </div>
             <!-- <img src="assets/img/demo.JPG" style="margin-left: auto;margin-right: auto;display: block;width: 100%"> -->
         </div>
@@ -79,7 +85,7 @@
         <div class="container">
             <div class="text-center">
                 <h2 class="section-heading text-uppercase">Products / Services</h2>
-                <h3 class="section-subheading text-muted">Fast and scalable tools for movement data pre-processing,
+                <h3 class="section-subheading text-orange">Fast and scalable tools for movement data pre-processing,
                     knowledge extraction and management, and evidence-based transport planning and optimization.</h3>
             </div>
             <div class="row text-center">
@@ -277,7 +283,7 @@
                                 Gyözö has a long history in developing movement trace analytics and machine learning
                                 methods to extract and utilize patterns in movement traces in order to optimize
                                 transportation.</p>
-                                <div class="d-flex align-items-center">
+                            <div class="d-flex d-md-block justify-content-center align-items-center">
                                 <a class="btn btn-dark btn-social mr-2" href="#!"><i class="fab fa-twitter"></i></a>
                                 <a class="btn btn-dark btn-social mr-2" href="#!"><i class="fab fa-facebook-f"></i></a>
                                 <a class="btn btn-dark btn-social mr-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
@@ -289,14 +295,15 @@
                     <div
                         class="team-box ceo d-flex flex-column justify-content-center align-items-center position-relative">
                         <div class="team-overlay position-absolute"></div>
-                        <img class="position-absolute" src="assets/img/team/can_team.png" alt="movement trace lead analytics">
+                        <img class="position-absolute" src="assets/img/team/can_team.png"
+                            alt="movement trace lead analytics">
                         <div class="team-text-box position-absolute">
                             <h4 class="m-0">Can Yang</h4>
                             <p>Movement Trace Analytics Lead</p>
                             <p>Can is a finishing PhD student in Geoinformatics at KTH Royal Institute of Technology.
                                 Can’s research focuses on processing and extracting patterns from movement traces. His
                                 specialities include map matching and sequential pattern mining.</p>
-                                <div class="d-flex align-items-center">
+                            <div class="d-flex d-md-block justify-content-center align-items-center">
                                 <a class="btn btn-dark btn-social mr-2" href="#!"><i class="fab fa-twitter"></i></a>
                                 <a class="btn btn-dark btn-social mr-2" href="#!"><i class="fab fa-facebook-f"></i></a>
                                 <a class="btn btn-dark btn-social mr-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
@@ -316,7 +323,7 @@
                                 of Technology and is soon to join KTH for a PhD on “Data-Driven Smart Urban Mobility”.
                                 Ehsan has extensive experience in GIS consultancy and web and mobile GIS full-stack
                                 development.</p>
-                                <div class="d-flex align-items-center">
+                            <div class="d-flex d-md-block justify-content-center align-items-center">
                                 <a class="btn btn-dark btn-social mr-2" href="#!"><i class="fab fa-twitter"></i></a>
                                 <a class="btn btn-dark btn-social mr-2" href="#!"><i class="fab fa-facebook-f"></i></a>
                                 <a class="btn btn-dark btn-social mr-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
@@ -328,14 +335,16 @@
                     <div
                         class="team-box ceo d-flex flex-column justify-content-center align-items-center position-relative">
                         <div class="team-overlay position-absolute"></div>
-                        <img class="position-absolute" src="assets/img/team/jesper_team.png" alt="data science and ai lead">
+                        <img class="position-absolute" src="assets/img/team/jesper_team.png"
+                            alt="data science and ai lead">
                         <div class="team-text-box position-absolute">
                             <h4 class="m-0">Jesper</h4>
                             <p>Data Science and AI Lead</p>
-                            <p>Jesper is a MSc Student in Data Science &amp; Technology at the University of Twente. Jesper
+                            <p>Jesper is a MSc Student in Data Science &amp; Technology at the University of Twente.
+                                Jesper
                                 develops deep learning approaches that utilize mobility analytics to improve logistics.
                             </p>
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex d-md-block justify-content-center align-items-center">
                                 <a class="btn btn-dark btn-social mr-2" href="#!"><i class="fab fa-twitter"></i></a>
                                 <a class="btn btn-dark btn-social mr-2" href="#!"><i class="fab fa-facebook-f"></i></a>
                                 <a class="btn btn-dark btn-social mr-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
@@ -387,8 +396,9 @@
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" id="subject" name="subject" type="text" placeholder="The subject *"
-                                required="required" data-validation-required-message="Please enter the subject." />
+                            <input class="form-control" id="subject" name="subject" type="text"
+                                placeholder="The subject *" required="required"
+                                data-validation-required-message="Please enter the subject." />
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="form-group mb-md-0">
@@ -453,12 +463,33 @@
                                             <img src="assets/img/icons_for_usecases/charging_infrastr.png" alt="">
                                         </div>
                                         <p class="text-lg-left ml-lg-4">
-                                            Charging infrastructure planning is extremely complex! There are many components and stakeholders that have to work together while focusing on their own and societal objectives. Moreover, the optimality of any charging infrastructure plan heavily depends on the transport energy demand that the charging infrastructure components serve. In particular, a movement trace in relation to a plan defines how energy is consumed and can be acquired along the trace. Thus, movement traces are paramount in evaluating the benefits of a placement and dimensioning of components in a complex system, which then needs to be weighed against the costs.
+                                            Charging infrastructure planning is extremely complex! There are many
+                                            components and stakeholders that have to work together while focusing on
+                                            their own and societal objectives. Moreover, the optimality of any charging
+                                            infrastructure plan heavily depends on the transport energy demand that the
+                                            charging infrastructure components serve. In particular, a movement trace in
+                                            relation to a plan defines how energy is consumed and can be acquired along
+                                            the trace. Thus, movement traces are paramount in evaluating the benefits of
+                                            a placement and dimensioning of components in a complex system, which then
+                                            needs to be weighed against the costs.
                                         </p>
                                     </div>
                                     <div class="d-flex flex-column flex-lg-row">
                                         <p class="text-lg-left mr-lg-4 order-1 order-lg-0">
-                                            At Gordian we provide planning tools that are powered by lightning-fast analytics and artificial intelligence. The tools allow to interactively evaluate or optimize a plan such that it best serves (covers) the transport demand (movement traces) with a set of infrastructure components. A non-optimal plan and an optimized plan for charging components (shown with filled circles) are illustrated in the grey and orange images for a single movement trace. Now imagine optimizing the plan for millions of traces. And let’s not forget that there are an astronomical number of possible plans. The speed and information in our analytics allow unprecedented optimizations: we accurately evaluate the effects of millions of the top plans against millions of movement traces under a few minutes. Thereby, we provide evidence-based decision support and up to 5 times more cost-effective plans than our competitors. We provide this for single or multiple stakeholders and objectives. <br />
+                                            At Gordian we provide planning tools that are powered by lightning-fast
+                                            analytics and artificial intelligence. The tools allow to interactively
+                                            evaluate or optimize a plan such that it best serves (covers) the transport
+                                            demand (movement traces) with a set of infrastructure components. A
+                                            non-optimal plan and an optimized plan for charging components (shown with
+                                            filled circles) are illustrated in the grey and orange images for a single
+                                            movement trace. Now imagine optimizing the plan for millions of traces. And
+                                            let’s not forget that there are an astronomical number of possible plans.
+                                            The speed and information in our analytics allow unprecedented
+                                            optimizations: we accurately evaluate the effects of millions of the top
+                                            plans against millions of movement traces under a few minutes. Thereby, we
+                                            provide evidence-based decision support and up to 5 times more
+                                            cost-effective plans than our competitors. We provide this for single or
+                                            multiple stakeholders and objectives. <br />
                                             <button class="btn btn-primary mt-2 mr-2" data-toggle="modal"
                                                 href="#electricRoadVideo">Watch electric road video !</button>
                                             <button data-toggle="modal" href="#renoApp"
@@ -470,7 +501,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary contact_more_info_btn" data-subject="USE CASES: Charging Infrastructure Planning" data-dismiss="modal"
+                                <button class="btn btn-primary contact_more_info_btn"
+                                    data-subject="USE CASES: Charging Infrastructure Planning" data-dismiss="modal"
                                     type="button">
                                     Contact us for more info
                                 </button>
@@ -505,12 +537,32 @@
                                             <img src="assets/img/icons_for_usecases/transport_hub_planning.png" alt="">
                                         </div>
                                         <p class="text-lg-left ml-lg-4">
-                                            Transport and transfer hubs, both for people and goods, are most cost-effective if they are located at places that are along many movement traces and are either close to where the traces start, end or merge. At Gordian we believe that the keyword is along because using a hub that is off a given movement trace ultimately represents a detour, which one logically wants to minimize. With all other things considered equal, which hub location with bus and shared mobility services is more attractive: one that the traveler has to walk back 500 meters or one that is 500 meters ahead along the planed and direct path of the traveler?
+                                            Transport and transfer hubs, both for people and goods, are most
+                                            cost-effective if they are located at places that are along many movement
+                                            traces and are either close to where the traces start, end or merge. At
+                                            Gordian we believe that the keyword is along because using a hub that is off
+                                            a given movement trace ultimately represents a detour, which one logically
+                                            wants to minimize. With all other things considered equal, which hub
+                                            location with bus and shared mobility services is more attractive: one that
+                                            the traveler has to walk back 500 meters or one that is 500 meters ahead
+                                            along the planed and direct path of the traveler?
                                         </p>
                                     </div>
                                     <div class="d-flex flex-column flex-lg-row">
                                         <p class="text-lg-left mr-lg-4 order-1 order-lg-0">
-                                            Similar to the other use cases, at Gordian we provide planning tools that are powered by lightning-fast analytics and artificial intelligence. The tools allow to interactively evaluate or optimize a plan such that is best serves (covers) the transport demand (movement traces) with a set transport hubs. A non-optimal plan and an optimized plan for one hub (shown as a circle) are illustrated in the grey and orange images for four movement traces. Now imagine optimizing the plan for millions of traces. And let’s not forget that there are also an astronomical number of possible placements and dimensioning of hubs. The speed and information in our analytics allow unprecedented optimizations: we accurately evaluate the effects of millions of the top plans against millions of movement traces under a few minutes. Thereby, we provide evidence-based decision support that increases the utility of the planned hubs. <br />
+                                            Similar to the other use cases, at Gordian we provide planning tools that
+                                            are powered by lightning-fast analytics and artificial intelligence. The
+                                            tools allow to interactively evaluate or optimize a plan such that is best
+                                            serves (covers) the transport demand (movement traces) with a set transport
+                                            hubs. A non-optimal plan and an optimized plan for one hub (shown as a
+                                            circle) are illustrated in the grey and orange images for four movement
+                                            traces. Now imagine optimizing the plan for millions of traces. And let’s
+                                            not forget that there are also an astronomical number of possible placements
+                                            and dimensioning of hubs. The speed and information in our analytics allow
+                                            unprecedented optimizations: we accurately evaluate the effects of millions
+                                            of the top plans against millions of movement traces under a few minutes.
+                                            Thereby, we provide evidence-based decision support that increases the
+                                            utility of the planned hubs. <br />
                                             <button class="btn btn-primary mt-2 mr-2">Try to beet Gordian at optimizing
                                                 transport hubs !</button>
                                         </p>
@@ -520,8 +572,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary contact_more_info_btn" data-subject="USE CASES: Transport Hub Planning" data-dismiss="modal"
-                                    type="button">
+                                <button class="btn btn-primary contact_more_info_btn"
+                                    data-subject="USE CASES: Transport Hub Planning" data-dismiss="modal" type="button">
                                     Contact us for more info
                                 </button>
                                 <button class="btn btn-primary" data-dismiss="modal" type="button">
@@ -554,12 +606,32 @@
                                             <img src="assets/img/icons_for_usecases/transit_route_plan.png" alt="">
                                         </div>
                                         <p class="text-lg-left ml-lg-4">
-                                            Transit route networks (e.g., a set of buss lines) are most cost-effective if they are dimensioned and located at places such that the maximal number of travelers can accomplish their trips from start to end with as few and possible transfers and as direct as possible routes. At Gordian we believe that movement traces, in particular, simulated least-costs (shortest / fastest / cheapest) movement traces from origin-destination transport demands reflect the underling transport demand that the transit route networks should serve.
+                                            Transit route networks (e.g., a set of buss lines) are most cost-effective
+                                            if they are dimensioned and located at places such that the maximal number
+                                            of travelers can accomplish their trips from start to end with as few and
+                                            possible transfers and as direct as possible routes. At Gordian we believe
+                                            that movement traces, in particular, simulated least-costs (shortest /
+                                            fastest / cheapest) movement traces from origin-destination transport
+                                            demands reflect the underling transport demand that the transit route
+                                            networks should serve.
                                         </p>
                                     </div>
                                     <div class="d-flex flex-column flex-lg-row">
                                         <p class="text-lg-left mr-lg-4 order-1 order-lg-0">
-                                            Similar to the other use cases, at Gordian we provide planning tools that are powered by lightning-fast analytics and artificial intelligence. The tools allow to interactively evaluate or optimize a plan such that is best serves (covers) the transport demand (movement traces) with a set of transit routes. The grey and orange images illustrate a non-optimal and an optimal plan with some existing and new routes (shown as lines) that aim to serve the transport demand (shown as circles), which arises from how well the transit route network serves the movement traces. As with the other use cases, there are millions of traces and an astronomical number of possible placements and dimensioning of transit routes. The speed and information in our analytics allow unprecedented optimizations: we accurately evaluate the effects of millions of the top plans against millions of movement traces under a few minutes. Thereby, we provide evidence-based decision support that increases the utility of the planned transit routes.
+                                            Similar to the other use cases, at Gordian we provide planning tools that
+                                            are powered by lightning-fast analytics and artificial intelligence. The
+                                            tools allow to interactively evaluate or optimize a plan such that is best
+                                            serves (covers) the transport demand (movement traces) with a set of transit
+                                            routes. The grey and orange images illustrate a non-optimal and an optimal
+                                            plan with some existing and new routes (shown as lines) that aim to serve
+                                            the transport demand (shown as circles), which arises from how well the
+                                            transit route network serves the movement traces. As with the other use
+                                            cases, there are millions of traces and an astronomical number of possible
+                                            placements and dimensioning of transit routes. The speed and information in
+                                            our analytics allow unprecedented optimizations: we accurately evaluate the
+                                            effects of millions of the top plans against millions of movement traces
+                                            under a few minutes. Thereby, we provide evidence-based decision support
+                                            that increases the utility of the planned transit routes.
                                         </p>
                                         <div>
                                             <img src="assets/img/icons_for_usecases/transit_route_plan_HOVER.png"
@@ -567,8 +639,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary contact_more_info_btn" data-subject="USE CASES: Transit Route Planning" data-dismiss="modal"
-                                    type="button">
+                                <button class="btn btn-primary contact_more_info_btn"
+                                    data-subject="USE CASES: Transit Route Planning" data-dismiss="modal" type="button">
                                     Contact us for more info
                                 </button>
                                 <button class="btn btn-primary" data-dismiss="modal" type="button">
@@ -601,19 +673,44 @@
                                             <img src="assets/img/icons_for_usecases/hub_to_hub.png" alt="">
                                         </div>
                                         <p class="text-lg-left ml-lg-4">
-                                            The cost of commercial transport today is generally equally divided between the cost of the vehicle, the fuel and the driver. Electrification and automation will radically change these costs. Full automation of heavy transports is challenging in urban areas and building up the communication infrastructure to support safe autonomous driving everywhere is costly. For such an application one needs to find a set of hub-to-hub corridors on which autonomous electrified transports is cost-effective. Apart from from meeting minimum physical requirements, such corridors are cost-effective if the length of the corridors that connect hubs and support automated transports is relatively long compared to the off-corridor transport route parts that need to be human-controlled. Hub-to-hub corridors should ideally form a connected network and reutilize the same infrastructure.
+                                            The cost of commercial transport today is generally equally divided between
+                                            the cost of the vehicle, the fuel and the driver. Electrification and
+                                            automation will radically change these costs. Full automation of heavy
+                                            transports is challenging in urban areas and building up the communication
+                                            infrastructure to support safe autonomous driving everywhere is costly. For
+                                            such an application one needs to find a set of hub-to-hub corridors on which
+                                            autonomous electrified transports is cost-effective. Apart from from meeting
+                                            minimum physical requirements, such corridors are cost-effective if the
+                                            length of the corridors that connect hubs and support automated transports
+                                            is relatively long compared to the off-corridor transport route parts that
+                                            need to be human-controlled. Hub-to-hub corridors should ideally form a
+                                            connected network and reutilize the same infrastructure.
                                         </p>
                                     </div>
                                     <div class="d-flex flex-column flex-lg-row">
                                         <p class="text-lg-left mr-lg-4 order-1 order-lg-0">
-                                            Similar to the other use cases, at Gordian we provide planning tools that are powered by lightning-fast analytics and artificial intelligence. The tools allow to interactively evaluate or optimize a plan such that is best serves (covers) the transport demand (movement traces) with a network of hub-to-hub corridors. The grey image illustrates some traces out of which the transports between north and south could be more cost effectively served by a hub-to-hub corridor (shown in orange on the other image). As with the other use cases, there are millions of traces and an astronomical number of possible placements and dimensioning of hub-to-hub corridor network plans. The speed and information in our analytics allow unprecedented optimizations: we accurately evaluate the effects of millions of the top plans against millions of movement traces under a few minutes. Thereby, we provide evidence-based decision support that increases the utility of the planned hub-to-hub corridors.
+                                            Similar to the other use cases, at Gordian we provide planning tools that
+                                            are powered by lightning-fast analytics and artificial intelligence. The
+                                            tools allow to interactively evaluate or optimize a plan such that is best
+                                            serves (covers) the transport demand (movement traces) with a network of
+                                            hub-to-hub corridors. The grey image illustrates some traces out of which
+                                            the transports between north and south could be more cost effectively served
+                                            by a hub-to-hub corridor (shown in orange on the other image). As with the
+                                            other use cases, there are millions of traces and an astronomical number of
+                                            possible placements and dimensioning of hub-to-hub corridor network plans.
+                                            The speed and information in our analytics allow unprecedented
+                                            optimizations: we accurately evaluate the effects of millions of the top
+                                            plans against millions of movement traces under a few minutes. Thereby, we
+                                            provide evidence-based decision support that increases the utility of the
+                                            planned hub-to-hub corridors.
                                         </p>
                                         <div>
                                             <img src="assets/img/icons_for_usecases/hub_to_hub_HOVER.png" alt="">
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary contact_more_info_btn" data-subject="USE CASES: Hub-to-Hub Corridor Planning" data-dismiss="modal"
+                                <button class="btn btn-primary contact_more_info_btn"
+                                    data-subject="USE CASES: Hub-to-Hub Corridor Planning" data-dismiss="modal"
                                     type="button">
                                     Contact us for more info
                                 </button>
@@ -647,19 +744,44 @@
                                             <img src="assets/img/icons_for_usecases/consolidated_log.png" alt="">
                                         </div>
                                         <p class="text-lg-left ml-lg-4">
-                                            A vehicle that moves with unused cargo space is not cost-effective, but it happens all too often in practice. Even if routes are well planned for a fleet, often deliveries and pickups are served by different routes. On delivery routes cargo space is freed up as goods are delivered, while on pickup routes the vehicles travel with empty cargo space that gradually fills up. The cargo and the unused cargo space along some pickup and delivery routes, or parts of routes, complement each other. At Gordian, borrowed from the charging infrastructure planning use case, we treat cargo space in a similar way as the empty battery capacity of moving vehicles and cargo as the energy in the battery that after a delivery disappears. Using this approach we find delivery and pickup routes that complement each other and thereby fully utilize the moving cargo space.
+                                            A vehicle that moves with unused cargo space is not cost-effective, but it
+                                            happens all too often in practice. Even if routes are well planned for a
+                                            fleet, often deliveries and pickups are served by different routes. On
+                                            delivery routes cargo space is freed up as goods are delivered, while on
+                                            pickup routes the vehicles travel with empty cargo space that gradually
+                                            fills up. The cargo and the unused cargo space along some pickup and
+                                            delivery routes, or parts of routes, complement each other. At Gordian,
+                                            borrowed from the charging infrastructure planning use case, we treat cargo
+                                            space in a similar way as the empty battery capacity of moving vehicles and
+                                            cargo as the energy in the battery that after a delivery disappears. Using
+                                            this approach we find delivery and pickup routes that complement each other
+                                            and thereby fully utilize the moving cargo space.
                                         </p>
                                     </div>
                                     <div class="d-flex flex-column flex-lg-row">
                                         <p class="text-lg-left mr-lg-4 order-1 order-lg-0">
-                                            Similar to the other use cases, at Gordian we provide planning tools that are powered by lightning-fast analytics and artificial intelligence. The tools allow to interactively evaluate or optimize a plan such that transports from complementing routes are consolidated. The grey image illustrates one delivery and one pickup route which can effectively be consolidated into a one pickup-delivery route shown in orange on the other image. As with the other use cases, there are millions of traces and an astronomical number of possible consolidation plans that have to be extracted and scored from millions of logistics routes. The speed and information in our analytics allow unprecedented optimizations: we accurately evaluate the effects of millions of the top plans against millions of movement traces under a few minutes. Thereby, we provide evidence-based decision support that increases the utility of the planned consolidated logistics.
+                                            Similar to the other use cases, at Gordian we provide planning tools that
+                                            are powered by lightning-fast analytics and artificial intelligence. The
+                                            tools allow to interactively evaluate or optimize a plan such that
+                                            transports from complementing routes are consolidated. The grey image
+                                            illustrates one delivery and one pickup route which can effectively be
+                                            consolidated into a one pickup-delivery route shown in orange on the other
+                                            image. As with the other use cases, there are millions of traces and an
+                                            astronomical number of possible consolidation plans that have to be
+                                            extracted and scored from millions of logistics routes. The speed and
+                                            information in our analytics allow unprecedented optimizations: we
+                                            accurately evaluate the effects of millions of the top plans against
+                                            millions of movement traces under a few minutes. Thereby, we provide
+                                            evidence-based decision support that increases the utility of the planned
+                                            consolidated logistics.
                                         </p>
                                         <div>
                                             <img src="assets/img/icons_for_usecases/consolidated_log_HOVER.png" alt="">
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary contact_more_info_btn" data-subject="USE CASES: Consolidated Logistics Planning" data-dismiss="modal"
+                                <button class="btn btn-primary contact_more_info_btn"
+                                    data-subject="USE CASES: Consolidated Logistics Planning" data-dismiss="modal"
                                     type="button">
                                     Contact us for more info
                                 </button>
@@ -693,19 +815,42 @@
                                             <img src="assets/img/icons_for_usecases/merge_in_transit.png" alt="">
                                         </div>
                                         <p class="text-lg-left ml-lg-4">
-                                            Traditionally, distributions warehouses are used to merge several shipments from different suppliers to the same customer. Distribution warehouses are static, capacity constrained and expensive. Meanwhile, transport demands in supply chains are dynamic. Merge-in-transit (MIT) can eliminate the need for distribution warehouses if one can discover these dynamic consolidation opportunities and can adjust the operations to exploit them. We at Gordian believe that the answer again lies in the movement traces of shipments and vehicles and their dynamic orchestration in space and time. As a side note, planning the formation of heavy freight convoys is very similar in nature to MIT planning and also has links to electric charging infrastructure operation for electrified transports.
+                                            Traditionally, distributions warehouses are used to merge several shipments
+                                            from different suppliers to the same customer. Distribution warehouses are
+                                            static, capacity constrained and expensive. Meanwhile, transport demands in
+                                            supply chains are dynamic. Merge-in-transit (MIT) can eliminate the need for
+                                            distribution warehouses if one can discover these dynamic consolidation
+                                            opportunities and can adjust the operations to exploit them. We at Gordian
+                                            believe that the answer again lies in the movement traces of shipments and
+                                            vehicles and their dynamic orchestration in space and time. As a side note,
+                                            planning the formation of heavy freight convoys is very similar in nature to
+                                            MIT planning and also has links to electric charging infrastructure
+                                            operation for electrified transports.
                                         </p>
                                     </div>
                                     <div class="d-flex flex-column flex-lg-row">
                                         <p class="text-lg-left mr-lg-4 order-1 order-lg-0">
-                                            Similar to the other use cases, at Gordian we provide planning tools that are powered by lightning-fast analytics and artificial intelligence. The tools allow to interactively evaluate or optimize a plan such MIT operations. The grey image illustrates thee shipments from three suppliers to the same customer and the orange image illustrates how these are consolidated at the merge point into a single delivery. As with the other use cases, there are millions of traces of shipments and an astronomical number of possible MIT plans that have to be extracted and scored from millions of logistics routes. The speed and information in our analytics allow unprecedented optimizations: we accurately evaluate the effects of millions of the top plans against millions of movement traces under a few minutes. Thereby, we provide evidence-based decision support that help discover and exploit these MIT opportunities.
+                                            Similar to the other use cases, at Gordian we provide planning tools that
+                                            are powered by lightning-fast analytics and artificial intelligence. The
+                                            tools allow to interactively evaluate or optimize a plan such MIT
+                                            operations. The grey image illustrates thee shipments from three suppliers
+                                            to the same customer and the orange image illustrates how these are
+                                            consolidated at the merge point into a single delivery. As with the other
+                                            use cases, there are millions of traces of shipments and an astronomical
+                                            number of possible MIT plans that have to be extracted and scored from
+                                            millions of logistics routes. The speed and information in our analytics
+                                            allow unprecedented optimizations: we accurately evaluate the effects of
+                                            millions of the top plans against millions of movement traces under a few
+                                            minutes. Thereby, we provide evidence-based decision support that help
+                                            discover and exploit these MIT opportunities.
                                         </p>
                                         <div>
                                             <img src="assets/img/icons_for_usecases/merge_in_transit_HOVER.png" alt="">
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary contact_more_info_btn" data-subject="USE CASES: Merge-in-Transit Planning" data-dismiss="modal"
+                                <button class="btn btn-primary contact_more_info_btn"
+                                    data-subject="USE CASES: Merge-in-Transit Planning" data-dismiss="modal"
                                     type="button">
                                     Contact us for more info
                                 </button>
@@ -739,19 +884,43 @@
                                             <img src="assets/img/icons_for_usecases/intelligent_fleet.png" alt="">
                                         </div>
                                         <p class="text-lg-left ml-lg-4">
-                                            Vehicles are most cost-effective when they are intelligently dispatched and repositioned. Hence, intelligent fleet management can be regarded as a crucial task in maximizing revenue and QoS in a transport system. However, optimizing the positioning of fleets is complex and depends on the real-time evolution of demands in time and space as well as the state of the vehicles. At Gordian, we therefore believe that pro-active demand prediction is a key component to optimize fleet management strategies. Techniques from AI, such as deep reinforcement learning (DRL), can be used to determine policies which maximize QoS and revenue metrics while adhering to specific constraints. Large numbers of movement traces are essential to form state spaces which can be interpreted by the AI models and turned into optimized fleet management strategies.
+                                            Vehicles are most cost-effective when they are intelligently dispatched and
+                                            repositioned. Hence, intelligent fleet management can be regarded as a
+                                            crucial task in maximizing revenue and QoS in a transport system. However,
+                                            optimizing the positioning of fleets is complex and depends on the real-time
+                                            evolution of demands in time and space as well as the state of the vehicles.
+                                            At Gordian, we therefore believe that pro-active demand prediction is a key
+                                            component to optimize fleet management strategies. Techniques from AI, such
+                                            as deep reinforcement learning (DRL), can be used to determine policies
+                                            which maximize QoS and revenue metrics while adhering to specific
+                                            constraints. Large numbers of movement traces are essential to form state
+                                            spaces which can be interpreted by the AI models and turned into optimized
+                                            fleet management strategies.
                                         </p>
                                     </div>
                                     <div class="d-flex flex-column flex-lg-row">
                                         <p class="text-lg-left mr-lg-4 order-1 order-lg-0">
-                                            At Gordian we provide planning tools that are powered by lightning-fast analytics and artificial intelligence. The tools allow to optimize fleet management policies with the aim of satisfying future demand, shortening dispatch times and maximizing vehicle utilization. The grey image shows four zones of demand, which can be conveniently derived from millions of movement traces using the tools that are provided by Gordian. Based on the predicted demand and the real-time state of vehicles, the AI model is able to determine the optimal routes for every vehicle such that the future requests can be served efficiently while maximizing the Quality of Service (e.g. low waiting and detour times). Moreover, the tools enable the user to incorporate any kind of objective into the optimization task. Thereby, we provide evidence-based decision support that facilitates pro-active intelligent fleet management.
+                                            At Gordian we provide planning tools that are powered by lightning-fast
+                                            analytics and artificial intelligence. The tools allow to optimize fleet
+                                            management policies with the aim of satisfying future demand, shortening
+                                            dispatch times and maximizing vehicle utilization. The grey image shows four
+                                            zones of demand, which can be conveniently derived from millions of movement
+                                            traces using the tools that are provided by Gordian. Based on the predicted
+                                            demand and the real-time state of vehicles, the AI model is able to
+                                            determine the optimal routes for every vehicle such that the future requests
+                                            can be served efficiently while maximizing the Quality of Service (e.g. low
+                                            waiting and detour times). Moreover, the tools enable the user to
+                                            incorporate any kind of objective into the optimization task. Thereby, we
+                                            provide evidence-based decision support that facilitates pro-active
+                                            intelligent fleet management.
                                         </p>
                                         <div>
                                             <img src="assets/img/icons_for_usecases/intelligent_fleet_HOVER.png" alt="">
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary contact_more_info_btn" data-subject="USE CASES: Intelligent Fleet Management" data-dismiss="modal"
+                                <button class="btn btn-primary contact_more_info_btn"
+                                    data-subject="USE CASES: Intelligent Fleet Management" data-dismiss="modal"
                                     type="button">
                                     Contact us for more info
                                 </button>
@@ -790,7 +959,8 @@
                                     traces of millions of objects in a scalable and steaming fashion.</p>
                                 <button data-toggle="modal" href="#mmApp" class="btn btn-primary mt-2 mr-2">Try our map
                                     matching demo tool</button><br>
-                                    <button class="btn btn-primary contact_more_info_btn mt-2" data-subject="Products / Services: Data processing" data-dismiss="modal"
+                                <button class="btn btn-primary contact_more_info_btn mt-2"
+                                    data-subject="Products / Services: Data processing" data-dismiss="modal"
                                     type="button">
                                     Contact us for more info
                                 </button>
@@ -822,8 +992,9 @@
                                     movements. We provide visualization tools to help you gain a deep understanding of
                                     the patterns and their evolution. We also provide tools that use these patterns to
                                     compress and anonymize movement data with minimal information loss.</p>
-                                    <button class="btn btn-primary contact_more_info_btn" data-subject="Products / Services: Knowledge Discovery and Management" data-dismiss="modal"
-                                    type="button">
+                                <button class="btn btn-primary contact_more_info_btn"
+                                    data-subject="Products / Services: Knowledge Discovery and Management"
+                                    data-dismiss="modal" type="button">
                                     Contact us for more info
                                 </button>
                             </div>
@@ -856,8 +1027,9 @@
                                     The speed and information of the analytics allow us to optimize a wide range of
                                     combinatorial transport planning problems and find plans that are up to 5X more
                                     cost-effective than those that can be found by the tools of our competitors.</p>
-                                    <button class="btn btn-primary contact_more_info_btn" data-subject="Products / Services: Transport Planning and Optimization" data-dismiss="modal"
-                                    type="button">
+                                <button class="btn btn-primary contact_more_info_btn"
+                                    data-subject="Products / Services: Transport Planning and Optimization"
+                                    data-dismiss="modal" type="button">
                                     Contact us for more info
                                 </button>
                             </div>
@@ -931,6 +1103,7 @@
     <script src="assets/mail/contact_me.js"></script>
 
     <script src="js/lightslider/lightslider.min.js"></script>
+    <script src="js/yt_code.js"></script>
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
 </body>

@@ -9902,6 +9902,10 @@ a.text-dark:hover, a.text-dark:focus {
   color: #6c757d !important;
 }
 
+.text-orange {
+  color: #FF6600;
+}
+
 .text-black-50 {
   color: rgba(0, 0, 0, 0.5) !important;
 }
@@ -10041,7 +10045,7 @@ p {
 }
 
 .page-section {
-  padding: 6rem 0;
+  padding: 1.5rem 0;
 }
 .page-section h2.section-heading {
   font-size: 1.8rem;
@@ -10049,7 +10053,7 @@ p {
   margin-bottom: 1rem;
 }
 .page-section h3.section-subheading {
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 400;
   /* font-style: italic; */
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -10157,10 +10161,28 @@ section#about {
   align-items: center;
   width: 100%;
 }
+.floating_btns_on_yt_video {
+  width: 116px;
+  height: 116px;
+  cursor: pointer;
+  bottom: 27.9%;
+  border-radius: 50%;
+}
+.floating_btns_on_yt_video:hover {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.65);
+}
+.floating_btns_on_yt_video#watch_video {
+  /* border: 2px solid #FF6600; */
+  left: 27.2%;
+}
+.floating_btns_on_yt_video#try_demo {
+  /* border: 2px solid #66CC66; */
+  left: 38.93%;
+}
 
 @media (min-width: 768px) {
   section {
-    padding: 9rem 0;
+    padding: 1.5rem 0;
   }
   .page-section h2.section-heading {
     font-size: 2.2rem;

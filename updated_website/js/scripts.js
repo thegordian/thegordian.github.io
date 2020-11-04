@@ -73,7 +73,7 @@ function on_resize(width, height) {
     // setTimeout(function() {
     //     $(".team-text-box").css("left", $(".team-box > img").width());
     // }, 1500);
-    if(width <= 1100) {
+    if (width <= 1100) {
         $(".team-box > img").removeClass("position-absolute");
         $(".team-text-box").removeClass("position-absolute");
     } else {
@@ -87,7 +87,7 @@ $('.modal').on("hidden.bs.modal", function (e) { //fire on closing modal box
     }
 });
 
-$(document).on("click", ".contact_more_info_btn", function(e) {
+$(document).on("click", ".contact_more_info_btn", function (e) {
     scrollToId("contact");
     var subject = $(this).attr("data-subject");
     $("#subject").val(subject);
