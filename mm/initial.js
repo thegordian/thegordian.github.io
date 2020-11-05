@@ -58,7 +58,10 @@ function onload(e) {
     
     editableLayers = new L.FeatureGroup();
     map.addLayer(editableLayers);
-    
+
+    L.drawLocal.draw.handlers.polyline.tooltip.start = "Click to start adding points";
+    L.drawLocal.draw.handlers.polyline.tooltip.cont = "Click to continue adding points";
+    L.drawLocal.draw.handlers.polyline.tooltip.end = "Click last point to finish drawing";
     var options = {
         position: 'topleft',
         draw: {
@@ -98,9 +101,12 @@ function onload(e) {
         html += "<button class='custom-btn-style m-0' onclick='clear_layers(event)'><i class='fa fa-trash fa-2x'></i></button>";
        var popupOptions = {
            maxWidth: 200,
-           closeButton: false
+           closeButton: false,
+           closeOnClick: false,
+           autoClose: false
         };
-        layer.bindPopup(html, popupOptions).openPopup();
+        delete_popup = L.popup(popupOptions).setLatLng([polyline._currentLatLng.lat, polyline._currentLatLng.lng]).setContent(html);
+        // layer.bindPopup(html, popupOptions).openPopup();
     
         // Run map matching
         var traj = e.layer.toGeoJSON();
@@ -137,6 +143,7 @@ function onload(e) {
                         }
                     );
                     editableLayers.addLayer(geojson_layer);
+                    delete_popup.openOn(map);
                 } else {
                     alert("Cannot match the trajectory, try another one")
                 }
@@ -222,4 +229,8 @@ function onload(e) {
 function clear_layers(e) {
     editableLayers.clearLayers();
     polyline.enable();
+    if(delete_popup) {
+        map.closePopup();
+        delete_popup = null;
+    }
 }
