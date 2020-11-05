@@ -1,9 +1,10 @@
 $(function () {
     $(
-        "#contactForm input,#contactForm textarea,#contactForm button"
+        "#contactForm input, #contactForm select,#contactForm textarea,#contactForm button"
     ).jqBootstrapValidation({
         preventSubmit: true,
         submitError: function ($form, event, errors) {
+            event.preventDefault();
             // additional error messages or events
         },
         submitSuccess: function ($form, event) {
@@ -11,7 +12,8 @@ $(function () {
             // get values from FORM
             var name = $("input#name").val();
             var email = $("input#email").val();
-            var subject = $("input#subject").val();
+            var subject = $("select#subject").val();
+            debugger;
             var phone = $("input#phone").val();
             var message = $("textarea#message").val();
             var firstName = name; // For Success/Failure Message

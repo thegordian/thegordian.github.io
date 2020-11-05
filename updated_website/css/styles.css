@@ -10390,10 +10390,11 @@ section#contact form#contactForm .form-group {
   margin-bottom: 1.5rem;
 }
 section#contact form#contactForm .form-group input,
-section#contact form#contactForm .form-group textarea {
+section#contact form#contactForm .form-group textarea,
+section#contact form#contactForm .form-group select {
   padding: 1.25rem;
 }
-section#contact form#contactForm .form-group input.form-control {
+section#contact form#contactForm .form-group input.form-control, section#contact form#contactForm .form-group select.form-control {
   height: auto;
 }
 section#contact form#contactForm .form-group-textarea {
@@ -10534,6 +10535,17 @@ section#contact form#contactForm :-ms-input-placeholder {
   }
   .team-box img {
     height: 50%;
+  }
+}
+@media (min-width: 992px) and (max-width: 1070px) {
+  .special-nav {
+    flex-wrap: nowrap !important;
+  }
+  #mainNav .navbar-nav .nav-item {
+    white-space: nowrap;
+  }
+  #mainNav .navbar-nav .nav-item a {
+    padding-left: 0 !important;
   }
 }
 @media (min-width: 992px) {

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css"  data-require="leaflet@0.7.3" data-semver="0.7.3" />
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link rel="stylesheet" href="lib/css/leaflet-sidebar.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+  <div id="absolute-maps" class="position-absolute absolute-maps d-none flex-column h-100 w-100">
+    <h1 class="text-center" style="margin-top: 20px; font-size: 1.5rem;">Results</h1>
+    <div id="absolute-maps-wrapper" class="d-flex h-100 p-2">
+      <div class="h-100 w-50 pr-1">
+        <h1 class="map-main-title mb-1" style="color: #fff; background-color: #000000;">Your selection</h1>
+        <div id="map-1" class="">
+          <div class="result-white-box-1 result-white-box" style="position: absolute;right: 20px;top: 1px;z-index: 10000;">
+            <input type="text" id="eval_info" style="display: none">
+            <!-- <input type="text" id="eval_text"> -->
+            <p id="eval_text"></p>
+            <button id="modal_toggle_btn_animate_u" class="btn btn-sm">Animate U</button>
+          </div>
+        </div>
+      </div>
+      <div class="h-100 w-50 pr-1">
+        <h1 class="map-main-title mb-1" style="color: #fff; background-color: #000000;">Optimized selection</h1>
+        <div id="map-2" class="">
+          <div class="result-white-box-2 result-white-box" style="position: absolute;right: 20px;top: 1px;z-index: 10000;">
+            <input type="text" id="opt_info" style="display: none">
+            <!-- <input type="text" id="opt_text"> -->
+            <p id="opt_text"></p>
+            <button id="modal_toggle_btn_animate_o" class="btn btn-sm">Animate O</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <button id="exit_filter_modal_toggle_btn" class="btn btn-sm">Try again</button>
+
+  </div>
+    
+    <div id="filter_slider" class="position-fixed">
+      <!-- <input type="text" id="hover_info"  placeholder="Hover over the map for trajectory / starting point statistics"> -->
+      <p id="hover_info">Hover over the map for trajectory / starting point statistics</p>
+      <span id="len" style="display: none"></span><div class="slider-1 range-slider" style="display: none"></div>
+      Maximum acceptable distance to a hub in meters<span id="dis"></span><div id="slider-2"></div>
+
+      <div class="d-flex align-items-center">
+        <button id="filter_modal_toggle_btn" class="btn btn-sm">Evaluate and Optimize</button>
+        <i id="click-info-2" class="fa fa-info-circle ml-2" style="cursor: pointer"></i>
+      </div>
+    </div>
+    <div class="modal fade" id="info_modal_2" tabindex="-1" role="dialog"
+        aria-labelledby="info_modal_2" aria-hidden="true" style="z-index: 1000000;">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="info_modal_2_title">Info</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body d-flex">
+                  <div style="max-width: 100%">
+                    <p>Click here to evaluate the length-offset trajectory coverage of the selected <i>k</i> segments (see hint / info next to the page title for problem definition) and to compare it against the length-offset trajectory coverage of the optimized selection of <i>k</i> segments.</p>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="modal fade" id="info_modal" tabindex="-1" role="dialog"
+        aria-labelledby="info_modal" aria-hidden="true" style="z-index: 1000000;">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="info_modal_title">Info</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body d-flex" style="margin-top: 0px !important;">
+                  <div style="max-width: 100%">
+                    <p>Transport hubs are most cost-effective if they are located at places that are along many movement traces and are either close to where the traces start, end or merge. Such hubs represent minimal detours and are attractive for travelers. Try to beat Gordian by selecting road segments for potential hub locations that are within a user-defined distance from the start of as many movement traces as possible. As a little hint: A segment is brighter the more movement traces pass through it. A triangle is larger the more movement traces start from it. Good luck!</p>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  <div id="sidebar" class="leaflet-sidebar collapsed d-none">
+
+    <!-- nav tabs -->
+    <div class="leaflet-sidebar-tabs">
+      <!-- top aligned tabs -->
+      <ul role="tablist">
+        <li><a href="#home" role="tab"><i class="fa fa-bars active"></i></a></li>
+
+      </ul>
+
+    </div>
+
+    <!-- panel content -->
+    <div class="leaflet-sidebar-content">
+      <div class="leaflet-sidebar-pane" id="home">
+        <h1 class="leaflet-sidebar-header">
+          Settings
+          <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+        </h1>
+        <div style="margin: 15px 15px 5px 15px">
+
+          <label class="label">
+            <div class="toggle">
+              <input id="check_multi" class="toggle-state" type="checkbox" name="check" value="check" />
+              <div class="toggle-inner">
+                 <div class="indicator"></div>
+              </div>
+              <div class="active-bg"></div>
+            </div>
+            <div class="label-text">Multiple selection</div>
+          </label>
+
+        </div>
+        <div style="margin: 15px 15px 5px 15px">
+
+          <label class="label">
+            <div class="toggle">
+              <input id="check_hover" class="toggle-state" type="checkbox" name="check" value="check" />
+              <div class="toggle-inner">
+                <div class="indicator"></div>
+              </div>
+              <div class="active-bg"></div>
+            </div>
+            <div class="label-text">Segment - Information on hover</div>
+          </label>
+
+
+
+            <label class="label">
+              <div class="toggle">
+                <input id="check_hover_node" class="toggle-state" type="checkbox" name="check" value="check" />
+                <div class="toggle-inner">
+                  <div class="indicator"></div>
+                </div>
+                <div class="active-bg"></div>
+              </div>
+              <div class="label-text">Node - Information on hover</div>
+            </label>
+
+        </div>
+
+        <div class="formdiv">
+          <form>
+            <label for="count_ss">Number of selected segments:</label>
+            <input type="text" id="count_ss"  placeholder="Number of selected segments:">
+
+            <label for="sels">selected segments</label>
+            <input type="text" id="sels"  placeholder="selected segments">
+
+            <label for="numtraj">Number of trajectores</label>
+            <input type="text" id="numtraj"  placeholder="Number of trajectores">
+
+            <label for="trajid">Trajectores IDs</label>
+            <input type="text" id="trajid"  placeholder="Trajectores IDs">
+            <button class="btn"><i class="fa fa-close"></i> Clear</button>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="h-100 w-100">
+    <div class="d-flex flex-column h-100">
+      <div class="mt-3 text-center" style="cursor: pointer">
+        <h1 class="map-main-title d-inline">Transport hub planning challenge <i id="click-info" class="fa fa-info-circle"></i></h1>
+        <h2 class="map-second-title" style="border: thick solid #000000">Exploration / Query Map</h2>
+      </div>
+  <div id="map"></div>
+    </div>
+  </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js" data-require="leaflet@0.7.3" data-semver="0.7.3"></script>
+    <script type="application/javascript" src="lib/js/leaflet-sidebar.min.js"></script>
+
+    <script type="text/javascript" src="data.js"></script>
+
+    <script type="text/javascript" src="script.js"></script>
+  </body>
+</html>

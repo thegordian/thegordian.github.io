@@ -64,18 +64,18 @@
         <div class="container">
             <div class="text-center">
                 <h2 class="section-heading text-uppercase">philosophy</h2>
-                <h3 class="section-subheading text-orange">Digital movement traces provide a wealth of information about
+                <h3 class="section-subheading text-body">Digital movement traces provide a wealth of information about
                     transport needs that is <b>essential</b> to better plan and optimize resource allocations.</h3>
             </div>
             <div class="youtube-video-box text-center position-relative">
-                <!-- <iframe width="100%" height="500" src="https://www.youtube.com/embed/9xiVsFo3qmo?rel=0"  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-                <div id="philosophy_player"></div>
+                <iframe width="100%" height="500" src="https://www.youtube.com/embed/UHfpUinIdtA?rel=0"  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <!-- <div id="philosophy_player"></div>
                 <div id="watch_video" class="floating_btns_on_yt_video position-absolute d-none">
                     <a class="w-100 h-100 d-inline-block" href="#"></a>
                 </div>
                 <div id="try_demo" class="floating_btns_on_yt_video position-absolute d-none">
                     <a class="w-100 h-100 d-inline-block" href="#"></a>
-                </div>
+                </div> -->
             </div>
             <!-- <img src="assets/img/demo.JPG" style="margin-left: auto;margin-right: auto;display: block;width: 100%"> -->
         </div>
@@ -85,7 +85,7 @@
         <div class="container">
             <div class="text-center">
                 <h2 class="section-heading text-uppercase">Products / Services</h2>
-                <h3 class="section-subheading text-orange">Fast and scalable tools for movement data pre-processing,
+                <h3 class="section-subheading text-body">Fast and scalable tools for movement data pre-processing,
                     knowledge extraction and management, and evidence-based transport planning and optimization.</h3>
             </div>
             <div class="row text-center">
@@ -396,10 +396,23 @@
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" id="subject" name="subject" type="text"
+                            <!-- <input class="form-control" id="subject" name="subject" type="text"
                                 placeholder="The subject *" required="required"
-                                data-validation-required-message="Please enter the subject." />
-                            <p class="help-block text-danger"></p>
+                                data-validation-required-message="Please enter the subject." /> -->
+                                <select class="form-control" name="subject" id="subject" data-validation-required-message="Please select the subject" required="required" onchange="$('#subject option:first-child').attr('disabled', true);">
+                                    <option value="" selected>Select the subject</option>
+                                    <option value="USE CASES: Charging Infrastructure Planning">USE CASES: Charging Infrastructure Planning</option>
+                                    <option value="USE CASES: Transport Hub Planning">USE CASES: Transport Hub Planning</option>
+                                    <option value="USE CASES: Transit Route Planning">USE CASES: Transit Route Planning</option>
+                                    <option value="USE CASES: Hub-to-Hub Corridor Planning">USE CASES: Hub-to-Hub Corridor Planning</option>
+                                    <option value="USE CASES: Consolidated Logistics Planning">USE CASES: Consolidated Logistics Planning</option>
+                                    <option value="USE CASES: Merge-in-Transit Planning">USE CASES: Merge-in-Transit Planning</option>
+                                    <option value="USE CASES: Intelligent Fleet Management">USE CASES: Intelligent Fleet Management</option>
+                                    <option value="Products / Services: Data processing">Products / Services: Data processing</option>
+                                    <option value="Products / Services: Knowledge Discovery and Management">Products / Services: Knowledge Discovery and Management</option>
+                                    <option value="Products / Services: Transport Planning and Optimization">Products / Services: Transport Planning and Optimization</option>
+                                </select>
+                                <p class="help-block text-danger"></p>
                         </div>
                         <div class="form-group mb-md-0">
                             <input class="form-control" id="phone" name="phone" type="tel" placeholder="Your Phone *"
@@ -563,7 +576,7 @@
                                             of the top plans against millions of movement traces under a few minutes.
                                             Thereby, we provide evidence-based decision support that increases the
                                             utility of the planned hubs. <br />
-                                            <button class="btn btn-primary mt-2 mr-2">Try to beet Gordian at optimizing
+                                            <button data-toggle="modal" href="#thpcApp" class="btn btn-primary mt-2 mr-2">Try to beet Gordian at optimizing
                                                 transport hubs !</button>
                                         </p>
                                         <div>
@@ -1053,7 +1066,7 @@
                             <div class="modal-body">
                                 <div>
                                     <iframe id="modal-video" width="100%" height="500"
-                                        src="https://www.youtube.com/embed/UUu_54T7RBo?rel=0" frameborder="0"
+                                        src="https://www.youtube.com/embed/ZZTHoidPCP4?rel=0" frameborder="0"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                         allowfullscreen></iframe>
                                 </div>
@@ -1068,7 +1081,7 @@
     <div class="special-modal portfolio-modal modal fade" id="renoApp" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="close-modal close-modal-left" data-dismiss="modal"
+                <div class="close-modal" data-dismiss="modal"
                     onclick="$('#modal-reno-app').attr('src', $('#modal-reno-app').attr('src'));"><img
                         src="assets/img/close-icon.svg" alt="Close modal" /></div>
                 <iframe id="modal-reno-app" style="width: 100vw; height: 100vh;" width="100%" height="100%"
@@ -1092,6 +1105,19 @@
             </div>
         </div>
     </div>
+    <div class="special-modal portfolio-modal modal fade" id="thpcApp" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal"
+                    onclick="$('#modal-mm-app').attr('src', $('#modal-mm-app').attr('src'));"><img
+                        src="assets/img/close-icon.svg" alt="Close modal" /></div>
+                <iframe id="modal-mm-app" style="width: 100vw; height: 100vh;" width="100%" height="100%"
+                    src="https://www.thegordian.io/thpc/" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
 
     <!-- Bootstrap core JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -1103,7 +1129,7 @@
     <script src="assets/mail/contact_me.js"></script>
 
     <script src="js/lightslider/lightslider.min.js"></script>
-    <script src="js/yt_code.js"></script>
+    <!-- <script src="js/yt_code.js"></script> -->
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
 </body>
