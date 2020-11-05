@@ -55,6 +55,7 @@ var search_val_array_eval;
 var search_val_array_agg_eval = [];
 var node_leaflet_id_node_id_mapping_eval = [];
 
+
 var geoJsonLayerNode = L.geoJson(node_data,
   {
     // change circle to square
@@ -69,6 +70,15 @@ var geoJsonLayerNode = L.geoJson(node_data,
         opacity: 1,
         fillOpacity: 0.8
       });
+      // var iconSize = 4*(return_node_size(feature.properties.tr_start_count));
+      // return L.marker(latlng, {
+      //   icon: L.divIcon({
+      //     html: '<span style="opacity:0.8; color: ' + node_color + '; font-size:' + iconSize + 'px"><i class="fa fa-caret-up"></i></span>"',
+      //     className: '',
+      //     iconAnchor: [iconSize/3, iconSize/1.2],
+      //     iconSize: new L.Point(iconSize, iconSize),
+      //   })
+      // });
     },
 
     onEachFeature: function (featureData, featureLayer) {
@@ -722,7 +732,7 @@ function highlightFeature_node(e) {
     // $("#hover_info").css('color', '#000000');
     
     $("#hover_info_box").removeClass("non-hovered");
-    $("#hover_info").html('<b>' + e.target.feature.properties.tr_start_count + "</b> trajectories start from here");
+    $("#hover_info").html('<b>' + e.target.feature.properties.tr_start_count + "</b>&nbsp; trajectories start from here");
 
     layer.setStyle(
       {
@@ -734,8 +744,15 @@ function highlightFeature_node(e) {
         fillOpacity: 1
       }
     );
+    // var iconSize = 4*(return_node_size_max(layer.feature.properties.tr_start_count, 13));
+    // layer.setIcon(L.divIcon({
+    //   html: '<span style="opacity:1; color: ' + '#4b4dff' + '; font-size:' + iconSize + 'px"><i class="fa fa-caret-up"></i></span>"',
+    //   className: '',
+    //   iconAnchor: [iconSize/3, iconSize/1.2],
+    //   iconSize: new L.Point(iconSize, iconSize),
+    // }));
 
-    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge && typeof layer.bringToFront === 'function') {
       layer.bringToFront();
     }
 
@@ -758,6 +775,13 @@ function resetHighlight_node(e) {
       opacity: 1,
       fillOpacity: 1
     });
+  // var iconSize = 4*(return_node_size_max(e.target.feature.properties.tr_start_count, 13));
+  // e.target.setIcon(L.divIcon({
+  //     html: '<span style="opacity:0.8; color: ' + node_color + '; font-size:' + iconSize + 'px"><i class="fa fa-caret-up"></i></span>"',
+  //     className: '',
+  //     iconAnchor: [iconSize/3, iconSize/1.2],
+  //     iconSize: new L.Point(iconSize, iconSize),
+  //   }))
 }
 
 
@@ -1273,6 +1297,7 @@ $(document).ready(function () {
     geoJsonLayerSeg_opt.bringToFront();
 
     geoJsonLayerNode_opt.bringToFront();
+
 
     var url = "https://spatialstack.com/tv_w7/eval.php?ids=" + selected_segment_ids.toString() + "&l=" + l; //+ data.name;
     $.ajax({
