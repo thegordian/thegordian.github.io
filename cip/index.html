@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css"
+          data-require="leaflet@0.7.3" data-semver="0.7.3"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link rel="stylesheet" href="lib/css/leaflet-sidebar.min.css"/>
+    <link rel="stylesheet" href="style.css"/>
+
+    <style>
+        /* Style the form - display items horizontally */
+        .form-inline {
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+        }
+
+        /* Add some margins for each label */
+        .form-inline label {
+            margin: 5px 10px 5px 0;
+        }
+
+        /* Style the input fields */
+        .form-inline select {
+            vertical-align: middle;
+            margin: 5px 10px 5px 0;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+
+        /* Style the submit button */
+        .form-inline button {
+            padding: 10px 20px;
+            background-color: dodgerblue;
+            border: 1px solid #ddd;
+            color: white;
+        }
+
+        .form-inline button:hover {
+            background-color: royalblue;
+        }
+
+        /* Add responsiveness - display the form controls vertically instead of horizontally on screens that are less than 800px wide */
+        @media (max-width: 800px) {
+            .form-inline input {
+                margin: 10px 0;
+            }
+
+            .form-inline {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="h-100 w-100">
+    <div class="d-flex flex-column h-100">
+        <div class="mt-3 text-center" style="cursor: pointer">
+            <div class="d-flex justify-content-between">
+                <button style="background: #66cc66;height:40px;padding: 7px 12px;" class="ml-2 btn-light btn color-dark btn-sm"
+                        onclick="toggleSideBar()">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <h1 class="w-100 map-main-title d-inline">Mind the gaps and transport routes when planning electric roads <i id="click-info" class="fa fa-info-circle"></i></h1>
+            </div>
+        </div>
+        <div id="map"></div>
+    </div>
+    <div class="modal fade text-dark" id="info_modal" tabindex="-1" role="dialog"
+         aria-labelledby="info_modal" aria-hidden="true" style="position: absolute;z-index: 1000000;">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content  model_style">
+                <div class="modal-body d-flex" style="margin-top: 0px !important;">
+                    <div style="max-width: 100%">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade text-dark" id="info_modal-1" tabindex="-1" role="dialog"
+         aria-labelledby="info_modal" aria-hidden="true" style="position: absolute;z-index: 1000000;">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title" id="info_modal_1_title">Mind the gap and the transport routes!
+                    </h1>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body d-flex" style="margin-top: 0px !important;">
+                    <div style="max-width: 100%">
+
+                        <p>In order to accelerate the electrification of the heavy freight transport industry and to
+                            realize of the positive effects of this, <em>it is essential that stakeholders discuss
+                                and make decisions about Electric Road Systems (ERS) rollout scenarios that maximize
+                                the benefits, minimize the cost and thereby enable the financial sustainability ERS
+                                for all stakeholders</em> (vehicle manufacturers, charging equipment manufacturers,
+                            battery manufacturers, electric network operators, and road authorities).
+
+                        <p><em>No presently discussed, largely corridor-based scenario is cost-effective</em> in
+                            terms of a transport demand perspective because on-board batteries of moving vehicles
+                            can become fully charged and thereby decrease the utility of the electrified segments.
+                            Constant gaps between electrified segments does not fix this problem.
+                        <p>The utility of an electrified segment in a network is heavily influenced by the transport
+                            routes of vehicles as is it is show in the figure below.
+
+                            <img src="RBEU.PNG"
+                                 style="margin-left: auto;margin-right: auto;display: block;width: 80%">
+                            Figure: Illustration of transport route dependent aspects and challenges of ERS
+                            placement scenario evaluations and optimizations. 3 routes shown in yellow, green, and
+                            purple and segments of three placement scenarios shown in red, light and dark brown.
+
+                        <p>In the <a
+                                href="https://www.itrl.kth.se/research/ongoingprojects/reno-route-based-ers-network-optimization-1.984073"
+                                target="_blank">Route Based ERS Network Optimization (RENO) project</a> (financed by
+                            Vinnova and Trafikverket), we have adapted and applied years of research on trajectory
+                            data compression, indexing, querying, and analytics in order to optimize the placement
+                            of ERS from a transport demand perspective.
+
+                        <p>Compared to corridor-placements the benefits of optimal scenarios are:
+                        <ul>
+                            <li>Up to 3X transport work electrification</li>
+                            <li>Up to 80% infrastructure cost reduction</li>
+                            <li>Savings of megatons of CO2 emissions and billions of Euros in infrastructure costs
+                                at national levels
+                            </li>
+                        </ul>
+
+                        <p>This page is a web-based dynamic exploration tool of the results. Use it to explore the
+                            placement and effects of some transport demand optimized- and not-so-optimal
+                            corridor-based scenarios for some parameter settings.
+
+                        <p>Disclaimer: This is a research prototype that is not to be used for commercial purposes.
+                            For commercial products contact <a href="mailto:info@thegordian.io">
+                                info@thegordian.io</a>.
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade text-dark" id="info_modal_2" tabindex="-1" role="dialog"
+         aria-labelledby="info_modal_2" aria-hidden="true" style="position: absolute;z-index: 1000000;">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content model_style">
+                <div class="modal-body d-flex">
+                    <div style="max-width: 100%">
+                        <p id="message_text" style="text-align: center">...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade text-dark" id="info_modal_3" tabindex="-1" role="dialog"
+         aria-labelledby="info_modal_3" aria-hidden="true" style="position: absolute;z-index: 1000000;">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content model_style">
+                <div class="modal-body d-flex">
+                    <div style="max-width: 100%">
+                        <p id="message_loader" style="text-align: center">Loading transport flows of 10 million freight transport routes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <div id="sidebar" onclick="toggleSideBar()"></div>
+        <form id="sidebar-content" class="p-2 text-left text-white" onsubmit="event.preventDefault();">
+
+
+            <i style="position:sticky;top:0;cursor: pointer" class="p-1 text-right fa fa-arrow-circle-left fa-2x sidebar-close d-block" onclick="toggleSideBar()"></i>
+            <label class="mr-sm-2" for="bs_c">Battery size (kWh)</label>
+            <select id="bs_c" class="form-control mb-2 mr-sm-2">
+                <option value="100">100</option>
+                <option value="300">300</option>
+            </select>
+            <label class="mr-sm-2" for="cp_p">Charging power (kW)</label>
+            <select class="form-control mb-2 mr-sm-2" id="cp_p">
+                <option value="150">150</option>
+                <option value="300">300</option>
+            </select>
+            <label class="mr-sm-2" for="ib">Infrastructure plan</label>
+            <select class="form-control mb-2 mr-sm-2" id="ib">
+                <!--<option value="u">User plan</option>-->
+                <option value="s1">Small corridor (300 km)</option>
+                <option value="s2">Medium corridor (1150 km)</option>
+                <option value="s3">Large corridor (1950 km)</option>
+                <option value="k60">Optimized (300 km)</option>
+                <option value="k230">Optimized (1150 km)</option>
+                <option value="k390">Optimized (1950 km)</option>
+                <option value="k100">Optimized (500 km)</option>
+                <option value="k200">Optimized (1000 km)</option>
+                <option value="k500">Optimized (2500 km)</option>
+            </select>
+            <div class="form-check mb-2 mr-sm-2;" style="display: none">
+                <input class="form-check-input" type="checkbox" id="b_full" name="b_full" value="Bike">
+                <label class="form-check-label" for="b_full">
+                    Battery full
+                </label>
+            </div>
+
+            <button id="filter_modal_clear_btn" class="btn btn-block btn-primary btn-sm mb-2 mr-sm-2"
+                    style="display: none">Clear K
+            </button>
+            <button id="filter_modal_toggle_btn" class="btn btn-block btn-primary btn-sm mb-2 mr-sm-2">Get results
+            </button>
+            <button id="start_from_here_btn" class="btn btn-block btn-primary btn-sm mb-2 mr-sm-2" style="display: none">
+                Start user selection from here
+            </button>
+            <button id="click-info-2" class="btn btn-block btn-primary  btn-sm mb-2 mr-sm-2">Show statistics</button>
+        </form>
+
+        <div id="hover_info-div" class="d-flex justify-content-center">
+            <p id="hover_info">Hover over the map for statistics</p>
+        </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"
+            data-require="leaflet@0.7.3" data-semver="0.7.3"></script>
+    <script type="application/javascript" src="lib/js/leaflet-sidebar.min.js"></script>
+    <script type="application/javascript" src="lib/js/Leaflet.Control.Custom.js"></script>
+
+    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-image/v0.0.4/leaflet-image.js'></script>
+
+
+    <script type="text/javascript" src="data/nt.js"></script>
+
+    <script type="text/javascript" src="script.js"></script>
+
+</body>
+</html>

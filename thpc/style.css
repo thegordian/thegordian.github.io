@@ -468,3 +468,11 @@ input[type=text], select {
     font-size: 0.8rem;
   }
 }
+
+.bg-half-dark {
+  background: rgba(255,255,255,0.2);
+}
+
+.introjs-prevbutton {
+  display: none !important;
+}
