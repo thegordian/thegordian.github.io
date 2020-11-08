@@ -61,7 +61,7 @@ geoJsonLayerNetwork = L.geoJson(nt_data, {
     // Executes on each feature in the dataset
     onEachFeature: function (featureData, featureLayer) {
         featureLayer.setStyle({
-            'color': 'grey',
+            'color': 'white',
             'weight': 1,//return_line_weight(featureData.properties.trans_work_tn_km),
             'opacity': 1
         });
@@ -104,7 +104,7 @@ geoJsonLayerNetworkSelected = L.geoJson(nt_data, {
         my_network_index_selected++;
 
         featureLayer.setStyle({
-            'color': 'red',
+            'color': '#FF6600',
             'weight': 4,
             'opacity': 1
         });
@@ -128,7 +128,7 @@ geoJsonLayerNetworkElectrified = L.geoJson(nt_data, {
         my_network_index++;
 
         featureLayer.setStyle({
-            'color': 'grey',//return_line_color(featureData.properties.fraction),//'#7DF9FF',
+            'color': 'white',//return_line_color(featureData.properties.fraction),//'#7DF9FF',
             'weight': return_line_weight(featureData.properties.work),
             'opacity': 0
         });
@@ -265,7 +265,7 @@ function highlightFeature(e) {
         $("#hover_info-div").css('bottom', 10);
         var electrified_segment_message = '';
         if (!(selected_edges_array.indexOf(e.target.feature.properties.network_id) == -1))
-            electrified_segment_message = ' Electrified edge energy demand: <b>' + ((selected_edges_demand_array[e.target.feature.properties.network_id]) / 1000).toFixed(2) + ' MWh<b>';
+            electrified_segment_message = ' Electrified edge energy demand: <b>' + ((selected_edges_demand_array[e.target.feature.properties.network_id]) / 1000000).toFixed(2) + ' GWh<b>';
         $("#hover_info").html('Percent electrified : <b>' + (e.target.feature.properties.fraction * 100).toFixed(2) + " %</b> Electrified transport work : <b>" + (e.target.feature.properties.e_work / 1000000).toFixed(2) + ' Mtkm</b>' + '</b> Transport work : <b>' + (e.target.feature.properties.work / 1000000).toFixed(2) + ' Mtkm</b>' + electrified_segment_message);//+"</b> Transport work : <b>"+(e.target.feature.properties.work/1000000).toFixed(3)+' Mtkm</b>
 
         // console.log(e.target.feature.properties);
@@ -300,7 +300,7 @@ function resetHighlight(e) {
                 });
         } else {
             e.target.setStyle({
-                'color': 'grey',
+                'color': 'white',
                 'weight': 1,//return_line_weight(featureData.properties.trans_work_tn_km),
                 'opacity': 1
             });
@@ -309,13 +309,13 @@ function resetHighlight(e) {
         if (e.target.feature.properties.work) {
             e.target.setStyle(
                 {
-                    'color': 'grey',//'#7DF9FF',
+                    'color': 'white',//'#7DF9FF',
                     'weight': return_line_weight(e.target.feature.properties.work),
                     'opacity': 1//featureData.properties.fraction
                 });
         } else {
             e.target.setStyle({
-                'color': 'grey',
+                'color': 'white',
                 'weight': 1,//return_line_weight(featureData.properties.trans_work_tn_km),
                 'opacity': 1
             });
@@ -713,7 +713,7 @@ function show_dots() {
 function display_second_message() {
     if (case_o) {
         //message+='Searching for optimized placement of '+parseInt(ib_str.replace(/\D/g, ""))*5+' km of electric roads among '+choose_result+' possible placements.';
-        message += 'Evaluated ' + choose_result + ' million placements against 10 million transport routes.<br>';
+        message += 'Evaluated ' + pcs.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' million placements against 10 million transport routes.<br>';
         message += 'Best ' + parseInt(ib_str.replace(/\D/g, "")) * 5 + ' km electric road placement found electrifies ' + (stat.electric_work / 1000000000).toFixed(2) + ' Gtkm (' + ((stat.fraction) * 100).toFixed(2) + '%) of the total transport work.';
     } else {
         //   message+='Evaluating '+ib*5 +' km corridor placement.';
@@ -828,7 +828,7 @@ function reset_values() {
         feature_to_update.properties.e_work = null;
         geoJsonLayerNetworkElectrified.getLayer(network_array_leaflet_id[key]).setStyle(
             {
-                'color': 'grey',
+                'color': 'white',
                 'weight': 1,
                 dashArray: '5, 10',
                 'opacity': 1//featureData.properties.fraction
@@ -884,7 +884,7 @@ function fill_electrified_edges_layer(electrified_edge_json) {
         if (i_load) {
             geoJsonLayerNetworkElectrified.getLayer(li).setStyle(
                 {
-                    'color': 'grey',
+                    'color': 'white',
                     'weight': return_line_weight(feature_to_update.properties.work), //dashArray: '5, 10',
                     dashArray: '0,0',
                     'opacity': 1//featureData.properties.fraction
@@ -937,22 +937,22 @@ function return_line_color(fr) {
     var n_tr = fr;
     switch (true) {
         case (n_tr == 0.00):
-            return 'grey';
+            return 'white';
             break;
         case (n_tr < 0.25):
-            return '#58CCED';
+            return '#7CFC00';
             break;
         case (n_tr < 0.50):
-            return '#3895D3';
+            return '#32CD32';
             break;
         case (n_tr < 0.75):
-            return '#1261A0';
+            return '#228B22';
             break;
         case (n_tr < 1.00):
-            return '#072F5F';
+            return '#006400';
             break;
         default:
-            return '#072F5F'
+            return '#006400'
             break;
     }
 }
@@ -1231,21 +1231,21 @@ legend.onAdd = function (map) {
 
     //  for (var i = 0; i < grades.length; i++) {
     var html = '<i style="font-size: 20px" class="fa fa-list-ul m-0 w-100" data-toggle="collapse" data-target="#legendd"></i>' +
-        '<div id="legendd" class="collapse"><div><b>Percent of transport work </br>(i.e., tkm) electrified</div>' +
-        '<div><i style="margin-top: 10px;height:1px;background:repeating-linear-gradient(to right,grey 0,grey 3px,transparent 3px,transparent 7px)"></i>' + 'No transport' + '</div>' +
-        '<div><i style="background:#58CCED;height: 6px;margin-top: 6px"></i> ' + '00 - 25%' + '</div>' +
-        '<div><i style="background:#3895D3;height: 6px;margin-top: 6px"></i> ' + '25 - 50%' + '</div>' +
-        '<div><i style="background:#1261A0;height: 6px;margin-top: 6px"></i> ' + '50 - 75%' + '</div>' +
-        '<div><i style="background:#072F5F;height: 6px;margin-top: 6px"></i> ' + '75 - 100%' + '</div>' +
+        '<div id="legendd" class="collapse"><div><b>Percent of transport work </br>(i.e., tkm) electrified</b></div>' +
+        '<div><i style="margin-top: 10px;height:1px;background:repeating-linear-gradient(to right,white 0,white 3px,transparent 3px,transparent 7px)"></i>' + 'No transport' + '</div>' +
+        '<div><i style="background:#7CFC00;height: 6px;margin-top: 6px"></i> ' + '00 - 25%' + '</div>' +
+        '<div><i style="background:#32CD32;height: 6px;margin-top: 6px"></i> ' + '25 - 50%' + '</div>' +
+        '<div><i style="background:#228B22;height: 6px;margin-top: 6px"></i> ' + '50 - 75%' + '</div>' +
+        '<div><i style="background:#006400;height: 6px;margin-top: 6px"></i> ' + '75 - 100%' + '</div>' +
         '<div><b>Electrified edges</b></div>' +
-        '<div><i style="background:red;height: 6px;margin-top: 6px"></i></div>' +
-        '<br><div><b>Total transport work (Mtkm)</div>' +
-        '<div><i style="margin-top: 10px;height:1px;background:repeating-linear-gradient(to right,grey 0,grey 3px,transparent 3px,transparent 7px)"></i>' + 'No transport' + '</div>' +
-        '<div><i style="background:grey;height: 1px;margin-top: 10px"></i> ' + '0 - 1' + '</div>' +
-        '<div><i style="background:grey;height: 2px;margin-top: 9px"></i> ' + '1 - 4' + '</div>' +
-        '<div><i style="background:grey;height: 3px;margin-top: 8px"></i> ' + '4 - 10' + '</div>' +
-        '<div><i style="background:grey;height: 4px;margin-top: 8px"></i> ' + '10 - 28' + '</div>' +
-        '<div><i style="background:grey;height: 5px;margin-top: 7px"></i> ' + '28 - 54' + '</div></div>';
+        '<div><i style="background:#FF6600;height: 6px;margin-top: 6px"></i></div>' +
+        '<br><div><b>Total transport work (Mtkm)</b></div>' +
+        '<div><i style="margin-top: 10px;height:1px;background:repeating-linear-gradient(to right,white 0,white 3px,transparent 3px,transparent 7px)"></i>' + 'No transport' + '</div>' +
+        '<div><i style="background:white;height: 1px;margin-top: 10px"></i> ' + '0 - 1' + '</div>' +
+        '<div><i style="background:white;height: 2px;margin-top: 9px"></i> ' + '1 - 4' + '</div>' +
+        '<div><i style="background:white;height: 3px;margin-top: 8px"></i> ' + '4 - 10' + '</div>' +
+        '<div><i style="background:white;height: 4px;margin-top: 8px"></i> ' + '10 - 28' + '</div>' +
+        '<div><i style="background:white;height: 5px;margin-top: 7px"></i> ' + '28 - 54' + '</div></div>';
     div.innerHTML = html;
 
     return div;
@@ -1265,8 +1265,18 @@ function load_initial() {
     t0 = new Date().getTime();
     console.log('Request sent at ' + new Date().getTime());
     $('#info_modal_3').modal({backdrop: "static"});
+
+    setTimeout(load_initial_data_after_pause,1000);
+
     //alert('now');
     // console.log('t0:'+t0);
+
+//    load_initial_style();
+
+}
+
+function load_initial_data_after_pause()
+{
     $.ajax({
         url: 'https://spatialstack.com/reno_admin/eval.php/eval.php?ids=' + k_list.toString() + '&capacity=' + $("#bs_c").val() + '&power=' + $("#cp_p").val(),
         type: "GET",
@@ -1291,8 +1301,6 @@ function load_initial() {
             map.removeLayer(geoJsonLayerNetworkSelected);
         }
     });
-//    load_initial_style();
-
 }
 
 var initApp = false;
@@ -1311,7 +1319,7 @@ function load_initial_style() {
 
         geoJsonLayerNetworkElectrified.getLayer(network_array_leaflet_id[key]).setStyle(
             {
-                'color': 'grey',//'#7DF9FF',
+                'color': 'white',//'#7DF9FF',
                 'weight': return_line_weight(feature_to_update.properties.work), //dashArray: '5, 10',
                 dashArray: '0,0',
                 'opacity': 1//featureData.properties.fraction
