@@ -962,7 +962,7 @@ function resetHighlight_opt(e) {
 
 var map = L.map('map', {
     'center': [59.313932, 18.061776],
-    'zoom': 14,
+    'zoom': 15,
     'layers': [
         //    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {'attribution': 'Map data &copy; OpenStreetMap contributors'}),
         L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {'attribution': 'Map tiles by Carto, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'}),
@@ -1008,7 +1008,7 @@ if (window.innerWidth < 450) {
 }
 //mobile}
 else {
-    map.setView(new L.LatLng(59.313932, 18.061776), 14);
+    map.setView(new L.LatLng(59.313932, 18.061776), 15);
 }//laptop}
 
 
@@ -1534,7 +1534,7 @@ $(document).ready(function () {
                 //            marker_end.addTo(map_2);
 
 
-                setTimeout(animate_u, 500);
+                setTimeout(animate_u, 250);
             } else {
                 geoJsonLayerTr_animate_feature_user.clearLayers();
                 markers_u.clearLayers();
@@ -1547,7 +1547,7 @@ $(document).ready(function () {
     var array_eval_layer_seg_mapping;
     var tr_sorting_array_eval;
 
-    $('#modal_toggle_btn_animate_u').on('click', function () {
+    $('#modal_toggle_btn_animate_u').off('click').on('click', function () {
         current_step_u = 0;
         total_steps_u = geoJsonLayerTr_eval.getLayers().length;
 
@@ -1574,7 +1574,7 @@ $(document).ready(function () {
             array_eval_layer_seg_mapping[z] = geoJsonLayerTr_eval.getLayers()[z].feature.properties.id;
         }
 
-        setTimeout(animate_u, 500);
+        setTimeout(animate_u, 250);
 
     });
 
@@ -1634,7 +1634,7 @@ $(document).ready(function () {
                 //            marker_end.addTo(map_2);
 
 
-                setTimeout(animate_o, 500);
+                setTimeout(animate_o, 250);
 
             } else {
                 geoJsonLayerTr_animate_feature.clearLayers();
@@ -1649,7 +1649,7 @@ $(document).ready(function () {
     var array_opt_layer_seg_mapping;
     var tr_sorting_array_opt;
 
-    $('#modal_toggle_btn_animate_o').on('click', function () {
+    $('#modal_toggle_btn_animate_o').off('click').on('click', function () {
         current_step_o = 0;
 
         total_steps_o = geoJsonLayerTr_opt.getLayers().length;
@@ -1675,7 +1675,7 @@ $(document).ready(function () {
         }
 
 
-        setTimeout(animate_o, 500);
+        setTimeout(animate_o, 250);
     });
 
     // $('#filter_modal').on('show.bs.modal', function(){

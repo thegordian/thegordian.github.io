@@ -244,18 +244,18 @@ input[type=text], select {
   padding: 20px;
 }
 /* Style buttons */
-.btn {
-  background-color: #0274D9; /* Blue background */
-  border: none; /* Remove borders */
-  color: white; /* White text */
-  padding: 12px 16px; /* Some padding */
-  font-size: 16px; /* Set a font size */
-  cursor: pointer; /* Mouse pointer on hover */
-}
+/*.btn {*/
+  /*background-color: #0274D9; !* Blue background *!*/
+  /*border: none; !* Remove borders *!*/
+  /*color: white; !* White text *!*/
+  /*padding: 12px 16px; !* Some padding *!*/
+  /*font-size: 16px; !* Set a font size *!*/
+  /*cursor: pointer; !* Mouse pointer on hover *!*/
+/*}*/
 
-/* Darker background on mouse-over */
-.btn:hover {
-  background-color: RoyalBlue;
+/*!* Darker background on mouse-over *!*/
+.sidebar-btn:hover {
+  background-color: #66cc66;
 }
 
 .map-main-title {
@@ -471,7 +471,7 @@ input[type=text], select {
   height: 100%;
   width: calc(100% - 250px);
   position: fixed;
-  z-index: 2000;
+  z-index: 2000!important;
   right: -10000px;
   transition: all 0.3s;
   background: rgba(0,0,0,0.2);
@@ -482,7 +482,7 @@ input[type=text], select {
   width: 250px;
   height: 100%;
   background: rgba(0,0,0,0.88);
-  z-index: 2001;
+  z-index: 2001!important;
   left: -500px;
   top: 0;
   position: fixed;
@@ -497,11 +497,22 @@ input[type=text], select {
   right: 0;
 }
 
+.sidebar-btn {
+  background: #FF6600;
+}
+
 .sidebar-close {
   transition: all 0.3s;
-  color: rgba(255,255,255,0.7);
+  color: #FF6600;
 }
 
 .sidebar-close:hover {
   color: white !important;
+}
+
+.bg-half-dark {
+  background: rgba(255,255,255,0.2);
+}
+.introjs-prevbutton {
+  display: none !important;
 }

@@ -17,14 +17,14 @@ function startIntro(){
                 position: 'bottom'
             },
             {
-                element: document.querySelector('.'+geoJsonLayerSeg.getLayers()[4].options.className),
+                element: '#map-anch',
                 intro: "Hover on a segment to see the number of movement traces that pass through the segment.",
-                position: 'left'
+                position: 'right'
             },
             {
-                element: document.querySelector('.'+geoJsonLayerNode.getLayers()[14].options.className),
+                element:'#map-anch',
                 intro: "Hover over a circle to see how many movement traces start from it.",
-                position: 'bottom'
+                position: 'right'
             },
             {
                 element: '#slider-2',
@@ -32,9 +32,9 @@ function startIntro(){
                 position: 'right'
             },
             {
-                element: document.querySelector('.'+geoJsonLayerSeg.getLayers()[4].options.className),
+                element: '#map-anch',
                 intro: "Click a segment to select and deselect it.",
-                position: 'left'
+                position: 'right'
             },
             {
                 element: '#filter_modal_toggle_btn',
@@ -77,14 +77,13 @@ function startIntro(){
         })
         trgAtFinish = false;
         if (this.currentStep() === 1) {
-            trgSegment = geoJsonLayerSeg.getLayers()[4];
+            trgSegment = geoJsonLayerSeg.getLayers()[6];
             highlightFeature({target: trgSegment});
-            adjustToolBox()
         } else if (this.currentStep() === 2) {
             if (trgSegment !== undefined) {
                 resetHighlight({target: trgSegment});
             }
-            trgCircle = geoJsonLayerNode.getLayers()[14];
+            trgCircle = geoJsonLayerNode.getLayers()[18];
             highlightFeature_node({target: trgCircle})
         } else if (this.currentStep() === 3) {
             if (trgCircle !== undefined) {
@@ -103,9 +102,8 @@ function startIntro(){
             },1500);
 
         } else if (this.currentStep() === 4) {
-            trgSegment = geoJsonLayerSeg.getLayers()[4];
+            trgSegment = geoJsonLayerSeg.getLayers()[6];
             clickFeature({target: trgSegment}, trgSegment.feature);
-            adjustToolBox();
         } else if (this.currentStep() === 5) {
             setTimeout(function () {
                 $('#filter_slider').removeClass('introjs-fixParent');
@@ -157,7 +155,7 @@ function startIntro(){
     trgfixStart = false;
     trgAtBorder = false;
     trgAtFinish = false;
-    map.setView([59.313932, 18.061776], 14);
+    map.setView([59.313932, 18.061776], 15);
     map.dragging.disable();
     intro.start();
     setTimeout(function () {
@@ -167,14 +165,6 @@ function startIntro(){
             $('#exit_filter_modal_toggle_btn').click();
         })
     },1000);
-
-}
-
-function adjustToolBox() {
-    setTimeout(function () {
-        var pos = $('.'+geoJsonLayerSeg.getLayers()[4].options.className).position();
-        $('.introjs-tooltipReferenceLayer').css('left', pos.left-50).css('top', pos.top + 100);
-    });
 
 }
 
