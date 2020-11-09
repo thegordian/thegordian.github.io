@@ -5418,7 +5418,7 @@ a.close.disabled {
 }
 .special-modal .modal-content {
   color: #fff;
-  background: transparent;
+  background: #333 !important;
   padding: 0 !important;
   min-height: 100vh;
   display: flex;
@@ -10175,11 +10175,11 @@ section#about {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.65);
 }
 .floating_btns_on_yt_video#watch_video {
-  /* border: 2px solid #FF6600; */
+   border: 2px solid #FF6600;
   left: 27.2%;
 }
 .floating_btns_on_yt_video#try_demo {
-  /* border: 2px solid #66CC66; */
+   border: 2px solid #66CC66;
   left: 38.93%;
 }
 
@@ -10362,6 +10362,13 @@ header.masthead .masthead-heading {
 .portfolio-modal .modal-content img {
   margin-bottom: 2rem;
   width: 100%;
+  margin: 10px 8px -6px 4px;
+}
+
+}
+.portfolio-modal .icon-size{
+  width: 25px;
+  height: 25px;
 }
 .portfolio-modal .close-modal {
   position: absolute;
@@ -10371,7 +10378,9 @@ header.masthead .masthead-heading {
   height: 3rem;
   cursor: pointer;
   background-color: transparent;
+  padding:1px 20px 26px 6px !important;
 }
+
 .portfolio-modal .close-modal.close-modal-left {
   left: 0;
   right: unset;
@@ -10556,37 +10565,43 @@ section#contact form#contactForm :-ms-input-placeholder {
   .portfolio-modal .modal-content img {
     margin-bottom: 2rem;
     width: unset;
+    margin: 10px 8px -6px 4px;
   }
-  .portfolio-modal .modal-content h2 {
-    font-size: 2.5rem;
-    line-height: 3rem;
-  }
-  .timeline > li {
-    min-height: 150px;
-  }
-  .timeline > li .timeline-panel {
-    padding: 0 20px 20px;
-  }
-  .timeline > li .timeline-image {
-    width: 150px;
-    height: 150px;
-    margin-left: -75px;
-  }
-  .timeline > li .timeline-image h4 {
-    font-size: 18px;
-    line-height: 26px;
-    margin-top: 30px;
-  }
-  .timeline > li.timeline-inverted > .timeline-panel {
-    padding: 0 20px 20px;
-  }
-  .team-box img {
-    height: 68%;
-  }
-  .team-box .team-text-box.position-absolute {
-    width: 40%;
-    left: 55%;
-  }
+}
+.portfolio-modal .icon-size{
+  width: 25px;
+  height: 25px;
+}
+.portfolio-modal .modal-content h2 {
+  font-size: 2.5rem;
+  line-height: 3rem;
+}
+.timeline > li {
+  min-height: 150px;
+}
+.timeline > li .timeline-panel {
+  padding: 0 20px 20px;
+}
+.timeline > li .timeline-image {
+  width: 150px;
+  height: 150px;
+  margin-left: -75px;
+}
+.timeline > li .timeline-image h4 {
+  font-size: 18px;
+  line-height: 26px;
+  margin-top: 30px;
+}
+.timeline > li.timeline-inverted > .timeline-panel {
+  padding: 0 20px 20px;
+}
+.team-box img {
+  height: 68%;
+}
+.team-box .team-text-box.position-absolute {
+  width: 40%;
+  left: 55%;
+}
 
 }
 @media (min-width: 1200px) {
@@ -10615,6 +10630,17 @@ section#contact form#contactForm :-ms-input-placeholder {
     left: 60%;
     width: 35%;
   }
+  .portfolio-modal .modal-content img {
+    margin-bottom: 2rem;
+    width: unset;
+    margin: 10px 8px -6px 4px;
+  }
+}
+.portfolio-modal .icon-size{
+  width: 25px!important;
+  height: 25px !important;
+}
+
 }
 @media (max-width: 600px){
   .team-box img{

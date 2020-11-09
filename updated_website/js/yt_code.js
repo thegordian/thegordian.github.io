@@ -1,4 +1,10 @@
 var philosophy_player;
+var checkYT = setInterval(function () {
+    if(YT.loaded){
+        clearInterval(checkYT);
+        onYouTubeIframeAPIReady()
+    }
+}, 1000);
 function onYouTubeIframeAPIReady() {
     philosophy_player = new YT.Player('philosophy_player', {
         height: '500',
