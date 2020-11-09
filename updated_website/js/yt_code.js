@@ -1,13 +1,12 @@
+
+var tag = document.createElement('script');
+
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
 var philosophy_player;
 
-$(document).ready(function (){
-    var checkYT = setInterval(function () {
-        if(YT.loaded){
-            clearInterval(checkYT);
-            onYouTubeIframeAPIReady()
-        }
-    }, 500);
-})
 
 function onYouTubeIframeAPIReady() {
     philosophy_player = new YT.Player('philosophy_player', {
