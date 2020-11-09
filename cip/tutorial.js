@@ -5,6 +5,7 @@ function startIntro() {
         highlightClass: 'bg-half-dark',
         doneLabel: 'Finish',
         hidePrev: true,
+        hideNext:true,
         showProgress: true,
         exitOnOverlayClick: false,
         exitOnEsc: true,
@@ -39,10 +40,6 @@ function startIntro() {
                 element: '#click-info',
                 intro: 'Click the information icon, to learn more about the model that is centered around the transport energy demand that arises from the transport routes and takes into account individual vehicle weights and speeds and the road elevation profiles.',
                 position: 'bottom'
-            },
-            {
-                intro: 'Finish',
-                position: 'bottom'
             }
         ]
     }).onexit(function () {
@@ -53,6 +50,9 @@ function startIntro() {
         }
         if (trgSegment1 !== undefined) {
             resetHighlight({target: trgSegment1});
+        }
+        if (trgfixExit) {
+            //$('#click-info').click();
         }
     }).onchange(function (targetElement) {
 
@@ -90,8 +90,7 @@ function startIntro() {
             $('#sidebar,#sidebar-content').removeClass('open');
 
         } else
-        if (this.currentStep() === 6) {
-            $('#click-info').click();
+        if (this.currentStep() === 5) {
             trgfixExit = true;
         }
         bindSkip();

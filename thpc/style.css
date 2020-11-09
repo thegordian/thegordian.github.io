@@ -30,7 +30,7 @@ html, body {
   transition: left 0.3s;
 }
 #hover_info_box.non-hovered {
-  left: -100% !important;
+  left: -500px !important;
 }
 #hover_info {
   margin: 0;

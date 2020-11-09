@@ -513,8 +513,9 @@ input[type=text], select {
   color: #FF6600;
 }
 
+
 .sidebar-close:hover {
-  color: white !important;
+  color: #66cc66 !important;
 }
 
 .bg-half-dark {

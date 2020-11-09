@@ -71,7 +71,7 @@
         <div class="p-2 text-center" style="cursor: pointer">
             <div class="d-flex justify-content-between">
                 <button style="background: #FF6600;height:40px;padding: 9px 11px;"
-                        class="ml-2 btn-light btn color-dark btn-sm"
+                        class="ml-0 btn-light btn color-dark btn-sm"
                         onclick="toggleSideBar()">
                     <i style="color: white;font-size: 20px" class="fa fa-cog"></i>
                 </button>
@@ -193,10 +193,9 @@
 
     <i style="position:sticky;top:0;cursor: pointer"
        class="p-1 text-right fa fa-arrow-circle-left fa-2x sidebar-close d-block" onclick="toggleSideBar()">
-        <a id="trg-sidebar"></a>
     </i>
 
-    <label class="mr-sm-2" for="bs_c">Battery size (kWh)</label>
+    <label class="mr-sm-2" for="bs_c">Battery size (kWh)<a id="trg-sidebar"></a></label>
     <select id="bs_c" class="form-control mb-2 mr-sm-2">
         <option value="100">100</option>
         <option value="300">300</option>

@@ -5,6 +5,7 @@ function startIntro(){
         highlightClass: 'bg-half-dark',
         doneLabel: 'Finish',
         hidePrev: true,
+        hideNext:true,
         showProgress: true,
         exitOnOverlayClick: false,
         exitOnEsc: true,
@@ -54,7 +55,7 @@ function startIntro(){
             },
             {
                 element: '#exit_filter_modal_toggle_btn',
-                intro: 'Finish'
+                intro: 'Try to beat Gordian!'
             }
         ]
     }).onexit(function() {
