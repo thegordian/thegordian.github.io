@@ -34,7 +34,7 @@ function youtube_video_toggled(e) {
             if(check_video_seek_interval) {
                 clearInterval(check_video_seek_interval);
                 check_video_seek_interval = null;
-                if(current_time < 109.5 || current_time > 116) {
+                if(current_time < 113 || current_time > 116) {
                     $(".floating_btns_on_yt_video").addClass("d-none");
                 }
             }
@@ -46,7 +46,7 @@ function youtube_video_toggled(e) {
 var current_time = 0;
 function check_video_seek() {
     current_time = philosophy_player.getCurrentTime();
-    if(current_time >= 109.5) {
+    if(current_time >= 113) {
         // watch video toggle here
         $("#watch_video").removeClass("d-none");
     }
