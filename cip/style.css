@@ -54,7 +54,7 @@ html, body {
 #map {
   min-height: 450px;
   height: 100%;
-  margin: 0 10px 10px 10px;
+  margin: 0 0px 0px 0px;
 }
 .absolute-maps {
   top: 50%;
@@ -67,7 +67,14 @@ html, body {
   /* width: calc(50vw - 30px); */
   height: calc(100vh - 115px);
 }
-
+.btn {
+  background-color: #FF6600;
+  border: none;
+  color: white !important;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
 #exit_filter_modal_toggle_btn {
   position: absolute;
   bottom: 50px;
