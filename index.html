@@ -1163,6 +1163,57 @@
     <script src="js/lightslider/lightslider.min.js"></script>
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
+
+    <script >
+        $(document).ready(function(){
+
+            function load_initial()
+            {
+                console.log($('#philosophy_player').height())
+                console.log($('#philosophy_player').width())
+                $(".floating_btns_on_yt_video").height($('#philosophy_player').width()*0.103 );
+                $(".floating_btns_on_yt_video").width($('#philosophy_player').width()*0.103 );
+
+                if($('#philosophy_player').width()>1000){
+                    $('#watch_video').css('left','27.2%')
+                    $('#try_demo').css('left','38.93%')
+                    $('.floating_btns_on_yt_video').css('bottom','27.9%')
+                }
+
+                if ($('#philosophy_player').width()<1000 && $('#philosophy_player').width()>700){
+                    $('#watch_video').css('left','23.2%')
+                    $('#try_demo').css('left','35.93%')
+                    $('.floating_btns_on_yt_video').css('bottom','33.9%')
+                }
+
+                if ($('#philosophy_player').width()<700 && $('#philosophy_player').width()>500){
+                    $('#watch_video').css('left','23.2%')
+                    $('#try_demo').css('left','35.93%')
+                    $('.floating_btns_on_yt_video').css('bottom','37.9%')
+                }
+
+                if ($('#philosophy_player').width()<500 && $('#philosophy_player').width()>400 ){
+                    $('#watch_video').css('left','23.2%')
+                    $('#try_demo').css('left','35.93%')
+                    $('.floating_btns_on_yt_video').css('bottom','37.9%')
+                }
+                if ($('#philosophy_player').width()<=400  ){
+                    $('#watch_video').css('left','23.2%')
+                    $('#try_demo').css('left','35.93%')
+                    $('.floating_btns_on_yt_video').css('bottom','42.9%')
+                }
+            }
+
+            load_initial();
+
+            $(window).resize(function(){
+                load_initial();
+            });
+        });
+
+
+    </script>
+
 </body>
 
 </html>

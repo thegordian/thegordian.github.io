@@ -10172,14 +10172,14 @@ section#about {
   border-radius: 50%;
 }
 .floating_btns_on_yt_video:hover {
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.65);
+  /*box-shadow: 0 0 4px rgba(0, 0, 0, 0.65);*/
 }
 .floating_btns_on_yt_video#watch_video {
-   border: 2px solid #FF6600;
+   /*border: 2px solid #FF6600;*/
   left: 27.2%;
 }
 .floating_btns_on_yt_video#try_demo {
-   border: 2px solid #66CC66;
+   /*border: 2px solid #66CC66;*/
   left: 38.93%;
 }
 
