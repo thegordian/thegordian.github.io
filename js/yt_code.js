@@ -12,7 +12,7 @@ function onYouTubeIframeAPIReady() {
     philosophy_player = new YT.Player('philosophy_player', {
         height: '500',
         width: '100%',
-        videoId: '9xiVsFo3qmo',
+        videoId: 'UHfpUinIdtA',
         playerVars: {
             rel: 0
         },
@@ -34,7 +34,7 @@ function youtube_video_toggled(e) {
             if(check_video_seek_interval) {
                 clearInterval(check_video_seek_interval);
                 check_video_seek_interval = null;
-                if(current_time < 113 || current_time > 116) {
+                if(current_time < 113 || current_time > 118) {
                     $(".floating_btns_on_yt_video").addClass("d-none");
                 }
             }
@@ -50,7 +50,7 @@ function check_video_seek() {
         // watch video toggle here
         $("#watch_video").removeClass("d-none");
     }
-    if(current_time >= 116) {
+    if(current_time >= 118) {
         // try demo
         $("#try_demo").removeClass("d-none");
     }
