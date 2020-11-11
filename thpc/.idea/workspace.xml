@@ -22,6 +22,7 @@
     <list default="true" id="a015a126-a0a6-4db5-a2ec-f40603fc4a7f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../js/yt_code.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/yt_code.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../js/yt_code_philosophy.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/yt_code_philosophy.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -72,7 +73,7 @@
       <option name="presentableId" value="Default" />
       <updated>1604691119490</updated>
       <workItem from="1604691120752" duration="18199000" />
-      <workItem from="1605015823820" duration="3818000" />
+      <workItem from="1605015823820" duration="7935000" />
     </task>
     <servers />
   </component>

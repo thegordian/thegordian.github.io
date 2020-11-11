@@ -10621,7 +10621,8 @@ section#contact form#contactForm :-ms-input-placeholder {
   .portfolio-modal .modal-content img {
     margin-bottom: 2rem;
     width: unset;
-    margin: 10px 8px -6px 4px;
+    margin: 10px 
+    8px -6px 4px;
   }
 }
 .portfolio-modal .icon-size{
@@ -10696,10 +10697,19 @@ section#contact form#contactForm :-ms-input-placeholder {
   width: 25px!important;
   height: 25px !important;
 }
-
+.case-study-spacing{
+  margin-top:20px;
 }
+}
+
 @media (max-width: 600px){
   .team-box img{
     border-bottom:4px solid black;
   }
 }
+@media (max-width:992px){
+  .case-study-spacings{
+    margin-top:20px;
+  }
+}
+
