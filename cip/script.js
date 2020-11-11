@@ -713,7 +713,7 @@ function show_dots() {
 function display_second_message() {
     if (case_o) {
         //message+='Searching for optimized placement of '+parseInt(ib_str.replace(/\D/g, ""))*5+' km of electric roads among '+choose_result+' possible placements.';
-        message += 'Evaluated ' + pcs.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' million placements against 10 million transport routes.<br>';
+        message += 'Evaluated ' + pcs.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' placements against 10 million transport routes.<br>';
         message += 'Best ' + parseInt(ib_str.replace(/\D/g, "")) * 5 + ' km electric road placement found electrifies ' + (stat.electric_work / 1000000000).toFixed(2) + ' Gtkm (' + ((stat.fraction) * 100).toFixed(2) + '%) of the total transport work.';
     } else {
         //   message+='Evaluating '+ib*5 +' km corridor placement.';
