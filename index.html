@@ -10,6 +10,8 @@
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
 <!--    <script src="https://www.youtube.com/iframe_api"></script>-->
     <script src="js/yt_code.js"></script>
+    <script src="js/yt_code_modal.js"></script>
+    <script src="js/yt_code_philosophy.js"></script>
 
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
@@ -72,7 +74,7 @@
     </header>
     <!-- philosophy-->
     <section class="page-section pb-0" id="philosophy">
-        <div class="container">
+        <div class="container" id="yt_philosophy">
             <div class="text-center">
                 <h2 class="section-heading text-uppercase">philosophy</h2>
                 <h3 class="section-subheading text-body">Digital movement traces provide a wealth of information about
@@ -81,7 +83,7 @@
             <div class="youtube-video-box text-center position-relative">
 <!--                <iframe width="100%" height="500" src="https://www.youtube.com/embed/UHfpUinIdtA?rel=0"  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
                 <div id="philosophy_player"></div>
-                <div id="watch_video" class="floating_btns_on_yt_video position-absolute d-none" data-toggle="modal" href="#electricRoadVideo">
+                <div id="watch_video" onclick="philosophy_player.stopVideo();" class="floating_btns_on_yt_video position-absolute d-none" data-toggle="modal" href="#electricRoadVideo">
                     <a class="w-100 h-100 d-inline-block" href="#"></a>
                 </div>
                 <div id="try_demo" class="floating_btns_on_yt_video position-absolute d-none" data-toggle="modal" href="#renoApp">
@@ -1090,17 +1092,57 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="close-modal" data-dismiss="modal"
-                    onclick="$('#modal-video').attr('src', $('#modal-video').attr('src'));"><img
+                    onclick="$('#modal-video').attr('src', $('#modal-video').attr('src'));philosophy_player_modal.stopVideo();"><img
                         src="assets/img/cross-512.png" alt="Close modal" class="icon-size"/></div>
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-lg-12">
                             <div class="modal-body">
-                                <div>
-                                    <iframe id="modal-video" width="100%" height="500"
-                                        src="https://www.youtube.com/embed/ZZTHoidPCP4?rel=0" frameborder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowfullscreen></iframe>
+                                <div style="height: 100%">
+<!--                                    <iframe id="modal-video" width="100%" height="500"-->
+<!--                                        src="https://www.youtube.com/embed/ZZTHoidPCP4?rel=0" frameborder="0"-->
+<!--                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"-->
+<!--                                        allowfullscreen></iframe>-->
+                                    <div id="philosophy_player_modal"></div>
+                                    <div id="watch_video_modal" onclick="philosophy_player_modal.stopVideo();" class="floating_btns_on_yt_video_modal position-absolute d-none" data-toggle="modal" href="#philosophyVideo">
+                                        <a class="w-100 h-100 d-inline-block" href="#"></a>
+                                    </div>
+                                    <div id="try_demo_modal" class="floating_btns_on_yt_video_modal position-absolute d-none" data-toggle="modal" href="#renoApp">
+                                        <a class="w-100 h-100 d-inline-block" href="#"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="special-modal portfolio-modal modal fade" id="philosophyVideo" tabindex="-1" role="dialog"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal"
+                     onclick="$('#modal-video').attr('src', $('#modal-video').attr('src'));philosophy_player_modal_ph.stopVideo();"><img
+                        src="assets/img/cross-512.png" alt="Close modal" class="icon-size"/></div>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-12">
+                            <div class="modal-body">
+                                <div style="height: 100%">
+                                    <!--                                    <iframe id="modal-video" width="100%" height="500"-->
+                                    <!--                                        src="https://www.youtube.com/embed/ZZTHoidPCP4?rel=0" frameborder="0"-->
+                                    <!--                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"-->
+                                    <!--                                        allowfullscreen></iframe>-->
+                                    <div id="philosophyVideo_modal"></div>
+                                    <div id="philosophy_watch_video_modal" onclick="philosophy_player_modal_ph.stopVideo();" class="floating_btns_on_yt_video_modal position-absolute d-none" data-toggle="modal" href="#electricRoadVideo">
+                                        <a class="w-100 h-100 d-inline-block" href="#"></a>
+                                    </div>
+                                    <div id="philosophy_try_demo_modal" class="floating_btns_on_yt_video_modal position-absolute d-none" data-toggle="modal" href="#renoApp">
+                                        <a class="w-100 h-100 d-inline-block" href="#"></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1169,39 +1211,14 @@
 
             function load_initial()
             {
-                console.log($('#philosophy_player').height())
-                console.log($('#philosophy_player').width())
+
                 $(".floating_btns_on_yt_video").height($('#philosophy_player').width()*0.103 );
                 $(".floating_btns_on_yt_video").width($('#philosophy_player').width()*0.103 );
 
-                if($('#philosophy_player').width()>1000){
-                    $('#watch_video').css('left','27.2%')
-                    $('#try_demo').css('left','38.93%')
-                    $('.floating_btns_on_yt_video').css('bottom','27.9%')
-                }
+                $(".floating_btns_on_yt_video_modal").height($(window).width()*0.09);
+                $(".floating_btns_on_yt_video_modal").width($(window).width()*0.09 );
 
-                if ($('#philosophy_player').width()<1000 && $('#philosophy_player').width()>700){
-                    $('#watch_video').css('left','23.2%')
-                    $('#try_demo').css('left','35.93%')
-                    $('.floating_btns_on_yt_video').css('bottom','33.9%')
-                }
 
-                if ($('#philosophy_player').width()<700 && $('#philosophy_player').width()>500){
-                    $('#watch_video').css('left','23.2%')
-                    $('#try_demo').css('left','35.93%')
-                    $('.floating_btns_on_yt_video').css('bottom','37.9%')
-                }
-
-                if ($('#philosophy_player').width()<500 && $('#philosophy_player').width()>400 ){
-                    $('#watch_video').css('left','23.2%')
-                    $('#try_demo').css('left','35.93%')
-                    $('.floating_btns_on_yt_video').css('bottom','37.9%')
-                }
-                if ($('#philosophy_player').width()<=400  ){
-                    $('#watch_video').css('left','23.2%')
-                    $('#try_demo').css('left','35.93%')
-                    $('.floating_btns_on_yt_video').css('bottom','42.9%')
-                }
             }
 
             load_initial();

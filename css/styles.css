@@ -10183,6 +10183,62 @@ section#about {
   left: 38.93%;
 }
 
+.floating_btns_on_yt_video_modal {
+  width: 116px;
+  height: 116px;
+  cursor: pointer;
+  bottom: 30.9%;
+  border-radius: 50%;
+}
+.floating_btns_on_yt_video_modal:hover {
+  /*box-shadow: 0 0 4px rgba(0, 0, 0, 0.65);*/
+}
+.floating_btns_on_yt_video_modal#watch_video_modal {
+  /*border: 2px solid #FF6600;*/
+  z-index: 100000;
+  left: 22.2%;
+}
+.floating_btns_on_yt_video_modal#try_demo_modal {
+  /*border: 2px solid #66CC66;*/
+  z-index: 100000;
+  left: 36.93%;
+}
+
+
+.floating_btns_on_yt_video_modal_ph {
+  width: 116px;
+  height: 116px;
+  cursor: pointer;
+  bottom: 27.9%;
+  border-radius: 50%;
+}
+.floating_btns_on_yt_video_modal_ph:hover {
+  /*box-shadow: 0 0 4px rgba(0, 0, 0, 0.65);*/
+}
+.floating_btns_on_yt_video_modal_ph#philosophy_watch_video_modal {
+  /*border: 2px solid #FF6600;*/
+  z-index: 10000000;
+  left: 27.2%;
+}
+.floating_btns_on_yt_video_modal_ph#philosophy_try_demo_modal {
+  /*border: 2px solid #66CC66;*/
+  z-index: 10000000;
+  left: 38.93%;
+}
+
+
+#electricRoadVideo .container{
+  display: contents;
+}
+
+#philosophyVideo .container{
+  display: contents;
+}
+
+#yt_philosophy {
+  display: contents;
+}
+
 @media (min-width: 768px) {
   section {
     padding: 1.5rem 0;

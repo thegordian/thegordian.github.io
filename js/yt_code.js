@@ -6,18 +6,46 @@ var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 var philosophy_player;
+var philosophy_player_modal;
 
 
 function onYouTubeIframeAPIReady() {
     philosophy_player = new YT.Player('philosophy_player', {
-        height: '500',
-        width: '100%',
+        height: ($(window).width()*0.8)*0.56,
+        width: $(window).width()*0.8,
         videoId: 'UHfpUinIdtA',
         playerVars: {
             rel: 0
         },
         events: {
             onReady: onReadyYT
+        }
+    });
+    philosophy_player_modal = new YT.Player('philosophy_player_modal', {
+        // height: $(window).height()-30,
+        // width: ($(window).height()-30)*1.77,
+        height: ($(window).width()*0.8)*0.56,
+        width: $(window).width()*0.8,
+        videoId: 'ZZTHoidPCP4',
+        playerVars: {
+            rel: 0
+        },
+        events: {
+            onReady: onReadyYT_modal
+        }
+    });
+
+    philosophy_player_modal_ph = new YT.Player('philosophyVideo_modal', {
+        // height: $(window).height()-30,
+        // width: ($(window).height()-30)*1.77,
+        height: ($(window).width()*0.8)*0.56,
+        width: $(window).width()*0.8,
+        videoId: 'UHfpUinIdtA',
+        playerVars: {
+            rel: 0
+        },
+        events: {
+            onReady: onReadyYT_modal_ph
         }
     });
 }
