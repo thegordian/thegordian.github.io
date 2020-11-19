@@ -10175,11 +10175,11 @@ section#about {
   /*box-shadow: 0 0 4px rgba(0, 0, 0, 0.65);*/
 }
 .floating_btns_on_yt_video#watch_video {
-  /*border: 2px solid #FF6600;*/
+   /*border: 2px solid #FF6600;*/
   left: 27.2%;
 }
 .floating_btns_on_yt_video#try_demo {
-  /*border: 2px solid #66CC66;*/
+   /*border: 2px solid #66CC66;*/
   left: 38.93%;
 }
 
@@ -10202,7 +10202,7 @@ section#about {
   /* border: 2px solid #66CC66; */
   z-index: 100000;
   left: 36.93%;
-
+  
 }
 
 
@@ -10623,7 +10623,7 @@ section#contact form#contactForm :-ms-input-placeholder {
   .portfolio-modal .modal-content img {
     margin-bottom: 2rem;
     width: unset;
-    margin: 10px
+    margin: 10px 
     8px -6px 4px;
   }
 
@@ -10655,9 +10655,9 @@ section#contact form#contactForm :-ms-input-placeholder {
 .timeline > li.timeline-inverted > .timeline-panel {
   padding: 0 20px 20px;
 }
-/* .team-box img {
-  height: 68%;
-} */
+  /* .team-box img {
+    height: 68%;
+  } */
 .team-box .team-text-box.position-absolute {
   width: 40%;
   left: 55%;
@@ -10696,16 +10696,16 @@ section#contact form#contactForm :-ms-input-placeholder {
     margin: 10px 8px -6px 4px;
   }
 
-  .portfolio-modal .icon-size{
-    width: 25px!important;
-    height: 25px !important;
-  }
+.portfolio-modal .icon-size{
+  width: 25px!important;
+  height: 25px !important;
+}
 
 
-  .team-box .team-text-box.position-absolute{
-    left:60%
+.team-box .team-text-box.position-absolute{
+	left:60%
 
-  }
+}
 }
 .case-study-spacing{
   margin-top:20px;
@@ -10722,21 +10722,37 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 @media (min-width:1101px) and (max-width:1198px){
   .team-box img{
-    height: 65% ;
+  height: 75% ;
 
   }
+  
+  }
 
-}
 @media(max-width:600px)
-{
-  .team-box img{
-    border-bottom:4px solid black;
-  }
+{  
+.team-box img{
+border-bottom:4px solid black;
 }
-@media (min-width:1199px){
-  .team-box img {
-    height: 70%;
-    top:0;
-    left:-10px;
-  }
+}
+@media (min-width:1199px) and (max-width:1298px){
+	.team-box img {
+	  height: 80%;
+	  top:0;
+	  left:10px;
+}
+}
+@media (min-width:1299px) and (max-width:1398px){
+	.team-box img {
+	  height: 90%;
+	  top:0;
+	  left:10px;
+}
+}
+@media (min-width:1399px) {
+	.team-box img {
+	  height: 90%;
+	  top:unset;
+    left:0px;
+    bottom: 0;
+}
 }
