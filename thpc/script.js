@@ -1453,7 +1453,7 @@ $(document).ready(function () {
         k = 0;
         $(".slider-1").slider("option", "value", k);
         $("#len").html(':' + k);
-        l = 0;
+        //l = 0;
         $(".slider-2").slider("option", "value", l);
         //$("#dis").html(''+l);
         setTimeout(function () {
