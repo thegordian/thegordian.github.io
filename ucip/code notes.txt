@@ -1,0 +1,17 @@
+data: 
+
+tr_data : id + geometry
+
+node_data : node_id, tr_start_count, geometry 
+
+seg_data_ : id, geom , number_of_tra, start_node_id, end_node_id
+
+seg_tr_mapping_e : seg_id -> [trajectories ids ,,,,,]
+
+tr_seg_mapping : trajectory_id -> [segment_ids]
+
+tr_node_mapping : trajectory_id -> [node_id] // maybe its the starting node id -- it is the starting node
+
+
+
+
