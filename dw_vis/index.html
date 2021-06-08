@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Pattern Visualization</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- custom css -->
+    <link href="css/styles.css" rel="stylesheet"/>
+    <!-- Bootstrap core js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- custom jS-->
+    <script src="js/scripts.js"></script>
+    <style>
+
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60px; /* Set the fixed height of the footer here */
+            /*line-height: 60px; */
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            width: auto;
+            max-width: 680px;
+            padding: 0 15px;
+        }
+
+        body {
+            margin-bottom: 0;
+            overflow-x: hidden;
+            /*margin: 0;*/
+            padding: 0;
+        }
+
+        #map {
+            /*position: absolute;*/
+            top: 0;
+            bottom: 0;
+            /*width: 87.4%;*/
+            width: 100%;
+        }
+
+        .mouse-pointer input, label {
+            cursor: pointer;
+        }
+
+        #sidebar-wrapper {
+            height: 100vh; /* Add height */
+            /*overflow-y: auto; !* Add overflow-y *!*/
+            /*overflow-x: hidden; !* Add overflow-x *!*/
+            -webkit-transition: margin .25s ease-out;
+            -moz-transition: margin .25s ease-out;
+            -o-transition: margin .25s ease-out;
+            transition: margin .25s ease-out;
+        }
+
+    </style>
+</head>
+<body>
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar-->
+    <div class="border-end bg-white min-vh-100" id="sidebar-wrapper" style="z-index: 2">
+        <div class="sidebar-heading border-bottom bg-light">Filters</div>
+        <div class="list-group list-group-flush mouse-pointer overflow-auto vh-100">
+            <div class="p-3">
+                <h6>Max Support</h6>
+               <div class="row" style="margin-left: 0">
+                   <div class="form-check mr-2 col-lg-3">
+                       <input class="form-check-input" type="radio" name="setupSelection"
+                              id="step-one" value="1" checked>
+                       <label class="form-check-label" for="step-one">
+                           1
+                       </label>
+                   </div>
+                   <div class="form-check col-lg-3">
+                       <input class="form-check-input" type="radio" name="setupSelection"
+                              id="step-two" value="5">
+                       <label class="form-check-label" for="step-two">
+                           5
+                       </label>
+                   </div>
+                   <div class="form-check col-lg-3">
+                       <input class="form-check-input" type="radio" name="setupSelection"
+                              id="step-three" value="10">
+                       <label class="form-check-label" for="step-three">
+                           10
+                       </label>
+                   </div>
+               </div>
+                <div class="mt-2 mb-2">
+                    <button type="submit" id="apply-setup" class="btn btn-primary">Setup
+                    </button>
+                </div>
+                <h6>Select DOW</h6>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input dow-checkbox" id="monday" value="0">
+                    <label class="form-check-label" for="monday">Monday</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input dow-checkbox" id="tuesday" value="1">
+                    <label class="form-check-label" for="tuesday">Tuesday</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input dow-checkbox" id="wednesday" value="2">
+                    <label class="form-check-label" for="wednesday">Wednesday</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input dow-checkbox" id="thursday" value="3">
+                    <label class="form-check-label" for="thursday">Thursday</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input dow-checkbox" id="friday" value="4">
+                    <label class="form-check-label" for="friday">Friday</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input dow-checkbox" id="saturday" value="5">
+                    <label class="form-check-label" for="saturday">Saturday</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input dow-checkbox" id="sunday" value="6">
+                    <label class="form-check-label" for="sunday">Sunday</label>
+                </div>
+                <h6 class="mt-2">Select HOD</h6>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input hod-checkbox" id="hod-1" value="1">
+                    <label class="form-check-label" for="hod-1">0 - 5</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input hod-checkbox" id="hod-2" value="2">
+                    <label class="form-check-label" for="hod-2">6 - 11</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input hod-checkbox" id="hod-3" value="3">
+                    <label class="form-check-label" for="hod-3">12 - 17</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input hod-checkbox" id="hod-4" value="4">
+                    <label class="form-check-label" for="hod-4">18 - 23</label>
+                </div>
+            </div>
+            <div class="p-2">
+                <button type="submit" id="apply-filters" class="btn btn-primary">Apply Filters
+                </button>
+            </div>
+            <div style="margin-left: 16px">
+                <h6 class="mt-3">Selection Mode</h6>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="selectionRadioBtn" id="start-single-selection"
+                           value="start" disabled checked>
+                    <label class="form-check-label" for="start-single-selection">
+                        Start
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="selectionRadioBtn" id="end-single-selection"
+                           value="end" disabled>
+                    <label class="form-check-label" for="end-single-selection">
+                        End
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="selectionRadioBtn" id="path-multiple-selection"
+                           value="path" disabled>
+                    <label class="form-check-label" for="path-multiple-selection">
+                        Path
+                    </label>
+                </div>
+            </div>
+            <div style="margin-left: 16px" class="mt-1">
+                <button type="submit" id="apply-selection" class="btn btn-primary" disabled>
+                    Apply Selection
+                </button>
+            </div>
+                <br><br><br><br><br>
+        </div>
+    </div>
+    <!-- Page content wrapper-->
+        <div id="map"></div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container text-center mt-2">
+            <label>Minimum Pattern Support</label>
+            <div id="slider"></div>
+        </div>
+    </footer>
+    <!-- Footer -->
+</div>
+<script>
+    var map;
+    var selectedSelectionMode = 'start';
+    var filter;
+    var matchExpression = ['match', ['get', 'id']]
+    var latestLayersData;
+    $(document).ready(function () {
+
+        mapboxgl.accessToken = 'pk.eyJ1IjoidmNuIiwiYSI6ImNra25lODk1ZTJhNGUyd3BkOXo2Zm92d3QifQ.21PBPdqCt0Awz5J-nVinSA';
+        map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/vcn/ckl5ucsjo4p3v17tj1nf8psid',
+            zoom: 12,
+            center: [18.04542997263505, 59.26418781329522]
+        });
+// disable map rotation using right click + drag
+        map.dragRotate.disable();
+
+// disable map rotation using touch rotation gesture
+        map.touchZoomRotate.disableRotation();
+
+        function addNetwork() {
+            $.ajax({
+                url: "http://103.125.216.29:8000/get_pat_geom_count_by_agg_name?agg_name=e2",
+                async: false,
+                success: function (responseData) {
+                    var data = responseData['result']
+                    matchExpression = ['match', ['get', 'id']]
+                    for (var i = 0; i < data.length; i++) {
+                        var color = 'rgba(0, 0, 0)';
+                        var color_val = data[i][1];
+                        if (color_val <= 2) {
+                            color = 'rgba(255,255,255,0.2)'
+                        } else if (i > 2 && i <= 5) {
+                            color = 'rgba(255,255,255,0.4)'
+                        } else if (i > 5 && i <= 10) {
+                            color = 'rgba(255,255,255,0.6)'
+                        } else if (i > 10 && i <= 30) {
+                            color = 'rgba(255,255,255,0.8)'
+                        } else {
+                            color = 'rgba(255,255,255, 1)'
+                        }
+                        matchExpression.push(data[i][0], color);
+                    }
+                    matchExpression.push('rgba(0, 0, 0, 0)');
+                    updateMapWithData();
+                    latestLayersData = responseData['result'];
+                }
+            });
+        }
+
+
+        function initMap() {
+
+            map.on('load', function () {
+                // Add Mapillary sequence layer.
+                // https://www.mapillary.com/developer/tiles-documentation/#sequence-layer
+                map.addSource('mapillary', {
+                    'type': 'vector',
+                    'tiles': [
+                        'http://103.125.216.29/tileserver-php/network/{z}/{x}/{y}.pbf'
+                    ],
+                    'minzoom': 0,
+                    'maxzoom': 12
+                });
+                map.addLayer(
+                    {
+                        'id': 'mapillary',
+                        'type': 'line',
+                        'source': 'mapillary',
+                        'source-layer': 'network',
+                        'layout': {
+                            'line-cap': 'round',
+                            'line-join': 'round'
+                        },
+                        'paint': {
+                            'line-opacity': 1,
+                            'line-color': 'rgb(255, 255, 255)',
+                            'line-width': 3
+                        }
+                    },
+                    'waterway-label'
+                );
+
+                // var linecolor =   [
+                //       'interpolate',
+                //       ['linear'],
+                //       ['get', 'hash'],
+                //       0,
+                //       '#F2F12D',
+                //       1,
+                //       '#EED322',
+                //       2,
+                //       '#E6B71E',
+                //       3,
+                //       '#DA9C20',
+                //       4,
+                //       '#CA8323',
+                //       5,
+                //       '#B86B25',
+                //       6,
+                //       '#723122'
+                //   ]
+                //   map.addLayer(
+                //       {
+                //           'id': 'mapillary',
+                //           'type': 'line',
+                //           'source': 'mapillary',
+                //           'source-layer': 'network',
+                //           'layout': {
+                //               'line-cap': 'round',
+                //               'line-join': 'round'
+                //           },
+                //           'paint': {
+                //               'line-opacity': 0.9,
+                //               'line-color': linecolor,
+                //               'line-width': 3
+                //           }
+                //       },
+                //       'waterway-label'
+                //   );
+                map.addLayer(
+                    {
+                        'id': 'road_highlight',
+                        'type': 'line',
+                        'source': 'mapillary',
+                        'source-layer': 'network',
+                        'layout': {
+                            'line-cap': 'round',
+                            'line-join': 'round'
+                        },
+                        'paint': {
+                            'line-opacity': 0.6,
+                            'line-color': 'rgb(232,12,67)',
+                            'line-width': 3
+                        },
+                        'filter': ['in', 'id', '']
+
+                    },
+                    'waterway-label'
+                );
+                var muitselect = false;
+                var multifilter = ['in', 'id', 0];
+                $('#start-single-selection').on('change',
+                    function () {
+                        muitselect = false
+                        multifilter = ['in', 'id', 0];
+                        selectedSelectionMode = 'start';
+                        fetch('http://103.125.216.29:8000/select_traj_start_at_edge?agg_name=e2&edge=' + filter[2])
+                            .then(response => response.text())
+                            .then(data => {
+                            })
+                    })
+
+                $('#end-single-selection').on('change',
+                    function () {
+                        muitselect = false
+                        multifilter = ['in', 'id', 0];
+                        selectedSelectionMode = 'end';
+                        fetch('http://103.125.216.29:8000//select_traj_end_at_edge?agg_name=e2&edge=' + filter[2])
+                            .then(response => response.text())
+                            .then(data => {
+                            })
+                    })
+                $('#path-multiple-selection').on('change',
+                    function () {
+                        muitselect = true
+                        multifilter = ['in', 'id', 0];
+                        selectedSelectionMode = 'multi';
+                        console.log(filter)
+                        console.log(filter[2])
+                        fetch('http://103.125.216.29:8000/select_traj_following_edge_seq?agg_name=e2&edge=' + filter[2])
+                            .then(response => response.text())
+                            .then(data => {
+                            })
+                    })
+
+                map.on('click', 'mapillary', function (e) {
+                    var bbox = [
+                        [e.point.x - 2, e.point.y - 2],
+                        [e.point.x + 2, e.point.y + 2]
+                    ];
+                    var features = map.queryRenderedFeatures(bbox, {
+                        layers: ['mapillary']
+                    });
+
+                    if (muitselect == true) {
+                        for (var i = 0; i < features.length; i++) {
+                            multifilter.push(features[i]['properties']['id'])
+                        }
+                        filter = multifilter;
+
+
+                    } else {
+                        filter = features.reduce(
+                            function (memo, feature) {
+                                memo.push(feature.properties.id);
+                                return memo;
+                            },
+                            ['in', 'id']
+                        );
+
+                    }
+                    map.setFilter('road_highlight', filter);
+                });
+
+                // Change the cursor to a pointer when the mouse is over the places layer.
+                map.on('mouseenter', 'mapillary', function () {
+                    map.getCanvas().style.cursor = 'pointer';
+                });
+
+                // Change it back to a pointer when it leaves.
+                map.on('mouseleave', 'mapillary', function () {
+                    map.getCanvas().style.cursor = '';
+                });
+
+            });
+            map.addControl(new mapboxgl.NavigationControl());
+        }
+
+        initMap();
+
+
+        $('#apply-filters').click(function () {
+            document.getElementById('apply-filters').innerText = 'Please wait...';
+            document.getElementById('apply-filters').setAttribute('disabled', 'disabled');
+            let inputDowElements = document.getElementsByClassName('dow-checkbox'),
+                selectedDOW = [];
+            for (let i = 0; inputDowElements[i]; ++i) {
+                if (inputDowElements[i].checked) {
+                    selectedDOW.push(inputDowElements[i].value);
+                }
+            }
+            let inputHodElements = document.getElementsByClassName('hod-checkbox'),
+                selectedHOD = [];
+            for (let i = 0; inputHodElements[i]; ++i) {
+                if (inputHodElements[i].checked) {
+                    selectedHOD.push(inputHodElements[i].value);
+                }
+            }
+            let selectedPairs = [],
+                tempArray = [];
+            // nothing selected
+            if (selectedDOW.length == 0 && selectedHOD.length == 0) {
+                alert('please check atleast one checkbox from each DOW and HOD section')
+                document.getElementById('apply-filters').innerText = 'Apply Filters';
+                document.getElementById('apply-filters').removeAttribute('disabled');
+                return false;
+            }
+
+            // value exists in dow but not in hod array
+            else if (selectedDOW.length > 0 && selectedHOD.length == 0) {
+                alert('please check atleast one checkbox from HOD section')
+                document.getElementById('apply-filters').innerText = 'Apply Filters';
+                document.getElementById('apply-filters').removeAttribute('disabled');
+                return false;
+            }
+
+            // value exists in hod but not in dow array
+            else if (selectedHOD.length > 0 && selectedDOW.length == 0) {
+                alert('please check atleast one checkbox from DOW section')
+                document.getElementById('apply-filters').innerText = 'Apply Filters';
+                document.getElementById('apply-filters').removeAttribute('disabled');
+                return false;
+            } else {
+                for (let i = 0; i < selectedDOW.length; i++) {
+                    for (let j = 0; j < selectedHOD.length; j++) {
+                        tempArray.push([i])
+                        tempArray.push([j])
+                    }
+                }
+                selectedPairs = tempArray;
+            }
+
+            let parameters = selectedPairs.toString();
+            fetch('http://103.125.216.29:8000/aggregate_patterns?name=e2&parameter=' + parameters)
+                .then(response => response.text())
+                .then(data => {
+                    // change filter button text to normal and enable the button
+                    document.getElementById('apply-filters').innerText = 'Apply Filters';
+                    document.getElementById('apply-filters').removeAttribute('disabled');
+                    if (data == 'aggregation succeeded') {
+                        // enable all selection radio options along with button
+                        let inputDowElements = document.getElementsByName('selectionRadioBtn');
+                        for (let i = 0; i < inputDowElements.length; i++) {
+                            inputDowElements[i].removeAttribute('disabled')
+                        }
+                        document.getElementById('apply-selection').removeAttribute('disabled');
+                        addNetwork()
+                    } else {
+                        // disable all selection radio options along with button
+                        let inputDowElements = document.getElementsByName('selectionRadioBtn');
+                        for (let i = 0; i < inputDowElements.length; i++) {
+                            inputDowElements[i].setAttribute('disabled', 'disabled')
+                        }
+                        document.getElementById('apply-selection').setAttribute('disabled', 'disabled');
+                    }
+                });
+        });
+    })
+
+    function updateMapWithData() {
+        console.log(matchExpression)
+        map.removeLayer('mapillary');
+        map.addLayer(
+            {
+                'id': 'mapillary',
+                'type': 'line',
+                'source': 'mapillary',
+                'source-layer': 'network',
+                'layout': {
+                    'line-cap': 'round',
+                    'line-join': 'round'
+                },
+                'paint': {
+                    'line-opacity': 1,
+                    'line-color': matchExpression,
+                    'line-width': 4
+                }
+            },
+            'waterway-label'
+        );
+        map.removeLayer('road_highlight')
+        map.addLayer(
+            {
+                'id': 'road_highlight',
+                'type': 'line',
+                'source': 'mapillary',
+                'source-layer': 'network',
+                'layout': {
+                    'line-cap': 'round',
+                    'line-join': 'round'
+                },
+                'paint': {
+                    'line-opacity': 0.6,
+                    'line-color': 'rgb(227,8,59)',
+                    'line-width': 3
+                },
+                'filter': ['in', 'id', '']
+
+            },
+            'waterway-label'
+        );
+    }
+
+    $('#apply-selection').click(function () {
+        if (selectedSelectionMode == 'start') {
+            fetch('http://103.125.216.29:8000/select_traj_start_at_edge?agg_name=e2&edge=' + filter[2])
+                .then(response => response.json())
+                .then(jsonData => {
+                    if (jsonData['result'].length > 0) {
+                        var data = jsonData['result']
+                        matchExpression = ['match', ['get', 'id']]
+                        for (var i = 0; i < data.length; i++) {
+                            var color = 'rgba(0, 0, 0)';
+                            var color_val = data[i][1];
+                            if (color_val <= 2) {
+                                color = 'rgba(255,255,255,0.2)'
+                            } else if (i > 2 && i <= 5) {
+                                color = 'rgba(255,255,255,0.4)'
+                            } else if (i > 5 && i <= 10) {
+                                color = 'rgba(255,255,255,0.6)'
+                            } else if (i > 10 && i <= 30) {
+                                color = 'rgba(255,255,255,0.8)'
+                            } else {
+                                color = 'rgba(255,255,255, 1)'
+                            }
+                            matchExpression.push(data[i][0], color);
+                        }
+                        matchExpression.push('rgba(0, 0, 0, 0)');
+                        updateMapWithData();
+                        latestLayersData = data;
+                    }
+                })
+        } else if (selectedSelectionMode == 'end') {
+            fetch('http://103.125.216.29:8000//select_traj_end_at_edge?agg_name=e2&edge=' + filter[2])
+                .then(response => response.json())
+                .then(jsonData => {
+                    if (jsonData['result'].length > 0) {
+                        matchExpression = ['match', ['get', 'id']]
+                        var data = jsonData['result']
+                        for (var i = 0; i < data.length; i++) {
+                            var color = 'rgba(0, 0, 0)';
+                            var color_val = data[i][1];
+                            if (color_val <= 2) {
+                                color = 'rgba(255,255,255,0.2)'
+                            } else if (i > 2 && i <= 5) {
+                                color = 'rgba(255,255,255,0.4)'
+                            } else if (i > 5 && i <= 10) {
+                                color = 'rgba(255,255,255,0.6)'
+                            } else if (i > 10 && i <= 30) {
+                                color = 'rgba(255,255,255,0.8)'
+                            } else {
+                                color = 'rgba(255,255,255, 1)'
+                            }
+                            matchExpression.push(data[i][0], color);
+                        }
+                        matchExpression.push('rgba(0, 0, 0, 0)');
+                        updateMapWithData();
+                        latestLayersData = data;
+                    }
+                })
+        } else {
+
+        }
+    })
+
+    $(function () {
+        $("#slider").slider({
+            max: 100,
+            min: 0,
+            step: 1,
+            range: true,
+            change: function (event, ui) {
+                filterMap(ui.value)
+            }
+        });
+    });
+
+    function filterMap(value) {
+        let forSureLatestLayer = [];
+        for (let i = 0; i < latestLayersData.length; i++) {
+            if (latestLayersData[i][1] >= value) {
+                forSureLatestLayer.push(latestLayersData[i])
+            }
+        }
+        console.log(value)
+        console.log(forSureLatestLayer)
+        console.log(forSureLatestLayer.length)
+        matchExpression = ['match', ['get', 'id']]
+        for (var i = 0; i < forSureLatestLayer.length; i++) {
+            var color = 'rgba(0, 0, 0)';
+            var color_val = forSureLatestLayer[i][1];
+            if (color_val <= 2) {
+                color = 'rgba(255,255,255,0.2)'
+            } else if (i > 2 && i <= 5) {
+                color = 'rgba(255,255,255,0.4)'
+            } else if (i > 5 && i <= 10) {
+                color = 'rgba(255,255,255,0.6)'
+            } else if (i > 10 && i <= 30) {
+                color = 'rgba(255,255,255,0.8)'
+            } else {
+                color = 'rgba(255,255,255, 1)'
+            }
+            matchExpression.push(forSureLatestLayer[i][0], color);
+        }
+        matchExpression.push('rgba(0, 0, 0, 0)');
+        updateMapWithData();
+    }
+
+    $('#apply-setup').click(function () {
+        let checkedValue = document.querySelector('input[name="setupSelection"]:checked').value;
+        if (checkedValue == 1) {
+            fetch('http://103.125.216.29:8000/define_default_par?filepath=/opt/kth/Data/&workpath=/opt/kth/Thesis/mining_methods/dist&db_name=kth_thesis&user_name=postgres&pw=diamondx&hostaddress=127.0.0.1&port_number=5432')
+                .then(response => response.text())
+                .then(data => {
+                    alert('Success!')
+                })
+        } else if (checkedValue == 5) {
+            fetch('http://103.125.216.29:8000/define_default_par?filepath=/opt/kth/Data/&workpath=/opt/kth/Thesis/mining_methods/dist&db_name=kth_thesis_5&user_name=postgres&pw=diamondx&hostaddress=127.0.0.1&port_number=5432')
+                .then(response => response.text())
+                .then(data => {
+                    alert('Success!')
+                })
+        } else {
+            fetch('http://103.125.216.29:8000/define_default_par?filepath=/opt/kth/Data/&workpath=/opt/kth/Thesis/mining_methods/dist&db_name=kth_thesis_10&user_name=postgres&pw=diamondx&hostaddress=127.0.0.1&port_number=5432')
+                .then(response => response.text())
+                .then(data => {
+                    alert('Success!')
+                })
+        }
+    })
+</script>
+</body>
+</html>
