@@ -781,7 +781,25 @@ function clickFeature(e, featureData) {
     geoJsonLayerSeg.bringToFront();
 
     geoJsonLayerNode.bringToFront();
+    
+    setTimeout(reset_flash, 1000);
+    
 }
+
+function reset_flash()
+{
+
+    no_filter_layer = true;
+    load_node_default();
+    search_val_array_agg = [];
+
+     geoJsonLayerTr.clearLayers();
+     geoJsonLayerTr.addData(tr_data);
+     geoJsonLayerSeg.bringToFront();
+     geoJsonLayerNode.bringToFront();
+
+}
+
 function highlightFeature(e) {
 
     if (hover) {
