@@ -75,8 +75,11 @@ var choose_options = {
     gc_k230s00:'1.446413E+504',
     gc_k390s00:'2.533299E+765',
     gc_k30s30:'2.165824272E+61',
-    gc_k115s115:'1.446413E+504',
-    gc_k195s195:'2.533299E+765'
+    gc_k115s115:'2.053779125E+169',
+    gc_k195s195:'3.415648842 E+240',
+    gc_k00s60:'2.165824272E+61',
+    gc_k00s230:'2.053779125E+169',
+    gc_k00s390:'3.415648842 E+240'
 };
 
 var node_color = '#FF6600';
@@ -747,7 +750,7 @@ function setup_slider(max_length) {
         }
     }
 
-    document.getElementById("filter_slider").style.display = "block";
+    //document.getElementById("filter_slider").style.display = "block";
 
 }
 
@@ -887,7 +890,7 @@ function show_dots() {
 function display_second_message() {
     if (case_o) {
         //message+='Searching for optimized placement of '+parseInt(ib_str.replace(/\D/g, ""))*5+' km of electric roads among '+choose_result+' possible placements.';
-        message += 'Evaluated ' + pcs.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' million placements against 10 million transport routes.<br>';
+        message += 'Evaluated ' + pcs.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' placements against 10 million transport routes.<br>';
         if(stat.k_ers)
         {
             message += 'Best ' + parseInt(ib_str.replace(/\D/g, "")) * 5 + ' km electric road placement found with best placed '+stat.k_station+' charging station(s) electrifies ' + (stat.electric_work / 1000000000).toFixed(2) + ' Gtkm (' + ((stat.fraction) * 100).toFixed(2) + '%) of the total transport work.';
@@ -1571,6 +1574,7 @@ $(document).on('click', '#b_full', function () {
 
 function toggleSideBar() {
     $('#sidebar,#sidebar-content').toggleClass('open');
+    document.getElementById("filter_slider").style.display = "none";
 }
 
 var legend = L.control({position: 'bottomright'});
@@ -1638,6 +1642,12 @@ function load_initial() {
 
 //    load_initial_style();
 
+}
+
+function hide_model_start_intro()
+{
+    $('#info_modal-1').modal('hide');
+    startIntro();
 }
 
 function load_initial_data_after_pause()
