@@ -130,15 +130,35 @@ var geoJsonLayerNode = L.geoJson(nt_data_point,
             network_array_network_id_selected_node[my_network_index_selected_node] = featureData.properties.network_id;
             my_network_index_selected_node++;
 
-            featureLayer.setStyle({
-                radius: 6,//return_node_size //(return_node_size(feature.properties.tr_start_count))
-                fillColor: node_color,
-                color: "#FFF",
-                weight: 3,
-                opacity: 1,
-                fillOpacity: 1
-                //className: 'seg-circles-'+rpNd
-            });
+            if($("input[name='cs_symbology_variable']:checked").val()=='energy_demand')
+            {
+                featureLayer.setStyle({
+                    radius: return_node_size(selected_edges_demand_array_node[featureLayer.feature.properties.network_id].demand/(1000000),'energy_demand'),//return_node_size //(return_node_size(feature.properties.tr_start_count))
+                    fillColor: node_color,
+                    color: "#FFF",
+                    weight: 1,
+                    opacity: 1,
+                    fillOpacity: 1
+                    //className: 'seg-circles-'+rpNd
+                });
+
+            }
+            else
+            {
+                featureLayer.setStyle({
+                    radius: return_node_size(selected_edges_demand_array_node[featureLayer.feature.properties.network_id].cbratio/(1000000),'bcr'),//return_node_size //(return_node_size(feature.properties.tr_start_count))
+                    fillColor: node_color,
+                    color: "#FFF",
+                    weight: 1,
+                    opacity: 1,
+                    fillOpacity: 1
+                    //className: 'seg-circles-'+rpNd
+                });
+
+            }
+
+            //featureLayer.feature.properties.network_id
+            //selected_edges_demand_array_node[e.target.feature.properties.network_id].demand
 
         },
         filter: function (featureData) {
@@ -352,7 +372,7 @@ function highlightFeature_node(e)
         $("#hover_info-div").css('bottom', 10);
         var electrified_segment_message = '';
         if (!(selected_edges_array_node.indexOf(e.target.feature.properties.network_id) == -1))
-            electrified_segment_message = ' Energy demand: <b>' + ((selected_edges_demand_array_node[e.target.feature.properties.network_id].demand) / 1000000).toFixed(2) + ' GWh</b>' + ' Infrastructure Cost : <b>' + (selected_edges_demand_array_node[e.target.feature.properties.network_id].cost_result) + " MSEK</b> Cost benifit ratio : <b>" + (selected_edges_demand_array_node[e.target.feature.properties.network_id].cbratio/1000000).toFixed(2) + ' GWh / MSEK</b>';
+            electrified_segment_message = ' Energy demand: <b>' + toFixed(((selected_edges_demand_array_node[e.target.feature.properties.network_id].demand) / 1000000),2) + ' GWh</b>' + ' Infrastructure Cost : <b>' + (selected_edges_demand_array_node[e.target.feature.properties.network_id].cost_result) + " MSEK</b> Benifit cost ratio : <b>" + toFixed((selected_edges_demand_array_node[e.target.feature.properties.network_id].cbratio/1000000),2) + ' GWh / MSEK</b>';
         $("#hover_info").html(electrified_segment_message);
 
         // console.log(e.target.feature.properties);
@@ -386,14 +406,14 @@ function resetHighlight_node(e) {
             e.target.setStyle(
                 {
                     'color':'#7DF9FF',// return_line_color(e.target.feature.properties.fraction),//'#7DF9FF',
-                    'weight': 3,
+                    'weight': 1,
                     'opacity': 1//featureData.properties.fraction
                 });
         } else {
             e.target.setStyle({
                 fillColor: node_color,
                 'color': 'white',
-                'weight': 3,//return_line_weight(featureData.properties.trans_work_tn_km),
+                'weight': 1,//return_line_weight(featureData.properties.trans_work_tn_km),
                 'opacity': 1
             });
         }
@@ -403,14 +423,14 @@ function resetHighlight_node(e) {
                 {
                     fillColor: node_color,
                     'color': 'white',//'#7DF9FF',
-                    'weight': 3,
+                    'weight': 1,
                     'opacity': 1//featureData.properties.fraction
                 });
         } else {
             e.target.setStyle({
                 fillColor: node_color,
                 'color': 'white',
-                'weight': 3,//return_line_weight(featureData.properties.trans_work_tn_km),
+                'weight': 1,//return_line_weight(featureData.properties.trans_work_tn_km),
                 'opacity': 1
             });
         }
@@ -440,7 +460,7 @@ function highlightFeature(e) {
         $("#hover_info-div").css('bottom', 10);
         var electrified_segment_message = '';
         if (!(selected_edges_array.indexOf(e.target.feature.properties.network_id) == -1))
-            electrified_segment_message = '<br> Energy demand: <b>' + ((selected_edges_demand_array[e.target.feature.properties.network_id].demand) / 1000000).toFixed(2) + ' GWh</b>' + ' Infrastructure Cost : <b>' + (selected_edges_demand_array[e.target.feature.properties.network_id].cost_result) + " MSEK</b> Cost benifit ratio : <b>" + (selected_edges_demand_array[e.target.feature.properties.network_id].cbratio/1000000).toFixed(2) + ' GWh / MSEK</b>';
+            electrified_segment_message = '<br> Energy demand: <b>' + ((selected_edges_demand_array[e.target.feature.properties.network_id].demand) / 1000000).toFixed(2) + ' GWh</b>' + ' Infrastructure Cost : <b>' + (selected_edges_demand_array[e.target.feature.properties.network_id].cost_result) + " MSEK</b> Benifit cost ratio : <b>" + (selected_edges_demand_array[e.target.feature.properties.network_id].cbratio/1000000).toFixed(2) + ' GWh / MSEK</b>';
         $("#hover_info").html('Percent electrified : <b>' + (e.target.feature.properties.fraction * 100).toFixed(2) + " %</b> Electrified transport work : <b>" + (e.target.feature.properties.e_work / 1000000).toFixed(2) + ' Mtkm</b>' + '</b> Transport work : <b>' + (e.target.feature.properties.work / 1000000).toFixed(2) + ' Mtkm</b>'  + '</b> Grid Cost : <b>' + (e.target.feature.properties.cost) + ' MSEK</b>'  + electrified_segment_message);//+"</b> Transport work : <b>"+(e.target.feature.properties.work/1000000).toFixed(3)+' Mtkm</b>
 
         // console.log(e.target.feature.properties);
@@ -602,6 +622,14 @@ function get_data(path) {
 
             setup_slider(selected_edges.ids.length);
 
+            //experiment_setting
+            //if($("input[name='cs_symbology_variable']:checked").val()=='energy_demand')
+            var option_user_plan = $("#ib")[0].options[$("#ib")[0].selectedIndex].text;
+            var option_battery = $("#bs_c")[0].options[$("#bs_c")[0].selectedIndex].text;
+            var option_charging_power = $("#cp_p")[0].options[$("#cp_p")[0].selectedIndex].text;
+
+            html_exp_setting="<p style=\"color: rgb(255, 102, 0); font-family: Montserrat; font-size: 16px;\">Experiment setting &nbsp;-> Battery size : <strong>"+option_battery+" kWh</strong> Charging power : <strong>"+option_charging_power+" kW</strong> Infrastructure plan : <strong>"+option_user_plan+"</strong></p>"
+            $("#experiment_setting").html(html_exp_setting);
 
         },
         error: function (response) {
@@ -1201,7 +1229,51 @@ function add_remove_layer(layer, to_add) {
     }
 }
 
+function return_node_size(data,variable)
+{
+    if(variable=='energy_demand')
+    {
+        switch (true) {
+            case (data < 5.00):
+                return (3);
+                break;
+            case (data < 10.00):
+                return (4);
+                break;
+            case (data < 15.00):
+                return (5);
+                break;
+            case (data < 20.00):
+                return (6);
+                break;
+            default:
+                return (6)
+                break;
+        }
+    }
+    else if(variable=='bcr')
+    {
+        switch (true) {
+            case (data < 0.160000):
+                return (3);
+                break;
+            case (data < 0.170000):
+                return (4);
+                break;
+            case (data < 0.180000):
+                return (5);
+                break;
+            case (data < 0.190000):
+                return (6);
+                break;
+            default:
+                return (6)
+                break;
+        }
 
+    }
+
+}
 
 
 function return_line_color_cost(fr) {
@@ -1341,6 +1413,11 @@ $('#filter_modal_toggle_btn_reset').on('click', function () {
 });
 
 $('#filter_modal_toggle_btn').on('click', function () {
+
+//
+
+    html_exp_setting="<p style=\"color: rgb(255, 102, 0); font-family: Montserrat; font-size: 16px;\">Experiment setting</p>"
+    $("#experiment_setting").html(html_exp_setting);
 
     r_load=true;
 
@@ -1605,9 +1682,14 @@ legend.onAdd = function (map) {
         '<div><i style="background:#006400;height: 6px;margin-top: 6px"></i> ' + '75 - 100%' + '</div>' +
         '<div><b>Electrified edges</b></div>' +
         '<div><i style="background:#FF6600;height: 6px;margin-top: 6px"></i></div>' +
-        '<div><br><b>Charging Station</b></div>' +
-        '<div><i style="height: 15px;  width: 15px;  background-color: #FF6600;  border:2px solid red;  border-radius: 100%;  border-width: 3px;border-style: solid;\tborder-color: White;  display: inline-block;"></i></div>' +
-        '<br><div><b>Total transport work (Mtkm)</b></div>' +
+        '<div id="cs_legend">' +
+        '<div><br><b>Charging Station - Energy Demand (GWh)</b></div>' +
+        '<div><i style="height: 8px;  width: 8px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;"></i>' + '0 - 5' + '</div>' +
+        '<div><i style="height: 10px;  width: 10px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;"></i>' + '5 - 10' + '</div>' +
+        '<div><i style="height: 12px;  width: 12px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;"></i>' + '10 - 15' + '</div>' +
+        '<div><i style="height: 14px;  width: 14px;  background-color: #FF6600;  border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;"></i>' + '15 +' + '</div>' +
+        '</div>'+
+        '<div><b>Total transport work (Mtkm)</b></div>' +
         '<div><i style="margin-top: 10px;height:1px;background:repeating-linear-gradient(to right,white 0,white 3px,transparent 3px,transparent 7px)"></i>' + 'No transport' + '</div>' +
         '<div><i style="background:white;height: 1px;margin-top: 10px"></i> ' + '0 - 1' + '</div>' +
         '<div><i style="background:white;height: 2px;margin-top: 9px"></i> ' + '1 - 4' + '</div>' +
@@ -1629,6 +1711,69 @@ var t0 = 0;
 var t1 = 0;
 //var time = new Date();
 //var t1 = time.getTime() - t0 ;
+
+function toFixed(num, fixed) {
+    var re = new RegExp('^-?\\d+(?:\.\\d{0,' + (fixed || -1) + '})?');
+    return num.toString().match(re)[0];
+}
+
+function handleChange(src) {
+    //alert(src.value);
+    if(src.value=='energy_demand')
+    {
+        style_feature_based_on_attribute('energy_demand');
+
+        $("#cs_legend").html('<div><br><b>Charging Station - Energy Demand (GWh)</b></div>' +
+            '<div><i style="height: 8px;  width: 8px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;"></i>' + '0 - 5' + '</div>' +
+            '<div><i style="height: 10px;  width: 10px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;"></i>' + '5 - 10' + '</div>' +
+            '<div><i style="height: 12px;  width: 12px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;"></i>' + '10 - 15' + '</div>' +
+            '<div><i style="height: 14px;  width: 14px;  background-color: #FF6600;  border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;"></i>' + '15 +' + '</div>');
+    }
+    else
+    {
+        style_feature_based_on_attribute('bcr');
+        $("#cs_legend").html('<div><br><b>Charging Station - Benefit cost ratio (GWh/MSEK)</b></div>' +
+            '<div><i style="height: 8px;  width: 8px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;"></i>' + '0 - 0.16' + '</div>' +
+            '<div><i style="height: 10px;  width: 10px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;"></i>' + '0.16 - 0.17' + '</div>' +
+            '<div><i style="height: 12px;  width: 12px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;"></i>' + '0.17 - 0.18' + '</div>' +
+            '<div><i style="height: 14px;  width: 14px;  background-color: #FF6600;  border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;"></i>' + '0.18 +' + '</div>');
+
+    }
+}
+
+function style_feature_based_on_attribute(attribute_value)
+{
+    if(attribute_value=='energy_demand')
+    {
+        for (var i = 0; i < geoJsonLayerNode.getLayers().length; i++) {
+            geoJsonLayerNode.getLayers()[i].setStyle({
+                radius: return_node_size(selected_edges_demand_array_node[geoJsonLayerNode.getLayers()[i].feature.properties.network_id].demand/(1000000),'energy_demand'),//return_node_size //(return_node_size(feature.properties.tr_start_count))
+                fillColor: node_color,
+                color: "#FFF",
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 1
+                //className: 'seg-circles-'+rpNd
+            });
+        }
+    }else
+    {
+        for (var i = 0; i < geoJsonLayerNode.getLayers().length; i++) {
+            geoJsonLayerNode.getLayers()[i].setStyle({
+                radius: return_node_size(selected_edges_demand_array_node[geoJsonLayerNode.getLayers()[i].feature.properties.network_id].cbratio/(1000000),'bcr'),//return_node_size //(return_node_size(feature.properties.tr_start_count))
+                fillColor: node_color,
+                color: "#FFF",
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 1
+                //className: 'seg-circles-'+rpNd
+            });
+        }
+    }
+
+//    geoJsonLayerNode.getLayers()
+
+};
 
 function load_initial() {
     t0 = new Date().getTime();
@@ -1745,6 +1890,7 @@ $("#slider-2").slider({
 
     });
 
+$("#energy_demand").prop("checked", true);
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
