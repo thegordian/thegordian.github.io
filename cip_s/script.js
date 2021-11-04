@@ -1666,7 +1666,7 @@ legend.onAdd = function (map) {
 
     //  for (var i = 0; i < grades.length; i++) {
     var html = '<i style="font-size: 20px" class="fa fa-list-ul m-0 w-100" data-toggle="collapse" data-target="#legendd"></i>' +
-        '<div id="legendd" class="collapse">' +
+        '<div id="legendd" class="collapse" style="max-height:500px;overflow-y:scroll; width:300px;">' +
         '<br><div><b>Grid Cost (MSEK)</b></div>' +
         // '<div><i style="margin-top: 10px;height:1px;background:repeating-linear-gradient(to right,white 0,white 3px,transparent 3px,transparent 7px)"></i>' + 'No cost calculated' + '</div>' +
         '<div><i style="background:#C4BCF8;height: 5px;margin-top: 10px"></i> ' + '0 - 1' + '</div>' +
@@ -1684,10 +1684,10 @@ legend.onAdd = function (map) {
         '<div><i style="background:#FF6600;height: 6px;margin-top: 6px"></i></div>' +
         '<div id="cs_legend">' +
         '<div><br><b>Charging Station - Energy Demand (GWh)</b></div>' +
-        '<div><i style="height: 8px;  width: 8px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;"></i>' + '0 - 5' + '</div>' +
-        '<div><i style="height: 10px;  width: 10px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;"></i>' + '5 - 10' + '</div>' +
-        '<div><i style="height: 12px;  width: 12px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;"></i>' + '10 - 15' + '</div>' +
-        '<div><i style="height: 14px;  width: 14px;  background-color: #FF6600;  border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;"></i>' + '15 +' + '</div>' +
+        '<div><i style="height: 8px;  width: 8px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;margin-top: 6px;"></i>' + '0 - 5' + '</div>' +
+        '<div><i style="height: 10px;  width: 10px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;margin-top: 5px"></i>' + '5 - 10' + '</div>' +
+        '<div><i style="height: 12px;  width: 12px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;margin-top: 4px;"></i>' + '10 - 15' + '</div>' +
+        '<div><i style="height: 14px;  width: 14px;  background-color: #FF6600;  border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;margin-top: 3px;"></i>' + '15 +' + '</div>' +
         '</div>'+
         '<div><b>Total transport work (Mtkm)</b></div>' +
         '<div><i style="margin-top: 10px;height:1px;background:repeating-linear-gradient(to right,white 0,white 3px,transparent 3px,transparent 7px)"></i>' + 'No transport' + '</div>' +
@@ -1697,6 +1697,8 @@ legend.onAdd = function (map) {
         '<div><i style="background:white;height: 4px;margin-top: 8px"></i> ' + '10 - 28' + '</div>' +
         '<div><i style="background:white;height: 5px;margin-top: 7px"></i> ' + '28 - 54' + '</div>' +
         '</div>';
+    div.style.top = '5px';
+    div.style.paddingTop = '0';
     div.innerHTML = html;
 
     return div;
@@ -1733,10 +1735,10 @@ function handleChange(src) {
     {
         style_feature_based_on_attribute('bcr');
         $("#cs_legend").html('<div><br><b>Charging Station - Benefit cost ratio (GWh/MSEK)</b></div>' +
-            '<div><i style="height: 8px;  width: 8px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;"></i>' + '0 - 0.16' + '</div>' +
-            '<div><i style="height: 10px;  width: 10px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;"></i>' + '0.16 - 0.17' + '</div>' +
-            '<div><i style="height: 12px;  width: 12px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;"></i>' + '0.17 - 0.18' + '</div>' +
-            '<div><i style="height: 14px;  width: 14px;  background-color: #FF6600;  border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;"></i>' + '0.18 +' + '</div>');
+            '<div><i style="height: 8px;  width: 8px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;margin-top: 6px;"></i>' + '0 - 0.16' + '</div>' +
+            '<div><i style="height: 10px;  width: 10px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;margin-top: 5px;"></i>' + '0.16 - 0.17' + '</div>' +
+            '<div><i style="height: 12px;  width: 12px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;margin-top: 4px;"></i>' + '0.17 - 0.18' + '</div>' +
+            '<div><i style="height: 14px;  width: 14px;  background-color: #FF6600;  border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;margin-top: 3px;"></i>' + '0.18 +' + '</div>');
 
     }
 }
