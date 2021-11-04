@@ -1726,10 +1726,10 @@ function handleChange(src) {
         style_feature_based_on_attribute('energy_demand');
 
         $("#cs_legend").html('<div><br><b>Charging Station - Energy Demand (GWh)</b></div>' +
-            '<div><i style="height: 8px;  width: 8px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;"></i>' + '0 - 5' + '</div>' +
-            '<div><i style="height: 10px;  width: 10px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;"></i>' + '5 - 10' + '</div>' +
-            '<div><i style="height: 12px;  width: 12px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;"></i>' + '10 - 15' + '</div>' +
-            '<div><i style="height: 14px;  width: 14px;  background-color: #FF6600;  border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;"></i>' + '15 +' + '</div>');
+            '<div><i style="height: 8px;  width: 8px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;margin-top: 6px;"></i>' + '0 - 5' + '</div>' +
+            '<div><i style="height: 10px;  width: 10px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;margin-top: 5px"></i>' + '5 - 10' + '</div>' +
+            '<div><i style="height: 12px;  width: 12px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;margin-top: 4px;"></i>' + '10 - 15' + '</div>' +
+            '<div><i style="height: 14px;  width: 14px;  background-color: #FF6600;  border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;margin-top: 3px;"></i>' + '15 +' + '</div>');
     }
     else
     {
