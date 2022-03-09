@@ -745,8 +745,8 @@ function setup_slider(max_length) {
             //console.log('N:'+node_slice_index);
             //console.log('E:'+edge_slice_index);
 
-            selected_edges_array= selected_edges_array_all.slice(0,edge_slice_index);
-            selected_edges_array_node= selected_edges_array_node_all.slice(0,node_slice_index);
+            selected_edges_array= selected_edges_array_all.slice(0,node_slice_index);
+            selected_edges_array_node= selected_edges_array_node_all.slice(0,edge_slice_index);
 
             geoJsonLayerNetworkSelected.clearLayers();
             geoJsonLayerNetworkSelected.addData(nt_data);
