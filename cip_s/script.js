@@ -700,6 +700,10 @@ var choose_result = '--';
 
 var case_o = true;
 var ib_str;
+var slider_value=0;
+
+//var selected_edges_array_temp= [];
+//var selected_edges_array_node_temp= [];
 
 function setup_slider(max_length) {
 
@@ -715,47 +719,21 @@ function setup_slider(max_length) {
     $("#slider-2").slider("destroy");
 
 
+
     $("#slider-2").slider({
         min: 1, // min value
         max: max_length, // max value
         step: 1,
         value: max_length, // default value of slider
         slide: function (event, ui) {
+
             console.log(ui.value);
-
-            var node_slice_index=Math.max((ui.value-switch_point),0);
-
-            if((ui.value - switch_point)<0)
-            {
-                var edge_slice_index=selected_edges_array_all.length+(ui.value - switch_point );
-            }
-            else
-            {
-                if(switch_point==0)
-                {
-                    var edge_slice_index=ui.value;
-                }
-                else
-                {
-                    var edge_slice_index=selected_edges_array_all.length;
-                }
-
-            }
-
-            //console.log('N:'+node_slice_index);
-            //console.log('E:'+edge_slice_index);
-
-            selected_edges_array= selected_edges_array_all.slice(0,node_slice_index);
-            selected_edges_array_node= selected_edges_array_node_all.slice(0,edge_slice_index);
-
-            geoJsonLayerNetworkSelected.clearLayers();
-            geoJsonLayerNetworkSelected.addData(nt_data);
-
-            geoJsonLayerNode.clearLayers();
-            geoJsonLayerNode.addData(nt_data_point);
+            slider_value=ui.value;
+            show_filtered_on_slider(slider_value);
 
         }
     })
+
 
 
     // Get the number of possible values
@@ -781,6 +759,70 @@ function setup_slider(max_length) {
     //document.getElementById("filter_slider").style.display = "block";
 
 }
+
+function show_filtered_on_slider(slider_value) 
+{
+    if($("input[name='cs_symbology_variable']:checked").val()=='energy_demand')
+    {
+        combined_selected_edges_node_list.sort((a,b) => a[1] - b[1] || a[2] - b[2] || a[0] - b[0]);// demand is on the first index
+    }
+    else
+    {
+        combined_selected_edges_node_list.sort((a,b) => a[2] - b[2] || a[1] - b[1] || a[0] - b[0] );// cost benifit ratio is on the second index
+    }
+
+    total_items=combined_selected_edges_node_list.length;
+    var combined_selected_edges_node_list_filtered=combined_selected_edges_node_list.slice(total_items-slider_value);            
+
+    //combined_selected_edges_node_list_filtered
+    selected_edges_array_temp= [];
+    selected_edges_array_node_temp= [];
+    for (var key in combined_selected_edges_node_list_filtered) 
+    {
+        //console.log(combined_selected_edges_node_list_filtered[key]);
+        if(combined_selected_edges_node_list_filtered[key][3]=='node')
+        {
+            selected_edges_array_node_temp.push(combined_selected_edges_node_list_filtered[key][0]);
+        }
+        else 
+        {
+            selected_edges_array_temp.push(combined_selected_edges_node_list_filtered[key][0]);
+        }
+    }
+
+    /*
+    var node_slice_index=Math.max((ui.value-switch_point),0);
+
+    if((ui.value - switch_point)<0)
+    {
+        var edge_slice_index=selected_edges_array_all.length+(ui.value - switch_point );
+    }
+    else
+    {
+        if(switch_point==0)
+        {
+            var edge_slice_index=ui.value;
+        }
+        else
+        {
+            var edge_slice_index=selected_edges_array_all.length;
+        }
+    }
+
+    selected_edges_array= selected_edges_array_all.slice(0,node_slice_index);
+    selected_edges_array_node= selected_edges_array_node_all.slice(0,edge_slice_index);
+    */
+    selected_edges_array= selected_edges_array_temp;
+    selected_edges_array_node= selected_edges_array_node_temp;
+
+    geoJsonLayerNetworkSelected.clearLayers();
+    geoJsonLayerNetworkSelected.addData(nt_data);
+
+    geoJsonLayerNode.clearLayers();
+    geoJsonLayerNode.addData(nt_data_point);
+
+};
+
 
 function show_dots() {
     //message=message+'.';
@@ -1019,7 +1061,7 @@ function fill_selected_edges_layer(selected_json) {
 
         }
 
-
+        fill_combined_selected_edges_node_list();
 
     }
 
@@ -1040,7 +1082,33 @@ function fill_selected_edges_layer(selected_json) {
 
     geoJsonLayerNode.clearLayers();
     geoJsonLayerNode.addData(nt_data_point);
+
 }
+
+
+var combined_selected_edges_node_list = [];
+    
+function fill_combined_selected_edges_node_list()
+{
+    combined_selected_edges_node_list = [];
+    if(selected_edges_array && selected_edges_demand_array)
+    {
+        for (var key in selected_edges_array) 
+        {
+            combined_selected_edges_node_list.push([selected_edges_array[key],selected_edges_demand_array[selected_edges_array[key]].demand,selected_edges_demand_array[selected_edges_array[key]].cbratio,'edge']);
+        }
+    }    
+
+    if(selected_edges_array_node && selected_edges_demand_array_node)
+    {
+        for (var key in selected_edges_array_node) 
+        {
+            combined_selected_edges_node_list.push([selected_edges_array_node[key],selected_edges_demand_array_node[selected_edges_array_node[key]].demand,selected_edges_demand_array_node[selected_edges_array_node[key]].cbratio,'node']);
+        }
+    }       
+}
+
+
 
 
 function detect_affected_edges(result_data) {
@@ -1741,6 +1809,11 @@ function handleChange(src) {
             '<div><i style="height: 14px;  width: 14px;  background-color: #FF6600;  border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;margin-top: 3px;"></i>' + '0.18 +' + '</div>');
 
     }
+
+    if(slider_value>0)
+    {
+        show_filtered_on_slider(slider_value);
+    }    
 }
 
 function style_feature_based_on_attribute(attribute_value)
@@ -1876,7 +1949,8 @@ $("#slider-2").slider({
         var vals = opt.max - opt.min;
 
         // Space out values
-        for (var i = 0; i <= vals; i = i + 50) {
+        for (var i = 0; i <= vals; i = i + 50) 
+        {
 
             if(i==0)
             {
@@ -1889,6 +1963,8 @@ $("#slider-2").slider({
                 //$("#slider-2").append(el);
             }
         }
+
+
 
     });
 
