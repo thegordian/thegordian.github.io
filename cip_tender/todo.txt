@@ -1,0 +1,24 @@
+To do - 
+ - Click - Hover : based on device
+ - selected zoom fixing
+ - legend 
+ - mobile friendly
+ - load on server
+ - admin view
+
+Maybe
+ - add and map all attributes - both directions
+
+Done 
+
+ - double click implementation
+ - start with showing all work
+ - flash change detection
+ - change detections
+ - n Choose k  -  https://www.hackmath.net/en/calculator/n-choose-k?n=13000&k=500&order=0&repeat=0
+ - his plan introduction
+ - check API
+ - fix e-work
+ - flasy results
+ - get rid of dots
+ - weighted average

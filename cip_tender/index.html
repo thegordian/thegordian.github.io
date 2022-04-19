@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css"
+          data-require="leaflet@0.7.3" data-semver="0.7.3"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link rel="stylesheet" href="lib/css/leaflet-sidebar.min.css"/>
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/3.0.1/introjs.min.css"
+          integrity="sha512-fsq7ym+bMq7ecs277R2a3QDPxF+JIwNNnkPfj9rIKDUyqrbXDnICZj/cCLcP3bKh3+jsCBnBR7BZJShOmELL0Q=="
+          crossorigin="anonymous"/>
+
+    <style>
+        /* Style the form - display items horizontally */
+        .form-inline {
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+        }
+
+        /* Add some margins for each label */
+        .form-inline label {
+            margin: 5px 10px 5px 0;
+        }
+
+        /* Style the input fields */
+        .form-inline select {
+            vertical-align: middle;
+            margin: 5px 10px 5px 0;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+
+        /* Style the submit button */
+        .form-inline button {
+            padding: 10px 20px;
+            background-color: dodgerblue;
+            border: 1px solid #ddd;
+            color: white;
+        }
+
+        .form-inline button:hover {
+            background-color: royalblue;
+        }
+
+        /* Add responsiveness - display the form controls vertically instead of horizontally on screens that are less than 800px wide */
+        @media (max-width: 800px) {
+            .form-inline input {
+                margin: 10px 0;
+            }
+
+            .form-inline {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+        }
+
+        /* Style the buttons that are used to open and close the accordion panel */
+        .accordion {
+            background-color: #eee;
+            color: #FF6600;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            transition: 0.4s;
+        }
+
+        /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+        .active, .accordion:hover {
+            background-color: #ccc;
+        }
+
+        /* Style the accordion panel. Note: hidden by default */
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+        }
+
+        .accordion:after {
+            content: '\02795'; /* Unicode character for "plus" sign (+) */
+            font-size: 13px;
+            color: #777;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active:after {
+            content: "\2796"; /* Unicode character for "minus" sign (-) */
+        }
+    </style>
+</head>
+<body>
+<a class="position-fixed" id="map-anch" style="top: 100px; left: 25px"></a>
+
+<div class="h-100 w-100">
+    <div class="d-flex flex-column h-100">
+        <div class="text-center" style="cursor: pointer;padding-top: 8px;padding-left: 8px;padding-right: 8px;">
+            <div class="d-flex justify-content-between">
+                <button style="background: #FF6600;height:40px;padding: 9px 11px;position: absolute;top:19px;"
+                        class="ml-0 btn-light btn color-dark btn-sm"
+                        onclick="toggleSideBar()">
+                    <i style="color: white;font-size: 20px" class="fa fa-cog"></i>
+                </button>
+                <h1 class="w-100 map-main-title d-inline font-weight-bold" style="color: #FF6600">Socioeconomic and business value optimized charging infrastructure for regional heavy transports
+                    <i id="click-info" class="fa fa-info-circle"></i></h1>
+            </div>
+            <h3 id="experiment_setting" class="w-100 map-main-title d-inline" style="color: #FF6600"><p style="color: rgb(255, 102, 0); font-family: Montserrat; font-size: 16px;">Experiment setting </p></h3>
+        </div>
+        <div id="map"></div>
+    </div>
+    <div class="modal fade text-dark" id="info_modal" tabindex="-1" role="dialog"
+         aria-labelledby="info_modal" aria-hidden="true" style="position: absolute;z-index: 1000000;">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content  model_style">
+                <div class="modal-body d-flex" style="margin-top: 0px !important;">
+                    <div style="max-width: 100%">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade text-dark" id="info_modal-1" tabindex="-1" role="dialog"
+         aria-labelledby="info_modal" aria-hidden="true" style="position: absolute;z-index: 1000000;">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+<!--                    <h1 class="modal-title font-weight-bold"  id="info_modal_1_title">Mind the gap and the transport routes!-->
+<!--                    </h1>-->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body d-flex" style="margin-top: 0px !important;">
+                    <div style="max-width: 100%">
+                        <button class="accordion">About the LOLA project</button>
+                        <div class="panel">
+                            <p>&nbsp;</p>
+                            <p><strong><em>Project title</em></strong></p>
+                            <p>LOLA | L&ouml;nsamhetsOptimerad Laddinfrastruktur (official Swedish title)</p>
+                            <p>COCAINE<sup>*</sup> | Cost-benefit Optimized ChArging INfrastructurE&nbsp;</p>
+                            <p><strong><em>Aim</em></strong></p>
+                            <p>To model, integrate and evaluate the importance of electric power production and distribution costs in electric charging infrastructure (charging station and electric road) placement optimizations.</p>
+                            <p><strong><em>Expected result</em></strong></p>
+                            <ul>
+                                <li>Methods and models, competence and knowledge building, and information and analysis about optimized charging infrastructure</li>
+                                <li>Report including:
+                                    <ul>
+                                        <li>description of the energy production and distribution cost model</li>
+                                        <li>high level description of the integration of the model in the extended RENO framework</li>
+                                    </ul>
+                                </li>
+                                <li>Cost-benefit optimized infrastructure placement, mix and dimensioning results and evaluations in terms of statistics, maps and data.</li>
+                                <li>One peer-review conference or journal publication</li>
+                            </ul>
+                            <p><sup>* </sup>While the COCAINE project acronym might be considered inappropriate, it is used to emphasize the optimized charging infrastructure&rsquo;s role as a &ldquo;powerful stimulant&rdquo; on electromobility.</p>
+                            <p>&nbsp;</p>
+                        </div>
+
+                        <button class="accordion">Route-based electrification concept</button>
+                        <div class="panel">
+                            <p>&nbsp;</p>
+                            <p>The <strong><em>utility of any charging infrastructure</em></strong> component (static [charging station] or dynamic [electric road]) at a given location <em>L</em> heavily <strong><em>depends</em></strong> on the <strong><em>State of Charge</em></strong> (SoC) of the <strong><em>battery of the vehicle</em></strong> that passes location <em>L</em> <strong><em>and </em></strong>the <strong><em>energy use and charging opportunities </em></strong>that the vehicle has and uses <strong><em>along </em></strong>its <strong><em>route up to and after location L.</em></strong></p>
+                            <p>Hence, the <strong><em>utility of a charging infrastructure component in a network</em></strong> is <strong><em>heavily influenced by the transport routes of several vehicles </em></strong>as it is show in the figure below.</p>
+                            <img src="RBEU.PNG"
+                                 style="margin-left: auto;margin-right: auto;display: block;width: 80%">
+                            Figure: Illustration of transport route dependent aspects and challenges of ERS
+                            placement scenario evaluations and optimizations. 3 routes and segments of three placement
+                            scenarios shown in red, light and dark brown.
+                            <br>
+
+                        </div>
+
+                        <button class="accordion">Grid cost model</button>
+                        <div class="panel">
+                            <p><strong>&nbsp;</strong></p>
+                            <p>To <strong><em>support</em></strong> the energy and power demand of <strong><em>large-scale electromobility</em></strong> <strong><em>the grid and the power system has to be upgraded</em></strong>. Depending on the location and magnitude of the demand, certain existing power lines / transformers have to be reenforced / upgraded, and new ones have to be established. Additionally, local power production has to be developed.</p>
+                            <p><strong><em>Modelling the electric power production and distribution costs</em></strong> in a way takes cost correlations between locations into account <strong><em>is complex</em></strong> task and the detailed <strong><em>capacity</em></strong> information about the <strong><em>local grid</em></strong> network (10-20kV) is <strong><em>not available</em></strong> from a single source and/or is <strong><em>classified.</em></strong> Thus, to enable a cost-benefit evaluations of charging infrastructure plans, an <strong><em>approximate cost</em></strong> is calculated by <strong><em>multiplying</em></strong> the <strong><em>length of the &ldquo;least-costs&rdquo; path from </em></strong>each 5km <strong><em>road network segment to the nearest transformer area (</em></strong>obtained from the Swedish Land Survey [SLS]) between the local and regional grid network with the <strong><em>unit cost (405 KSEK/km) of the wire (PEX 3x240 mm2, 24 kV) and its installation</em></strong> that is needed to deliver the maximum power demand of 10 MW. The least-cost calculations have been based on <strong><em>cost factor</em></strong> that is a function of the <strong><em>slope of the terrain and the land use</em></strong> classification based on 400-meter resolution data from SLS and a recent white paper on the full cost of electricity [1].&nbsp;</p>
+                            <p>[1] Andrade, Juan, Baldick, Ross, &ldquo;Estimation of Transmission Costs for New Generation,&rdquo; White Paper UTEI/2016-09-2, 2017, available at <a href="http://energy.utexas.edu/the-full-cost-of-electricity-fce/">http://energy.utexas.edu/the-full-cost-of-electricity-fce/</a>.</p>
+                        </div>
+
+                        <button class="accordion">Charging equipment cost model</button>
+                        <div class="panel">
+                            <p>&nbsp;</p>
+                            <p><strong><em>Electric road</em></strong></p>
+                            <p>The cost of an electric road stretch and its road- and/or supporting structure installation is <strong><em>proportional the length of the stretch</em></strong>. The default value of the cost parameter is <strong><em>20 MSEK/lane-km</em></strong>. The electric road equipment/installation is assumed to be able to <strong><em>supply a combined power capacity of 2 MW to charge vehicles that are simultaneously connected to a 1 km segment </em></strong>of the electrified stretch.</p>
+                            <p><strong><em>Charging station</em></strong></p>
+                            <p>The cost of a charging station is <strong><em>proportional to expected maximum peak power demand</em></strong> at the station that is calculated according to the &ldquo;charging behavior model&rdquo; below. The default value of the cost parameter is <strong><em>2 MSEK/MW</em></strong>.</p>
+                            <p>The <strong><em>total cost</em></strong> of a charging infrastructure component (electric road or charging station) is the <strong><em>sum of</em></strong> the <strong><em>grid cost</em></strong> and the <strong><em>charging equipment</em></strong><em>-</em> and its installation <strong><em>cost</em></strong>.</p>
+                        </div>
+
+                        <button class="accordion">Energy use model</button>
+                        <div class="panel">
+                            <p>&nbsp;</p>
+                            <p>A simple <strong><em>longitudinal dynamics model</em></strong>, according to Liu et al. (2020) but without the acceleration component, as shown in the figure below is used to calculate the energy (in Watt-hours) needed to move a vehicle across a road edge. The topography or height profile of a road segment is approximated as a sequence of interleaved upward slope-, downward slope-, and flat segment parts where the slopes in the individual parts can be considered to be constant due to spatial resolution of the height measurements. The force acting on the vehicle on an individual part depends on the slope of the part or equivalently the vertical elevation difference and the horizontal distance during which this elevation difference occurs. To facilitate efficient storage and computations, within an energy error margin of 1-2%, <strong><em>the individual uphill-, downhill-, and flat parts of a segment have been aggregated to one uphill-, one downhill- and one flat part to calculate the energies needed to propel the vehicles</em></strong>. &nbsp;&nbsp;</p>
+                        <img src="eum.JPG"
+                             style="margin-left: auto;margin-right: auto;display: block;width: 80%">
+                        </div>
+                        <button class="accordion">Charging (behavior) model</button>
+                        <div class="panel">
+                            <p><strong>&nbsp;</strong></p>
+                            <p>For both electric roads and charging stations a <strong><em>simple linear battery charging model</em></strong> is assumed, i.e., the SoC of the battery raises linearly with the charging time and the charging power irrespective of the SoC of the battery.</p>
+                            <p><strong><em>Electric road</em></strong></p>
+                            <p>A vehicle is assumed to <strong><em>charge at the maximum charging power</em></strong> while it moves at the posted <strong><em>speed limit</em></strong> of an electrified segment and until its batteries are fully charged. Thereafter, while on an electrified segment, the vehicle with a <strong><em>fully charged battery</em></strong> only <strong><em>draws enough power</em></strong> from the charging infrastructure <strong><em>to propel itself</em></strong> along the electrified segment according to the energy use model. On the &ldquo;last&rdquo; electric road segment that the vehicle encounters on its route the vehicle charges just enough to complete its route.&nbsp;&nbsp;</p>
+                            <p>For electric roads it is assumed that the <strong><em>total maximum power</em></strong> that any 1km-long part of the electrified segment can provide is constant with a default value of 2 MW. Thus, a default electric road charging settings for example for a maximum charging power of 300 KW <strong><em>can at least support a vehicle density of 6-7 vehicles per km</em></strong>.</p>
+                            <p><strong><em>Charging stations</em></strong></p>
+                            <p>A vehicle is assumed to charge with the <strong><em>maximum charging power</em></strong> up to <strong><em>maximum time units</em></strong> at the <strong><em>start of the routes</em></strong>. A vehicle is also assumed to charge with the maximum charging power up to maximum time units <strong><em>at an intermediate charging station if the charging station is at an &ldquo;appropriate stationary charging location&rdquo; for the vehicle considering its route</em></strong>. Appropriate locations for a vehicle are defined as locations that are <strong><em>user-defined time units (e.g., 4-5 hours) apart in the vehicle&rsquo;s route</em></strong>. &nbsp;On the &ldquo;last&rdquo; charging station that the vehicle encounters on its route the vehicle charges just enough to complete its route.&nbsp;</p>
+                            <p>The <strong><em>expected maximum peak power demand </em></strong>of a location is calculated by assuming the worst scenario that the 1/365 of the annual energy demand<strong><em> from stationary charging, i.e., the average daily energy demand manifests itself during a single hour. </em></strong>The cost and power dimensioning of charging stations is calculated according to this expected maximum peak power demand and the charging equipment cost model.&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</p>
+                            <p>&nbsp;</p>
+                        </div>
+
+                        <button class="accordion">Benefit-cost optimization</button>
+                        <div class="panel">
+                            <p>&nbsp;</p>
+                            <p>Given the four above mentioned models the optimization of the charging infrastructure is performed by <strong><em>incrementally expanding</em></strong> an initially empty <strong><em>network of charging infrastructure components</em></strong> with a component (electric road of charging station) at the location that <strong><em>maximizes the ratio of the benefit of (total energy demand or equivalently CO2 displacement) and the total cost of charging infrastructure component</em></strong> is maximized. In the present implementation, the <strong><em>budget for an infrastructure</em></strong> is given by the number of charging station <strong><em>k_staions</em></strong> and the number of maximum 5km log electric road segments <strong><em>k_ers</em></strong> that forms the charging infrastructure network.</p>
+
+                        </div>
+
+                        <button class="accordion">Technology</button>
+                        <div class="panel">
+                            <p>&nbsp;</p>
+                            <p>The accurate energy use and charging simulations along the transport routes are supported by a <strong><em>proprietary 50x lossless compression of indexed transport route data</em></strong>. The compression and indexing make it possible to perform one <strong><em>simulation of millions of routes for an incremental expansion of the infrastructure plan for given parameters in 0.4 milliseconds</em></strong>. This simulation performance is used to evaluate millions of incremental infrastructure expansions evaluations to effectively guide the search towards a near-optimal infrastructure plan among the infinitely many possible plans. Route-optimized infrastructure plans are <strong><em>up to 5 times more cost-effective / profitable</em></strong> than non-route based (e.g., Average Annual Daily Traffic (AADT)) optimized plans or simple corridor plans.</p>
+
+                        </div>
+
+                        <button class="accordion">Data and experiments</button>
+                        <div class="panel">
+                            <p>&nbsp;</p>
+                            <p>To evaluate the importance of electric power distribution costs and the cost-benefit optimized placement-, mix- and dimensioning of charging infrastructure types (charging stations and electric roads), the following data and experiments where performed.</p>
+                            <p><strong><em>Transport route data</em></strong>: Empty and loaded annual transport routes of 24+ ton trucks in 2014 according to Swedish national freight model (SAMGODS).</p>
+                            <p><strong><em>Road network data</em></strong>: SAMGODS road network segmented into maximum 5 km-long segments with elevation profiles derived based on a 50 m digital elevation model. Grid-, length- and power demand-based equipment and installation costs for electric roads and charging stations, and total costs are calculated for each road network location according to the above-described models.&nbsp;</p>
+                            <p><strong><em>Experiments</em></strong>: Several groups of experiments are performed to evaluate different effects of the models, their parameters, and the route-based cost-benefit optimization:</p>
+                            <ul>
+                                <li>Effects of <strong><em>spatial variation of grid costs</em></strong> on route-based, cost-benefit optimized <strong><em>electric road placements</em></strong> with respect to route-based electric road placement assuming constant grid cost</li>
+                                <li>Effects of <strong><em>battery size and charging power</em></strong> on route-based, cost-benefit optimized <strong><em>charging station</em></strong> placements and their impact (CO2 displacement)</li>
+                                <li>Effects of <strong><em>start and </em></strong><strong><em>intermediate / rest-stop charging times</em></strong> for different battery size and charging power on route-based, cost-benefit optimized <strong><em>charging station</em></strong> placements and their impact (CO2 displacement)</li>
+                                <li>Effects of&nbsp;<strong><em>battery size and charging power</em></strong>on route-based, cost-benefit optimized <strong><em>mixed electric road and charging station</em></strong> placements and their impact (CO2 displacement)</li>
+                            </ul>
+                        </div>
+
+                        <button class="accordion">Results and conclusions</button>
+                        <div class="panel">
+
+                            <p>&nbsp;</p>
+                            <p>Detailed results of the experiments can be viewed and examined on the interactive web maps; please see <strong><em><a onclick="hide_model_start_intro()" href="javascript:void(0);">web maps usage tutorial</a></em></strong></p>
+                            <p><strong><em>General conclusions</em></strong> about the results are as follows:</p>
+                            <ul>
+                                <li>The <strong><em>estimated grid costs vary spatially, however </em></strong>according the simplified model the range of grid costs [1-10 MSEK] is relatively small compared to the length- and power demand-based equipment and installation costs for electric roads [] and charging stations [], so the <strong><em>influence</em></strong> of grid cost variations <strong><em>is minimal on the cost-benefit optimized charging infrastructure placement</em></strong> and its positive impact on the environment.</li>
+                                <li>For large battery sizes and for charging power and intermediate / rest-stop charging times that allow a full charge leading to a maximal benefit for charging stations, the <strong><em>expected maximum peak power demands [] require charging stations dimensioning that have high costs</em></strong> [] and lead to <strong><em>lower benefit-cost ratios for charging stations [] than electric roads []</em></strong>, i.e., the <strong><em>cost-benefit optimized sequence of infrastructure rollouts select electric roads before charging stations.</em></strong></li>
+                                <li><strong><em>Charging times</em></strong> on electric roads are shorter [round 5 minutes on a 5km long segment], thus a 5km segment can at raise the SoC of vehicle batteries by 25%. Hence, the <strong><em>positive environmental impacts of k cost-benefit optimized electric road segments is lower than the impacts of k charging stations</em></strong> that are dimensions to be able to fully charge the vehicle batteries during a 1-hour rest-stop. Notably, the <strong><em>costs of charging station only infrastructures are proportionally higher than that of electric road only infrastructures</em></strong>. However, <strong><em>electric road infrastructures require smaller batteries and no charging stops</em></strong> leading to <strong><em>lower operating costs</em></strong> (vehicle TCO and driver salaries) for logistics service providers.&nbsp; &nbsp;</li>
+                            </ul>
+                        </div>
+                        <button class="accordion">Acknowledgements</button>
+                        <div class="panel">
+                            <p>&nbsp;</p>
+                            <p>The LOLA research project was financed by the <strong><em>Swedish Electromobility Center</em></strong>.</p>
+                        </div>
+
+                        <button class="accordion">Disclaimer</button>
+                        <div class="panel">
+                            <p><strong>&nbsp;</strong></p>
+                            <p>This is a <strong><em>research prototype</em></strong> that is not to be used for commercial purposes. For <strong><em>commercial products</em></strong> contact&nbsp;<a href="mailto:info@thegordian.io">info@thegordian.io</a>.</p>
+                        </div>
+
+
+
+<!--                        <p>In order to accelerate the electrification of the heavy freight transport industry and to-->
+<!--                            realize of the positive effects of this, <em>it is essential that stakeholders discuss-->
+<!--                                and make decisions about Electric Road Systems (ERS) rollout scenarios that maximize-->
+<!--                                the benefits, minimize the cost and thereby enable the financial sustainability ERS-->
+<!--                                for all stakeholders</em> (vehicle manufacturers, charging equipment manufacturers,-->
+<!--                            battery manufacturers, electric network operators, and road authorities).-->
+
+<!--                        <p><em>No presently discussed, largely corridor-based scenario is cost-effective</em> in-->
+<!--                            terms of a transport demand perspective because on-board batteries of moving vehicles-->
+<!--                            can become fully charged and thereby decrease the utility of the electrified segments.-->
+<!--                            Constant gaps between electrified segments does not fix this problem.-->
+<!--                        <p>The utility of an electrified segment in a network is heavily influenced by the transport-->
+<!--                            routes of vehicles as it is show in the figure below.-->
+
+<!--                            <img src="RBEU.PNG"-->
+<!--                                 style="margin-left: auto;margin-right: auto;display: block;width: 80%">-->
+<!--                            Figure: Illustration of transport route dependent aspects and challenges of ERS-->
+<!--                            placement scenario evaluations and optimizations. 3 routes and segments of three placement-->
+<!--                            scenarios shown in red, light and dark brown.-->
+
+<!--                        <p>In the <a-->
+<!--                                href="https://www.itrl.kth.se/research/ongoingprojects/reno-route-based-ers-network-optimization-1.984073"-->
+<!--                                target="_blank">Route Based ERS Network Optimization (RENO) project</a> (financed in-->
+<!--                            part by the <a href="www.itrl.kth.se" target="_blank">Intelligent Transport Research Lab-->
+<!--                                (ITRL)</a>, <a href="https://www.vinnova.se/en/" target="_blank">Sweden's innovation agency Vinnova</a>-->
+<!--                            and the<a href="https://www.trafikverket.se/en/startpage/" target="_blank"> Swedish Transport-->
+<!--                                Administration</a>), we have adapted and applied years of research on trajectory-->
+<!--                            data compression, indexing, querying, and analytics in order to optimize the placement-->
+<!--                            of ERS from a transport demand perspective.-->
+
+<!--                        <p>Compared to corridor-placements the benefits of optimal scenarios are:-->
+<!--                        <ul>-->
+<!--                            <li>Up to 3X transport work electrification</li>-->
+<!--                            <li>Up to 80% infrastructure cost reduction</li>-->
+<!--                            <li>Savings of megatons of CO2 emissions and billions of Euros in infrastructure costs-->
+<!--                                at national levels-->
+<!--                            </li>-->
+<!--                        </ul>-->
+
+<!--                        <p>This page is a web-based dynamic exploration tool of the results. Use it to explore the-->
+<!--                            placement and effects of some transport demand optimized- and not-so-optimal-->
+<!--                            corridor-based scenarios for some parameter settings.-->
+
+<!--                        <p>Disclaimer: This is a research prototype that is not to be used for commercial purposes.-->
+<!--                            For commercial products contact <a href="mailto:info@thegordian.io">-->
+<!--                                info@thegordian.io</a>.-->
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade text-dark" id="info_modal_2" tabindex="-1" role="dialog"
+         aria-labelledby="info_modal_2" aria-hidden="true" style="position: absolute;z-index: 1000000;">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content model_style">
+                <div class="modal-body d-flex">
+                    <div style="max-width: 100%">
+                        <p id="message_text" style="text-align: center">...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade text-dark" id="info_modal_3" tabindex="-1" role="dialog"
+         aria-labelledby="info_modal_3" aria-hidden="true" style="position: absolute;z-index: 1000000;">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content model_style">
+                <div class="modal-body d-flex justify-content-center">
+                    <div style="max-width: 100%">
+                        <p class="m-0" id="message_loader" style="text-align: center">Loading transport flows of 10
+                            million freight transport routes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button id="slider-button" onclick="toggleSlider()" class="btn" style="position: relative; bottom: 75px;left: 15px; padding-bottom: 5px;padding-right: 10px;padding-top: 5px;padding-left: 10px;"><i class="fa fa-sliders" aria-hidden="true"></i><a class="" id="slider-tooltip"></a></button>
+        <div id="filter_slider" style="position: fixed; bottom: 105px; display: none">
+            <p class="px-1">Infrastructure rollout sequence</p>
+            <div class="slider-outer-box">
+                <div id="slider-2"></div>
+            </div>
+
+        </div>
+
+<div id="sidebar" onclick="toggleSideBar()"></div>
+<form id="sidebar-content" class="p-2 text-left text-white" onsubmit="event.preventDefault();">
+
+
+    <i style="position:sticky;top:0;cursor: pointer"
+       class="p-1 text-right fa fa-arrow-circle-left fa-2x sidebar-close d-block" onclick="toggleSideBar()">
+    </i>
+
+    <label class="mr-sm-2" for="bs_c" style="display: none">Battery size (kWh)<a id="trg-sidebar"></a></label>
+    <select id="bs_c" class="form-control mb-2 mr-sm-2" style="display: none">
+        <option value="100">100</option>
+        <option value="300">300</option>
+    </select>
+    <label class="mr-sm-2" for="cp_p" style="display: none">Charging power (kW)</label>
+    <select class="form-control mb-2 mr-sm-2" id="cp_p" style="display: none">
+        <option value="150">150</option>
+        <option value="300">300</option>
+    </select>
+    <label class="mr-sm-2" for="ib" style="display: none">Infrastructure plan</label>
+    <select class="form-control mb-2 mr-sm-2" id="ib" style="display: none">
+        <!--<option value="u">User plan</option>-->
+        <option value="s1">Small corridor (no grid cost) (300 km ERS)</option>
+        <option value="s2">Medium corridor (no grid cost) (1150 km ERS)</option>
+        <option value="s3">Large corridor (no grid cost) (1950 km ERS)</option>
+        <option value="k60">Optimized (no grid cost) (300 km ERS)</option>
+        <option value="k230">Optimized (no grid cost) (1150 km ERS)</option>
+        <option value="k390">Optimized (no grid cost) (1950 km ERS)</option>
+        <option value="k100">Optimized (no grid cost) (500 km ERS)</option>
+        <option value="k200">Optimized (no grid cost) (1000 km ERS)</option>
+        <option value="k500">Optimized (no grid cost) (2500 km ERS)</option>
+        <option value="gc_k60s00">Optimized (300 km ERS)</option>
+        <option value="gc_k230s00">Optimized (1150 km ERS)</option>
+        <option value="gc_k390s00">Optimized (1950 km ERS)</option>
+        <option value="gc_k30s30">Optimized (150 km ERS + 30 Stations)</option>
+        <option value="gc_k115s115">Optimized (575 km ERS + 115 Stations)</option>
+        <option value="gc_k230s230">Optimized (975 km ERS + 195 Stations)</option>
+        <option value="gc_k00s60">Optimized (60 Stations)</option>
+        <option value="gc_k00s230">Optimized (230 Stations)</option>
+        <option value="gc_k115s390">Optimized (390 Stations)</option>
+    </select>
+    <div class="form-check mb-2 mr-sm-2;" style="display: none">
+        <input class="form-check-input" type="checkbox" id="b_full" name="b_full" value="Bike">
+        <label class="form-check-label" for="b_full">
+            Battery full
+        </label>
+    </div>
+
+    <button id="filter_modal_clear_btn" class="text-white btn  btn-block btn-dark btn-sm mb-2 mr-sm-2"
+            style="display: none;">Clear K
+    </button>
+    <button id="filter_modal_toggle_btn" class="text-white sidebar-btn btn btn-block btn-dark btn-sm mb-2 mr-sm-2" style="display: none">Get
+        results<a class="" id="res-trg"></a>
+    </button>
+    <button id="start_from_here_btn" class="text-white btn sidebar-btn btn-block btn-dark btn-sm mb-2 mr-sm-2"
+            style="display: none">
+        Start user selection from here
+    </button>
+
+
+    <button id="click-info-2" class="text-white btn sidebar-btn btn-block btn-dark btn-sm mb-2 mr-sm-2">Show
+        statistics
+    </button>
+
+    <button id="filter_modal_toggle_btn_reset" class="text-white sidebar-btn btn btn-block btn-dark btn-sm mb-2 mr-sm-2"
+            style="display: none">
+        Reset<a class="" id="res-trg-reset" ></a>
+    </button>
+
+    <label class="mr-sm-2" for="energy_demand">Charging station symbology and infrastructure rollout sequence ordering variable:</label>
+    <label><input type = "radio" name = "cs_symbology_variable" id = "energy_demand" value="energy_demand" onchange="handleChange(this);">Energy Demand</label>
+    <label><input type = "radio" name = "cs_symbology_variable" id = "bcr" value="bcr" onchange="handleChange(this);">Benefit cost ratio</label>
+
+</form>
+
+<div id="hover_info-div" class="d-flex justify-content-center">
+    <p id="hover_info">Hover over the map for statistics</p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"
+        data-require="leaflet@0.7.3" data-semver="0.7.3"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/3.0.1/intro.min.js"
+        integrity="sha512-Y3bwrs/uUQhiNsD26Mpr5YvfG18EY0J+aNxYI7ZQPJlM9H+lElGpuh/JURVJR/NBE+p1JZ+sVE773Un4zQcagg=="
+        crossorigin="anonymous"></script>
+<script type="application/javascript" src="lib/js/leaflet-sidebar.min.js"></script>
+<script type="application/javascript" src="lib/js/Leaflet.Control.Custom.js"></script>
+
+<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-image/v0.0.4/leaflet-image.js'></script>
+
+
+<script type="text/javascript" src="data/nt.js"></script>
+
+<script type="text/javascript" src="script.js"></script>
+<script type="text/javascript" src="tutorial.js"></script>
+    <script type="text/javascript">
+        function toggleSlider() {
+            if (document.getElementById('filter_slider').style.display == 'none') {
+                document.getElementById('filter_slider').style.display = 'block';
+            } else {
+                document.getElementById('filter_slider').style.display = 'none';
+            }
+        }
+
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
