@@ -110,6 +110,46 @@ var MyIcon = L.icon({
     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 
+var MyIconpd = L.icon({
+    iconUrl: 'parking.png',
+    iconSize:     [14, 14], // size of the icon
+    shadowSize:   [0, 0], // size of the shadow
+    iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+    shadowAnchor: [0, 0],  // the same for the shadow
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
+
+var rpNdpd = -1;
+var geoJsonPD = L.geoJson(pd,
+    {
+        pointToLayer: function (feature, latlng) {
+            //        if(feature.properties.node_id==2){alert('2')};
+            //feature._leaflet_id = feature.properties.node_id;
+            return L.marker(latlng,{icon: MyIconpd});       
+            
+
+
+        },
+     
+    
+    // Executes on each feature in the dataset
+    onEachFeature: function (featureData, featureLayer) {
+
+        featureLayer.on('mouseover', highlightFeature_pd);
+        featureLayer.on('mouseout', resetHighlight_pd);
+
+        /*        featureLayer.setStyle({
+            'color': return_line_color_cost(featureData.properties.cost),
+            'weight': 3,
+            'opacity': 1
+        });
+*/
+}
+
+});
+
+
 var rpNdCS = -1;
 var geoJsonCS = L.geoJson(cs,
     {
@@ -491,6 +531,58 @@ function highlightFeature_cs(e)
 
 }
 
+
+function resetHighlight_pd(e) {
+    //geoJsonLayerSeg.resetStyle(e.target);
+    $("#hover_info-div").css('bottom', -200);
+    $("#hover_info").html('');
+}
+
+function highlightFeature_pd(e)
+{
+        var layer = e.target;
+
+        $("#hover_info-div").css('bottom', 10);
+        var electrified_segment_message = '';
+        var power='NA';
+        if(e.target.feature.properties.h0!=null)
+        {
+            power=e.target.feature.properties.h0;
+        }
+        if(e.target.feature.properties.h1!=null)
+        {
+            power+=', '+e.target.feature.properties.h1;
+        }
+        if(e.target.feature.properties.h2!=null)
+        {
+            power+=', '+e.target.feature.properties.h2;
+        }
+        if(e.target.feature.properties.h3!=null)
+        {
+            power+=', '+e.target.feature.properties.h3;
+        }
+        if(e.target.feature.properties.h4!=null)
+        {
+            power+=', '+e.target.feature.properties.h4;
+        }
+        if(e.target.feature.properties.h5!=null)
+        {
+            power+=', '+e.target.feature.properties.h5;
+        }
+        if(e.target.feature.properties.h6!=null)
+        {
+            power+=', '+e.target.feature.properties.h6;
+        }
+        electrified_segment_message = ' Facilities: <b>' + power + '</b>';
+        $("#hover_info").html(electrified_segment_message);
+
+        // console.log(e.target.feature.properties);
+
+        if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+            layer.bringToFront();
+        }    
+}
+
 function highlightFeature_node(e)
 {
     if (lastHover_node !== undefined) {
@@ -833,7 +925,7 @@ function process_result_data(res) {
         startIntro();
     }
 
-    setTimeout(get_result_tender_setting,2000);
+    setTimeout(get_result_tender_setting,001);
 }
 
 var choose_result = '--';
@@ -2001,7 +2093,8 @@ var map = L.map('map', {
         geoJsonLayerNetwork,
         //geoJsonLayerNetworkSelected,        
         geoJsonLayerNode,
-        geoJsonCS
+        geoJsonCS,
+        geoJsonPD
     ]
 });
 L.control.custom({
@@ -2065,12 +2158,15 @@ map.on('zoomend', function () {
 });
 
 if (map.hasLayer(geoJsonCS)) map.removeLayer(geoJsonCS);
+if (map.hasLayer(geoJsonPD)) map.removeLayer(geoJsonPD);
+//geoJsonPD
 
 var overlayMaps = {
     "Grid cost": geoJsonLayerNetwork,
     "Percent of transport work electrified": geoJsonLayerNetworkElectrified,
     "Optimized Charging Station": geoJsonLayerNode,
-    "Existing Charging Station": geoJsonCS
+    "Existing Charging Station": geoJsonCS,
+    "Parking spots":geoJsonPD
     //"Grid cost": geoJsonLayerNetworkGC,
 };
 var baseMaps = {
@@ -2209,6 +2305,10 @@ legend.onAdd = function (map) {
          '<div><i style="height: 12px;  width: 12px;  background-color: red;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: Black;  display: inline-block;margin-top: 4px;"></i>' + '350' + '</div>' +
         '<div><img src="plus-red.png" height="15px" width="15px">' + ' NA' + '</div>' +
         '</div>'+
+        '<div id="parking_spots">' +
+        '<div><b>Existing Parking Spots</b></div>' +
+        '<div><img src="parking.png" height="15px" width="15px">' + '</div>' +
+        '</div>'+
         '<div><b>Total transport work (Mtkm)</b></div>' +
         '<div><i style="margin-top: 10px;height:1px;background:repeating-linear-gradient(to right,white 0,white 3px,transparent 3px,transparent 7px)"></i>' + 'No transport' + '</div>' +
         '<div><i style="background:white;height: 1px;margin-top: 10px"></i> ' + '0 - 1' + '</div>' +
@@ -2307,7 +2407,7 @@ function load_initial() {
     console.log('Request sent at ' + new Date().getTime());
     $('#info_modal_3').modal({backdrop: "static"});
 
-    setTimeout(load_initial_data_after_pause,1000);
+    setTimeout(load_initial_data_after_pause,001);
     
 
     //alert('now');
