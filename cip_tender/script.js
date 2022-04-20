@@ -962,11 +962,12 @@ function setup_slider(max_length) {
             console.log(ui.value);
             slider_value=ui.value;
             show_filtered_on_slider(slider_value);
-
+            //$('#ros').HTML(ui.value); //= ;
+            document.getElementById("ros").innerHTML = 'Infrastructure rollout sequence: top('+ui.value+')';
         }
     })
 
-
+    document.getElementById("ros").innerHTML = 'Infrastructure rollout sequence: top(200)';
 
     // Get the number of possible values
     var vals = max_length;
@@ -2226,6 +2227,9 @@ $(document).on('click', '#filter_modal_clear_btn', function () {
     //check_kth_server_request();
     load_initial();
 });
+
+
+
 
 $(document).on('click', '#click-info', function () {
     $('#info_modal-1').modal();
