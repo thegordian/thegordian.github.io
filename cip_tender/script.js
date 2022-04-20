@@ -101,6 +101,36 @@ geoJsonLayerNetwork = L.geoJson(nt_data, {
 
 });
 
+var geoJsonLayerGrid_200_400 = L.geoJson(grid_200_400, {
+    // Executes on each feature in the dataset
+    onEachFeature: function (featureData, featureLayer) {
+        featureLayer.setStyle({
+            'color': 'red',//return_line_color_cost(featureData.properties.cost),
+            'weight': 4,
+            'opacity': 1
+        });
+
+        featureLayer.on('mouseover', highlightFeature_gs);
+        featureLayer.on('mouseout', resetHighlight_gs);
+    }
+
+});
+
+var geoJsonLayerGrid_25_200 = L.geoJson(grid_25_200, {
+    // Executes on each feature in the dataset
+    onEachFeature: function (featureData, featureLayer) {
+        featureLayer.setStyle({
+            'color': 'yellow',//return_line_color_cost(featureData.properties.cost),
+            'weight': 3,
+            'opacity': 1
+        });
+
+        featureLayer.on('mouseover', highlightFeature_gs);
+        featureLayer.on('mouseout', resetHighlight_gs);
+    }
+
+});
+
 var MyIcon = L.icon({
     iconUrl: 'plus-red.png',
     iconSize:     [12, 12], // size of the icon
@@ -501,6 +531,25 @@ function highlightFeature_gc(e)
         }    
 }
 
+function resetHighlight_gs(e) {
+    //geoJsonLayerSeg.resetStyle(e.target);
+    $("#hover_info-div").css('bottom', -200);
+    $("#hover_info").html('');
+}
+function highlightFeature_gs(e)
+{
+        var layer = e.target;
+
+        $("#hover_info-div").css('bottom', 10);
+        var electrified_segment_message = '';
+        electrified_segment_message = 'Power: <b>' + e.target.feature.properties.XYFEL + ' kV</b>';
+        $("#hover_info").html(electrified_segment_message);
+        // console.log(e.target.feature.properties);
+        if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+            layer.bringToFront();
+        }    
+}
+
 function resetHighlight_cs(e) {
     //geoJsonLayerSeg.resetStyle(e.target);
     $("#hover_info-div").css('bottom', -200);
@@ -598,7 +647,27 @@ function highlightFeature_node(e)
         var electrified_segment_message = '';
         if (!(selected_edges_array_node.indexOf(e.target.feature.properties.network_id) == -1))
             electrified_segment_message = ' Energy demand: <b>' + toFixed(((selected_edges_demand_array_node[e.target.feature.properties.network_id].demand) / 1000000),2) + ' GWh</b>' + ' Infrastructure Cost : <b>' + (selected_edges_demand_array_node[e.target.feature.properties.network_id].cost_result) + " MSEK</b> Benifit cost ratio : <b>" + toFixed((selected_edges_demand_array_node[e.target.feature.properties.network_id].cbratio/1000000),2) + ' GWh / MSEK</b>';
+            electrified_segment_message = electrified_segment_message 
+            + '</br> s_count: <b>' + ocs_related_data_array[e.target.feature.properties.network_id].s_count+ '</b>' 
+            + ' i_count: <b>' + ocs_related_data_array[e.target.feature.properties.network_id].i_count 
+            + "</b> charge_count: <b>" + ocs_related_data_array[e.target.feature.properties.network_id].charge_count + '</b>'
+            + ' avg_in_bat: <b>' + ocs_related_data_array[e.target.feature.properties.network_id].avg_in_bat 
+            + "</b> avg_out_bat: <b>" + ocs_related_data_array[e.target.feature.properties.network_id].avg_out_bat + '</b>';
         $("#hover_info").html(electrified_segment_message);
+        //s_count;i_count;charge_count
+        //edge_network_mapping[e.target.feature.properties.network_id][0];
+        //alert(e.target.feature.properties.network_id);
+        //avg_in_bat;avg_out_bat
+        
+        /*
+        alert(
+            ocs_related_data_array[e.target.feature.properties.network_id].charge_count
+            +'*'+
+            ocs_related_data_array[e.target.feature.properties.network_id].grid_cost
+            +'*'+
+            ocs_related_data_array[e.target.feature.properties.network_id].ework
+            );
+        */
 
         // console.log(e.target.feature.properties);
 
@@ -922,7 +991,7 @@ function process_result_data(res) {
     $('#info_modal_3').modal('hide');
     show_dots();
     if (getCookie('skip') !== 'yes') {
-        startIntro();
+        //startIntro();
     }
 
     setTimeout(get_result_tender_setting,001);
@@ -1003,9 +1072,13 @@ function show_filtered_on_slider(slider_value)
     {
         combined_selected_edges_node_list.sort((a,b) => a[1] - b[1] || a[2] - b[2] || a[0] - b[0]);// demand is on the first index
     }
-    else
+    else if($("input[name='cs_symbology_variable']:checked").val()=='bcr')
     {
         combined_selected_edges_node_list.sort((a,b) => a[2] - b[2] || a[1] - b[1] || a[0] - b[0] );// cost benifit ratio is on the second index
+    }
+    else
+    {
+        
     }
 
     total_items=combined_selected_edges_node_list.length;
@@ -1226,6 +1299,20 @@ function onlyUnique(value, index, self) {
 }
 
 var switch_point=0;
+
+var ocs_related_data_array = new Array();
+
+function fill_other_data()
+{
+    for (var key in related_data)
+    {
+        var element_to_add = edge_network_mapping[parseInt(related_data[key].id)][0];
+        ocs_related_data_array[element_to_add] = related_data[key];
+        //ocs_related_data_array[parseInt(related_data[key].id)] = related_data[key];
+    }
+}
+
+fill_other_data();
 
 function fill_selected_edges_layer(selected_json) {
 
@@ -2095,9 +2182,12 @@ var map = L.map('map', {
         //geoJsonLayerNetworkSelected,        
         geoJsonLayerNode,
         geoJsonCS,
-        geoJsonPD
+        geoJsonPD,
+        geoJsonLayerGrid_200_400,
+        geoJsonLayerGrid_25_200
     ]
 });
+
 L.control.custom({
     position: 'topleft',
     content: '<i class="fa fa-question-circle" aria-hidden="true"></i>',
@@ -2109,7 +2199,8 @@ L.control.custom({
                 startIntro();
             }
         }
-}).addTo(map);
+});//.addTo(map);
+
 var sideInfo = L.control.custom({
     position: 'topleft',
     content: '<p class="m-0 p-2" id="basic_summary">Results summary will be displayed here</p>' +
@@ -2160,6 +2251,12 @@ map.on('zoomend', function () {
 
 if (map.hasLayer(geoJsonCS)) map.removeLayer(geoJsonCS);
 if (map.hasLayer(geoJsonPD)) map.removeLayer(geoJsonPD);
+if (map.hasLayer(geoJsonLayerGrid_200_400)) map.removeLayer(geoJsonLayerGrid_200_400);
+if (map.hasLayer(geoJsonLayerGrid_25_200)) map.removeLayer(geoJsonLayerGrid_25_200);
+if (map.hasLayer(geoJsonLayerNetwork)) map.removeLayer(geoJsonLayerNetwork);
+
+
+
 //geoJsonPD
 
 var overlayMaps = {
@@ -2167,7 +2264,9 @@ var overlayMaps = {
     "Percent of transport work electrified": geoJsonLayerNetworkElectrified,
     "Optimized Charging Station": geoJsonLayerNode,
     "Existing Charging Station": geoJsonCS,
-    "Parking spots":geoJsonPD
+    "Parking spots":geoJsonPD,
+    "Grid 200-400":geoJsonLayerGrid_200_400,
+    "Grid 25-200":geoJsonLayerGrid_25_200
     //"Grid cost": geoJsonLayerNetworkGC,
 };
 var baseMaps = {
@@ -2294,7 +2393,10 @@ legend.onAdd = function (map) {
         '<div><i style="background:#7CFC00;height: 6px;margin-top: 6px"></i> ' + '00 - 25%' + '</div>' +
         '<div><i style="background:#32CD32;height: 6px;margin-top: 6px"></i> ' + '25 - 50%' + '</div>' +
         '<div><i style="background:#228B22;height: 6px;margin-top: 6px"></i> ' + '50 - 75%' + '</div>' +
-        '<div><i style="background:#006400;height: 6px;margin-top: 6px"></i> ' + '75 - 100%' + '</div>' +      
+        '<div><i style="background:#006400;height: 6px;margin-top: 6px"></i> ' + '75 - 100%' + '</div>' +   
+        '<div><b>Grid (kV)</b></div>' +
+        '<div><i style="background:red;height: 4px;margin-top: 10px"></i> ' + '200 - 400' + '</div>' +
+        '<div><i style="background:yellow;height: 3px;margin-top: 9px"></i> ' + '25 - 200' + '</div>' +
         '<div id="cs_legend">' +
         '<div><b>Optimized Charging Station - Energy Demand (GWh)</b></div>' +
         '<div><i style="height: 8px;  width: 8px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;margin-top: 6px;"></i>' + '0 - 5' + '</div>' +
