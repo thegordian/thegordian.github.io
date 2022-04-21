@@ -477,7 +477,7 @@ geoJsonLayerNetworkElectrified = L.geoJson(nt_data, {
                     alert("Results not found!");
                     message = '';
                     $("#message_text").html(message);
-                    map.addLayer(geoJsonLayerNetwork);
+                    //map.addLayer(geoJsonLayerNetwork);
                     map.removeLayer(geoJsonLayerNetworkElectrified);
                     map.removeLayer(geoJsonLayerNetworkSelected);
                     return;
@@ -976,7 +976,7 @@ function get_data(path) {
             alert("Results not found!");
             message = '';
             $("#message_text").html(message);
-            map.addLayer(geoJsonLayerNetwork);
+            //map.addLayer(geoJsonLayerNetwork);
             map.removeLayer(geoJsonLayerNetworkElectrified);
             map.removeLayer(geoJsonLayerNetworkSelected);
             return;
@@ -991,8 +991,9 @@ function process_result_data_initial(res) {
 }
 
 function process_result_data(res) {
-    map.addLayer(geoJsonLayerNetworkElectrified);
-    map.addLayer(geoJsonLayerNetworkSelected);
+
+    //map.addLayer(geoJsonLayerNetworkElectrified);
+    //map.addLayer(geoJsonLayerNetworkSelected);
 
     map.removeLayer(geoJsonLayerNetwork);
 
@@ -1976,8 +1977,10 @@ function get_result_tender_setting() {
     
         geoJsonLayerNode.clearLayers();
         geoJsonLayerNode.addData(nt_data);
-    
+        var id=0;
         geoJsonLayerNetworkElectrified.eachLayer(function (layer) {
+            //console.log(id+'-'+layer.feature.properties.network_id);
+            //id=id+1;
             layer.setStyle({
                 'opacity': 0//featureData.properties.fraction
             });
@@ -2208,7 +2211,7 @@ $.ajax({
         alert("Results not found!");
         message = '';
         $("#message_text").html(message);
-        map.addLayer(geoJsonLayerNetwork);
+        //map.addLayer(geoJsonLayerNetwork);
         map.removeLayer(geoJsonLayerNetworkElectrified);
         map.removeLayer(geoJsonLayerNetworkSelected);
         return;
@@ -2242,7 +2245,7 @@ var map = L.map('map', {
     'layers': [
 
         tiles_carto_dark,
-        geoJsonLayerNetwork,
+        //geoJsonLayerNetwork,
         //geoJsonLayerNetworkSelected,        
         geoJsonLayerNode,
         geoJsonCS,
@@ -2623,7 +2626,7 @@ function load_initial_data_after_pause()
             alert("Results not found!");
             message = '';
             $("#message_text").html(message);
-            map.addLayer(geoJsonLayerNetwork);
+           // map.addLayer(geoJsonLayerNetwork);
             map.removeLayer(geoJsonLayerNetworkElectrified);
             map.removeLayer(geoJsonLayerNetworkSelected);
         }
