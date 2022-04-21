@@ -95,8 +95,8 @@ geoJsonLayerNetwork = L.geoJson(nt_data, {
             'opacity': 1
         });
 
-        featureLayer.on('mouseover', highlightFeature_gc);
-        featureLayer.on('mouseout', resetHighlight_gc);
+       // featureLayer.on('mouseover', highlightFeature_gc);
+       // featureLayer.on('mouseout', resetHighlight_gc);
     }
 
 });
@@ -105,13 +105,13 @@ var geoJsonLayerGrid_200_400 = L.geoJson(grid_200_400, {
     // Executes on each feature in the dataset
     onEachFeature: function (featureData, featureLayer) {
         featureLayer.setStyle({
-            'color': 'red',//return_line_color_cost(featureData.properties.cost),
+            'color': '#00FFFF',//return_line_color_cost(featureData.properties.cost),
             'weight': 4,
             'opacity': 1
         });
 
-        featureLayer.on('mouseover', highlightFeature_gs);
-        featureLayer.on('mouseout', resetHighlight_gs);
+       // featureLayer.on('mouseover', highlightFeature_gs);
+       // featureLayer.on('mouseout', resetHighlight_gs);
     }
 
 });
@@ -120,7 +120,7 @@ var geoJsonLayerGrid_25_200 = L.geoJson(grid_25_200, {
     // Executes on each feature in the dataset
     onEachFeature: function (featureData, featureLayer) {
         featureLayer.setStyle({
-            'color': 'yellow',//return_line_color_cost(featureData.properties.cost),
+            'color': '#5F9EA0',//return_line_color_cost(featureData.properties.cost),
             'weight': 3,
             'opacity': 1
         });
@@ -132,7 +132,34 @@ var geoJsonLayerGrid_25_200 = L.geoJson(grid_25_200, {
 });
 
 var MyIcon = L.icon({
-    iconUrl: 'plus-red.png',
+    iconUrl: 'green_plus.png',
+    iconSize:     [12, 12], // size of the icon
+    shadowSize:   [0, 0], // size of the shadow
+    iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+    shadowAnchor: [0, 0],  // the same for the shadow
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
+var MyIconRC = L.icon({
+    iconUrl: 'charger_red.png',
+    iconSize:     [20, 20], // size of the icon
+    shadowSize:   [0, 0], // size of the shadow
+    iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+    shadowAnchor: [0, 0],  // the same for the shadow
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
+var MyIconYC = L.icon({
+    iconUrl: 'charger_yellow.png',
+    iconSize:     [16, 16], // size of the icon
+    shadowSize:   [0, 0], // size of the shadow
+    iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+    shadowAnchor: [0, 0],  // the same for the shadow
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
+var MyIconGC = L.icon({
+    iconUrl: 'charger_green.png',
     iconSize:     [12, 12], // size of the icon
     shadowSize:   [0, 0], // size of the shadow
     iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
@@ -188,40 +215,15 @@ var geoJsonCS = L.geoJson(cs,
             //feature._leaflet_id = feature.properties.node_id;
             if(feature.properties.sum_of_power==250)
             {
-                rpNdCS++;
-                return L.circleMarker(latlng, {
-                    radius: 4,//return_node_size //(return_node_size(feature.properties.tr_start_count))
-                    fillColor: 'blue',
-                    color: "#000",
-                    weight: 1,
-                    opacity: 1,
-                    fillOpacity: 1,
-                    className: 'seg-circles-'+rpNdCS
-                });         
+                return L.marker(latlng,{icon: MyIconGC});      
+
             } else if(feature.properties.sum_of_power==300)
             {
-                rpNdCS++;
-                return L.circleMarker(latlng, {
-                    radius: 6,//return_node_size //(return_node_size(feature.properties.tr_start_count))
-                    fillColor: 'yellow',
-                    color: "#000",
-                    weight: 1,
-                    opacity: 1,
-                    fillOpacity: 1,
-                    className: 'seg-circles-'+rpNdCS
-                });         
+                return L.marker(latlng,{icon: MyIconYC});      
+
             } else if(feature.properties.sum_of_power==350)
             {
-                rpNdCS++;
-                return L.circleMarker(latlng, {
-                    radius: 7,//return_node_size //(return_node_size(feature.properties.tr_start_count))
-                    fillColor: 'red',
-                    color: "#000",
-                    weight: 1,
-                    opacity: 1,
-                    fillOpacity: 1,
-                    className: 'seg-circles-'+rpNdCS
-                });         
+                return L.marker(latlng,{icon: MyIconRC});                
             } 
             else 
             {
@@ -648,11 +650,11 @@ function highlightFeature_node(e)
         if (!(selected_edges_array_node.indexOf(e.target.feature.properties.network_id) == -1))
             electrified_segment_message = ' Energy demand: <b>' + toFixed(((selected_edges_demand_array_node[e.target.feature.properties.network_id].demand) / 1000000),2) + ' GWh</b>' + ' Infrastructure Cost : <b>' + (selected_edges_demand_array_node[e.target.feature.properties.network_id].cost_result) + " MSEK</b> Benifit cost ratio : <b>" + toFixed((selected_edges_demand_array_node[e.target.feature.properties.network_id].cbratio/1000000),2) + ' GWh / MSEK</b>';
             electrified_segment_message = electrified_segment_message 
-            + '</br> s_count: <b>' + ocs_related_data_array[e.target.feature.properties.network_id].s_count+ '</b>' 
-            + ' i_count: <b>' + ocs_related_data_array[e.target.feature.properties.network_id].i_count 
-            + "</b> charge_count: <b>" + ocs_related_data_array[e.target.feature.properties.network_id].charge_count + '</b>'
-            + ' avg_in_bat: <b>' + ocs_related_data_array[e.target.feature.properties.network_id].avg_in_bat 
-            + "</b> avg_out_bat: <b>" + ocs_related_data_array[e.target.feature.properties.network_id].avg_out_bat + '</b>';
+            + '</br> Number of transport routes starting: <b>' + ocs_related_data_array[e.target.feature.properties.network_id].s_count+ '</b>' 
+            + '</br> Number of transport routes passing: <b>' + ocs_related_data_array[e.target.feature.properties.network_id].i_count + "</b>"
+            //+ "</br></b> Estimated number of charging sessions: <b>" + ocs_related_data_array[e.target.feature.properties.network_id].charge_count + '</b>'
+            + '</br>Average incoming battery SOC (kWh): <b>' + ocs_related_data_array[e.target.feature.properties.network_id].avg_in_bat 
+            + "</b></br>Average outgoing battery SOC (kWh): <b>" + ocs_related_data_array[e.target.feature.properties.network_id].avg_out_bat + '</b>';
         $("#hover_info").html(electrified_segment_message);
         //s_count;i_count;charge_count
         //edge_network_mapping[e.target.feature.properties.network_id][0];
@@ -1078,7 +1080,7 @@ function show_filtered_on_slider(slider_value)
     }
     else
     {
-        
+
     }
 
     total_items=combined_selected_edges_node_list.length;
@@ -1311,7 +1313,10 @@ function fill_other_data()
         //ocs_related_data_array[parseInt(related_data[key].id)] = related_data[key];
     }
 }
-
+var demand_copy;
+var cb_copy;
+var max_demand_global;
+var max_cb_global;
 fill_other_data();
 
 function fill_selected_edges_layer(selected_json) {
@@ -1328,6 +1333,19 @@ function fill_selected_edges_layer(selected_json) {
 
     k_list_double = selected_json.ids;
 
+    if(selected_json.type)
+    {
+        demand_copy = [];
+        cb_copy = [];
+
+        for (i = 0; i < selected_json.demand.length; i++) 
+        {
+            demand_copy[i] = parseFloat(selected_json.demand[i]);
+            cb_copy[i] = parseFloat(selected_json.cbratio[i]);
+        }
+        max_demand_global=(demand_copy.sort(function(a, b){return b-a}))[0];
+        max_cb_global=(cb_copy.sort(function(a, b){return b-a}))[0];
+    }
 
     for (var key in selected_json.ids)
     {
@@ -1349,6 +1367,7 @@ function fill_selected_edges_layer(selected_json) {
                         , type:selected_json.type[key]
                         , cbratio:selected_json.cbratio[key]
                         , id:selected_json.ids[key]
+                        , d_cb:(selected_json.cbratio[key]/max_cb_global+selected_json.demand[key]/max_demand_global)/2
                     };
                 selected_edges_demand_array[element_to_add] = data_object;
             }
@@ -1363,8 +1382,13 @@ function fill_selected_edges_layer(selected_json) {
                         , type:selected_json.type[key]
                         , cbratio:selected_json.cbratio[key]
                         , id:selected_json.ids[key]
+                        , d_cb:(((selected_json.cbratio[key]/max_cb_global)+(selected_json.demand[key]/max_demand_global))/2)
                     };
                 selected_edges_demand_array_node[element_to_add] = data_object;
+                //console.log(selected_json.cbratio[key]/max_cb_global);
+                //console.log(selected_json.demand[key]/max_demand_global);
+                //console.log((((selected_json.cbratio[key]/max_cb_global)+(selected_json.demand[key]/max_demand_global))));
+                //console.log((((selected_json.cbratio[key]/max_cb_global)+(selected_json.demand[key]/max_demand_global))/2));
 
             }
         }
@@ -1381,13 +1405,13 @@ function fill_selected_edges_layer(selected_json) {
                     //, id:selected_json.ids[key]
                 };
             selected_edges_demand_array[element_to_add] = data_object;
-
-
         }
 
         fill_combined_selected_edges_node_list();
 
     }
+
+
 
     /*
 
@@ -2395,8 +2419,8 @@ legend.onAdd = function (map) {
         '<div><i style="background:#228B22;height: 6px;margin-top: 6px"></i> ' + '50 - 75%' + '</div>' +
         '<div><i style="background:#006400;height: 6px;margin-top: 6px"></i> ' + '75 - 100%' + '</div>' +   
         '<div><b>Grid (kV)</b></div>' +
-        '<div><i style="background:red;height: 4px;margin-top: 10px"></i> ' + '200 - 400' + '</div>' +
-        '<div><i style="background:yellow;height: 3px;margin-top: 9px"></i> ' + '25 - 200' + '</div>' +
+        '<div><i style="background:#00FFFF;height: 5px;margin-top: 10px"></i> ' + '200 - 400' + '</div>' +
+        '<div><i style="background:#5F9EA0;height: 4px;margin-top: 9px"></i> ' + '25 - 200' + '</div>' +
         '<div id="cs_legend">' +
         '<div><b>Optimized Charging Station - Energy Demand (GWh)</b></div>' +
         '<div><i style="height: 8px;  width: 8px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;margin-top: 6px;"></i>' + '0 - 5' + '</div>' +
@@ -2406,10 +2430,10 @@ legend.onAdd = function (map) {
         '</div>'+
         '<div id="cs_existing_legend">' +
         '<div><b>Existing Charging Station - Power (kW)</b></div>' +
-        '<div><i style="height: 8px;  width: 8px;  background-color: blue;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: Black;  display: inline-block;margin-top: 6px;"></i>' + '250' + '</div>' +
-        '<div><i style="height: 10px;  width: 10px;  background-color: yellow;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: Black;  display: inline-block;margin-top: 5px"></i>' + '300' + '</div>' +
-         '<div><i style="height: 12px;  width: 12px;  background-color: red;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: Black;  display: inline-block;margin-top: 4px;"></i>' + '350' + '</div>' +
-        '<div><img src="plus-red.png" height="15px" width="15px">' + ' NA' + '</div>' +
+        '<div><img src="green_plus.png" height="15px" width="15px">' + ' NA' + '</div>' + 
+        '<div><img src="charger_green.png" height="12px" width="12px">' + ' 250' + '</div>' +
+         '<div><img src="charger_yellow.png" height="16px" width="16px">' + ' 300' + '</div>' +
+         '<div><img src="charger_red.png" height="20px" width="20px">' + ' 350' + '</div>' +         
         '</div>'+
         '<div id="parking_spots">' +
         '<div><b>Existing Parking Spots</b></div>' +
