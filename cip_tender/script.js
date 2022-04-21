@@ -2264,7 +2264,7 @@ const mywms = L.tileLayer.wms("http://154.27.86.69:8080/geoserver/hojd/wms", {
     version: '1.1.0',
     attribution: "DEM layer"
 });
-mywms.addTo(map);
+//mywms.addTo(map);
 
 L.control.custom({
     position: 'topleft',
@@ -2333,7 +2333,7 @@ if (map.hasLayer(geoJsonLayerGrid_200_400)) map.removeLayer(geoJsonLayerGrid_200
 if (map.hasLayer(geoJsonLayerGrid_25_200)) map.removeLayer(geoJsonLayerGrid_25_200);
 if (map.hasLayer(geoJsonLayerNetwork)) map.removeLayer(geoJsonLayerNetwork);
 if (map.hasLayer(geoJsonTf)) map.removeLayer(geoJsonTf);
-if (map.hasLayer(mywms)) map.removeLayer(mywms);
+//if (map.hasLayer(mywms)) map.removeLayer(mywms);
 //mywms
 
 
@@ -2349,8 +2349,8 @@ var overlayMaps = {
     "Parking spots":geoJsonPD,
     "Transformers":geoJsonTf,
     "Grid 200-400":geoJsonLayerGrid_200_400,
-    "Grid 25-200":geoJsonLayerGrid_25_200,
-    "DEM":mywms
+    "Grid 25-200":geoJsonLayerGrid_25_200
+    //"DEM":mywms
     
     //"Grid cost": geoJsonLayerNetworkGC,
 };
