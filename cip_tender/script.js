@@ -141,7 +141,7 @@ var MyIcon = L.icon({
 });
 
 var MyIconRC = L.icon({
-    iconUrl: 'charger_red.png',
+    iconUrl: 'charger_red.PNG',
     iconSize:     [20, 20], // size of the icon
     shadowSize:   [0, 0], // size of the shadow
     iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
@@ -150,7 +150,7 @@ var MyIconRC = L.icon({
 });
 
 var MyIconYC = L.icon({
-    iconUrl: 'charger_yellow.png',
+    iconUrl: 'charger_yellow.PNG',
     iconSize:     [16, 16], // size of the icon
     shadowSize:   [0, 0], // size of the shadow
     iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
@@ -159,7 +159,7 @@ var MyIconYC = L.icon({
 });
 
 var MyIconGC = L.icon({
-    iconUrl: 'charger_green.png',
+    iconUrl: 'charger_green.PNG',
     iconSize:     [12, 12], // size of the icon
     shadowSize:   [0, 0], // size of the shadow
     iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
@@ -2431,9 +2431,9 @@ legend.onAdd = function (map) {
         '<div id="cs_existing_legend">' +
         '<div><b>Existing Charging Station - Power (kW)</b></div>' +
         '<div><img src="green_plus.png" height="15px" width="15px">' + ' NA' + '</div>' + 
-        '<div><img src="charger_green.png" height="12px" width="12px">' + ' 250' + '</div>' +
-         '<div><img src="charger_yellow.png" height="16px" width="16px">' + ' 300' + '</div>' +
-         '<div><img src="charger_red.png" height="20px" width="20px">' + ' 350' + '</div>' +         
+        '<div><img src="charger_green.PNG" height="12px" width="12px">' + ' 250' + '</div>' +
+         '<div><img src="charger_yellow.PNG" height="16px" width="16px">' + ' 300' + '</div>' +
+         '<div><img src="charger_red.PNG" height="20px" width="20px">' + ' 350' + '</div>' +         
         '</div>'+
         '<div id="parking_spots">' +
         '<div><b>Existing Parking Spots</b></div>' +
