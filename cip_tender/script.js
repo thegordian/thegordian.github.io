@@ -176,8 +176,48 @@ var MyIconpd = L.icon({
     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 
+var MyIconTf = L.icon({
+    iconUrl: 'transformer.PNG',
+    iconSize:     [10, 10], // size of the icon
+    shadowSize:   [0, 0], // size of the shadow
+    iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+    shadowAnchor: [0, 0],  // the same for the shadow
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
 
 var rpNdpd = -1;
+
+
+var geoJsonTf = L.geoJson(transformers,
+    {
+        pointToLayer: function (feature, latlng) {
+            //        if(feature.properties.node_id==2){alert('2')};
+            //feature._leaflet_id = feature.properties.node_id;
+            return L.marker(latlng,{icon: MyIconTf});       
+            
+
+
+        },
+     
+    
+    // Executes on each feature in the dataset
+    onEachFeature: function (featureData, featureLayer) {
+
+        //featureLayer.on('mouseover', highlightFeature_pd);
+        //featureLayer.on('mouseout', resetHighlight_pd);
+
+        /*        featureLayer.setStyle({
+            'color': return_line_color_cost(featureData.properties.cost),
+            'weight': 3,
+            'opacity': 1
+        });
+*/
+}
+
+});
+
+
 var geoJsonPD = L.geoJson(pd,
     {
         pointToLayer: function (feature, latlng) {
@@ -2208,7 +2248,8 @@ var map = L.map('map', {
         geoJsonCS,
         geoJsonPD,
         geoJsonLayerGrid_200_400,
-        geoJsonLayerGrid_25_200
+        geoJsonLayerGrid_25_200,
+        geoJsonTf
     ]
 });
 
@@ -2278,6 +2319,8 @@ if (map.hasLayer(geoJsonPD)) map.removeLayer(geoJsonPD);
 if (map.hasLayer(geoJsonLayerGrid_200_400)) map.removeLayer(geoJsonLayerGrid_200_400);
 if (map.hasLayer(geoJsonLayerGrid_25_200)) map.removeLayer(geoJsonLayerGrid_25_200);
 if (map.hasLayer(geoJsonLayerNetwork)) map.removeLayer(geoJsonLayerNetwork);
+if (map.hasLayer(geoJsonTf)) map.removeLayer(geoJsonTf);
+
 
 
 
@@ -2289,6 +2332,7 @@ var overlayMaps = {
     "Optimized Charging Station": geoJsonLayerNode,
     "Existing Charging Station": geoJsonCS,
     "Parking spots":geoJsonPD,
+    "Transformers":geoJsonTf,
     "Grid 200-400":geoJsonLayerGrid_200_400,
     "Grid 25-200":geoJsonLayerGrid_25_200
     //"Grid cost": geoJsonLayerNetworkGC,
@@ -2421,6 +2465,10 @@ legend.onAdd = function (map) {
         '<div><b>Grid (kV)</b></div>' +
         '<div><i style="background:#00FFFF;height: 5px;margin-top: 10px"></i> ' + '200 - 400' + '</div>' +
         '<div><i style="background:#5F9EA0;height: 4px;margin-top: 9px"></i> ' + '25 - 200' + '</div>' +
+        '<div id="transformers">' +
+        '<div><b>Transformers</b></div>' +
+        '<div><img src="transformer.PNG" height="15px" width="15px">' + '</div>' +
+        '</div>'+
         '<div id="cs_legend">' +
         '<div><b>Optimized Charging Station - Energy Demand (GWh)</b></div>' +
         '<div><i style="height: 8px;  width: 8px;  background-color: #FF6600;    border-radius: 100%;  border-width: 1px;border-style: solid;\tborder-color: White;  display: inline-block;margin-top: 6px;"></i>' + '0 - 5' + '</div>' +
