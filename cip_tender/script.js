@@ -95,8 +95,8 @@ geoJsonLayerNetwork = L.geoJson(nt_data, {
             'opacity': 1
         });
 
-       // featureLayer.on('mouseover', highlightFeature_gc);
-       // featureLayer.on('mouseout', resetHighlight_gc);
+        featureLayer.on('mouseover', highlightFeature_gc);
+        featureLayer.on('mouseout', resetHighlight_gc);
     }
 
 });
@@ -125,8 +125,8 @@ var geoJsonLayerGrid_25_200 = L.geoJson(grid_25_200, {
             'opacity': 1
         });
 
-        featureLayer.on('mouseover', highlightFeature_gs);
-        featureLayer.on('mouseout', resetHighlight_gs);
+        //featureLayer.on('mouseover', highlightFeature_gs);
+        //featureLayer.on('mouseout', resetHighlight_gs);
     }
 
 });
