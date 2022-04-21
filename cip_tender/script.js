@@ -610,7 +610,7 @@ function highlightFeature_cs(e)
         {
             power=e.target.feature.properties.sum_of_power;
         }
-        electrified_segment_message = ' Power: <b>' + power + '</b>' + ' Operator : <b>' + e.target.feature.properties.operator + "</b> Outlets : <b>" + e.target.feature.properties.outlets + '</b>';
+        electrified_segment_message = ' Power: <b>' + power + '</b>' + '<br> Operator : <b>' + e.target.feature.properties.operator + "</b> <br>Outlets : <b>" + e.target.feature.properties.outlets + '</b>';
         $("#hover_info").html(electrified_segment_message);
 
         // console.log(e.target.feature.properties);
@@ -688,7 +688,7 @@ function highlightFeature_node(e)
         $("#hover_info-div").css('bottom', 10);
         var electrified_segment_message = '';
         if (!(selected_edges_array_node.indexOf(e.target.feature.properties.network_id) == -1))
-            electrified_segment_message = ' Energy demand: <b>' + toFixed(((selected_edges_demand_array_node[e.target.feature.properties.network_id].demand) / 1000000),2) + ' GWh</b>' + ' Infrastructure Cost : <b>' + (selected_edges_demand_array_node[e.target.feature.properties.network_id].cost_result) + " MSEK</b> Benifit cost ratio : <b>" + toFixed((selected_edges_demand_array_node[e.target.feature.properties.network_id].cbratio/1000000),2) + ' GWh / MSEK</b>';
+            electrified_segment_message = ' Energy demand: <b>' + toFixed(((selected_edges_demand_array_node[e.target.feature.properties.network_id].demand) / 1000000),2) + ' GWh</b>' + '</br> Infrastructure Cost : <b>' + (selected_edges_demand_array_node[e.target.feature.properties.network_id].cost_result) + " MSEK</br></b> Benifit cost ratio : <b>" + toFixed((selected_edges_demand_array_node[e.target.feature.properties.network_id].cbratio/1000000),2) + ' GWh / MSEK</b>';
             electrified_segment_message = electrified_segment_message 
             + '</br> Number of transport routes starting: <b>' + ocs_related_data_array[e.target.feature.properties.network_id].s_count+ '</b>' 
             + '</br> Number of transport routes passing: <b>' + ocs_related_data_array[e.target.feature.properties.network_id].i_count + "</b>"
@@ -796,8 +796,8 @@ function highlightFeature(e) {
         $("#hover_info-div").css('bottom', 10);
         var electrified_segment_message = '';
         if (!(selected_edges_array.indexOf(e.target.feature.properties.network_id) == -1))
-            electrified_segment_message = '<br> Energy demand: <b>' + ((selected_edges_demand_array[e.target.feature.properties.network_id].demand) / 1000000).toFixed(2) + ' GWh</b>' + ' Infrastructure Cost : <b>' + (selected_edges_demand_array[e.target.feature.properties.network_id].cost_result) + " MSEK</b> Benifit cost ratio : <b>" + (selected_edges_demand_array[e.target.feature.properties.network_id].cbratio/1000000).toFixed(2) + ' GWh / MSEK</b>';
-        $("#hover_info").html('Percent electrified : <b>' + (e.target.feature.properties.fraction * 100).toFixed(2) + " %</b> Electrified transport work : <b>" + (e.target.feature.properties.e_work / 1000000).toFixed(2) + ' Mtkm</b>' + '</b> Transport work : <b>' + (e.target.feature.properties.work / 1000000).toFixed(2) + ' Mtkm</b>'  + '</b> Grid Cost : <b>' + (e.target.feature.properties.cost) + ' MSEK</b>'  + electrified_segment_message);//+"</b> Transport work : <b>"+(e.target.feature.properties.work/1000000).toFixed(3)+' Mtkm</b>
+            electrified_segment_message = '<br> Energy demand: <b>' + ((selected_edges_demand_array[e.target.feature.properties.network_id].demand) / 1000000).toFixed(2) + ' GWh</b>' + ' <br>Infrastructure Cost : <b>' + (selected_edges_demand_array[e.target.feature.properties.network_id].cost_result) + " MSEK</b><br> Benifit cost ratio : <b>" + (selected_edges_demand_array[e.target.feature.properties.network_id].cbratio/1000000).toFixed(2) + ' GWh / MSEK</b>';
+        $("#hover_info").html('<br>Percent electrified : <b>' + (e.target.feature.properties.fraction * 100).toFixed(2) + " %</b> <br>Electrified transport work : <b>" + (e.target.feature.properties.e_work / 1000000).toFixed(2) + ' Mtkm</b>' + '</b> <br>Transport work : <b>' + (e.target.feature.properties.work / 1000000).toFixed(2) + ' Mtkm</b>'  + '</b><br> Grid Cost : <b>' + (e.target.feature.properties.cost) + ' MSEK</b>'  + electrified_segment_message);//+"</b> Transport work : <b>"+(e.target.feature.properties.work/1000000).toFixed(3)+' Mtkm</b>
 
         // console.log(e.target.feature.properties);
 
