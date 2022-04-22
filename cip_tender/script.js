@@ -693,8 +693,8 @@ function highlightFeature_node(e)
             + '</br> Number of transport routes starting: <b>' + ocs_related_data_array[e.target.feature.properties.network_id].s_count+ '</b>' 
             + '</br> Number of transport routes passing: <b>' + ocs_related_data_array[e.target.feature.properties.network_id].i_count + "</b>"
             //+ "</br></b> Estimated number of charging sessions: <b>" + ocs_related_data_array[e.target.feature.properties.network_id].charge_count + '</b>'
-            + '</br>Average incoming battery SOC (kWh): <b>' + ocs_related_data_array[e.target.feature.properties.network_id].avg_in_bat 
-            + "</b></br>Average outgoing battery SOC (kWh): <b>" + ocs_related_data_array[e.target.feature.properties.network_id].avg_out_bat + '</b>';
+         //   + '</br>Average incoming battery SOC (kWh): <b>' + ocs_related_data_array[e.target.feature.properties.network_id].avg_in_bat 
+         //   + "</b></br>Average outgoing battery SOC (kWh): <b>" + ocs_related_data_array[e.target.feature.properties.network_id].avg_out_bat + '</b>';
         $("#hover_info").html(electrified_segment_message);
         //s_count;i_count;charge_count
         //edge_network_mapping[e.target.feature.properties.network_id][0];
@@ -2134,7 +2134,7 @@ $.ajax({
         
         $("#message_text").html(message);
 
-        message += 'Evaluated 200 placements against 10 million transport routes.<br>';
+        message += 'Evaluated 1,000,000 placements against 10 million transport routes.<br>';
         message += 'Best placed 200 charging station(s) electrifies ' + (stat.electric_work / 1000000000).toFixed(2) + ' Gtkm (' + ((stat.fraction) * 100).toFixed(2) + '%) of the total transport work.';        
         
         
@@ -2674,7 +2674,24 @@ function load_initial_style() {
 
 }
 
-
+function prepare_data()
+{
+    for (var key in selected_edges) 
+    {
+        //console.log(selected_edges[key]);
+        console.log(JSON.stringify(selected_edges[key]));
+    }
+    
+}
+function prepare_data_all()
+{
+    for (var key in electrified_edges) 
+    {
+        //console.log(selected_edges[key]);
+        console.log(JSON.stringify(electrified_edges[key]));
+    }
+    
+}
 
 
 $("#slider-2").slider({
